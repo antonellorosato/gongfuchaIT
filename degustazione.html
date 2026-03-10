@@ -12,6 +12,8 @@
   --gold:#c9a84c;--gold-l:#e8cd8a;--gold-p:#f5ecd4;
   --cream:#faf6ee;--cream-d:#ede4d0;--text:#e8dfc8;
 }
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(201,168,76,.07);z-index:999;pointer-events:none}
+.prog-bar{height:100%;background:linear-gradient(to right,rgba(201,168,76,.35),var(--gold));width:0%;transition:width .07s linear}
 body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 8%,rgba(35,74,42,.28) 0%,transparent 50%),radial-gradient(ellipse at 85% 85%,rgba(20,55,30,.22) 0%,transparent 50%);pointer-events:none;z-index:0}
 .poster{max-width:1160px;margin:0 auto;padding:52px 44px;position:relative;z-index:1}
@@ -39,6 +41,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.28),transparent)}
 .sec-intro{font-size:11.5px;color:var(--cream-d);opacity:.5;margin-bottom:28px;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.65;max-width:720px}
 
+.aroma-moments-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}
 /* ── SENSI: 5-column grid ── */
 .sensi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
 .senso-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:24px 18px 20px;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .15s}
@@ -64,18 +67,12 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .rterm:hover{opacity:1}
 
 /* ── LIQUORE COLORS ── */
-.liquore-section{display:flex;flex-direction:column;gap:3px}
-.liquore-row{display:grid;grid-template-columns:140px 1fr;gap:3px}
-.liquore-label-col{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:14px 18px;display:flex;flex-direction:column;justify-content:center}
-.liquore-tit{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;color:var(--gold-l);margin-bottom:2px}
-.liquore-sub{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.42}
-.liquore-scale-col{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:14px 18px}
-.liquore-scale{display:flex;gap:4px;align-items:center;margin-bottom:5px}
-.lswatch{width:28px;height:28px;border-radius:50%;border:1px solid rgba(201,168,76,.12);cursor:pointer;transition:transform .15s,box-shadow .15s;flex-shrink:0}
-.lswatch:hover{transform:scale(1.2);box-shadow:0 0 10px rgba(201,168,76,.25)}
-.lswatch-lbl{font-size:8.5px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--cream-d);opacity:.5;margin-top:2px;text-align:center;width:28px}
-.lswatch-wrap{display:flex;flex-direction:column;align-items:center}
-.liquore-teas{font-size:10px;color:var(--cream-d);opacity:.45;font-style:italic;font-family:'Cormorant Garamond',serif;margin-top:2px}
+.liquore-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.liq-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:14px 14px 12px}
+.liq-swatches{display:flex;gap:5px;margin-bottom:9px;align-items:center}
+.lswatch{width:20px;height:20px;border-radius:50%;border:1px solid rgba(0,0,0,.2);flex-shrink:0;cursor:default}
+.liq-name{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:500;color:var(--gold-l);margin-bottom:4px;line-height:1.25}
+.liq-teas{font-size:9.5px;color:var(--cream-d);opacity:.48;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.45}
 
 /* ── EVOLUTION TABLE ── */
 .evo-table{width:100%;border-collapse:collapse}
@@ -128,8 +125,9 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .modal-bg.open{opacity:1;pointer-events:all}
 .modal{background:var(--mid);border:1px solid rgba(201,168,76,.2);max-width:780px;width:94%;max-height:90vh;overflow-y:auto;position:relative;animation:slideUp .28s ease}
 @keyframes slideUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-close{position:absolute;top:15px;right:18px;font-size:17px;cursor:pointer;color:var(--gold);opacity:.42;z-index:2;transition:opacity .15s;background:none;border:none}
-.modal-close:hover{opacity:1}
+.modal-close{position:absolute;top:12px;right:12px;font-size:16px;cursor:pointer;color:var(--gold-l);z-index:2;transition:opacity .15s,background .15s;line-height:1;background:rgba(10,26,16,.85);border:1px solid rgba(201,168,76,.25);width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{opacity:1;background:rgba(201,168,76,.15)}
+@media(max-width:600px){.modal-close{width:44px;height:44px;font-size:18px;top:8px;right:8px}}
 .m-top{padding:30px 34px 0}
 .m-icon{font-size:42px;margin-bottom:8px}
 .m-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:var(--gold-l);margin-bottom:2px}
@@ -173,16 +171,26 @@ h1 em{font-style:italic;color:var(--gold-l)}
   .ruota-wrap{grid-template-columns:1fr}
   .vocab-grid{grid-template-columns:1fr 1fr}
   .scheda-grid{grid-template-columns:1fr}
+  .aroma-moments-grid{grid-template-columns:repeat(2,1fr)}
+  .liquore-grid{grid-template-columns:repeat(3,1fr)}
 }
 @media(max-width:600px){
   .sensi-grid{grid-template-columns:1fr 1fr}
   .vocab-grid{grid-template-columns:1fr}
-  .poster{padding:28px 18px}
+  .aroma-moments-grid{grid-template-columns:1fr}
+  .liquore-grid{grid-template-columns:1fr 1fr}
+  .poster{padding:36px 24px}
   .nav-home-lbl{display:none}
+  .border-frame{inset:10px}
+  .corner-tl{top:10px;left:10px}
+  .corner-tr{top:10px;right:10px}
+  .corner-bl{bottom:10px;left:10px}
+  .corner-br{bottom:10px;right:10px}
 }
 </style>
 </head>
 <body>
+<div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar"></div></div>
 <div class="poster">
   <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
   <div class="corner corner-bl"></div><div class="corner corner-br"></div>
@@ -223,7 +231,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   <section class="sec">
     <h2 class="sec-title">III — L'Aroma: i Quattro Momenti</h2>
     <p class="sec-intro">L'aroma non è uno — sono almeno quattro esperienze distinte, ciascuna con una propria finestra di accesso. Ognuna rivela qualcosa di diverso sulla foglia e sull'infusione.</p>
-    <div id="aroma-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px"></div>
+    <div id="aroma-grid" class="aroma-moments-grid"></div>
   </section>
 
   <!-- IV — LA RUOTA DEGLI AROMI -->
@@ -487,23 +495,12 @@ function renderSensi(){
 
 function renderLiquore(){
   const g=document.getElementById('liquore-section');
+  g.className='liquore-grid';
   LIQUORE_SCALE.forEach(row=>{
     const d=document.createElement('div');
-    d.className='liquore-row';
-    const swatchesHTML=row.swatches.map(s=>`
-      <div class="lswatch-wrap">
-        <div class="lswatch" style="background:${s.c}" title="${s.l}"></div>
-        <div class="lswatch-lbl">${s.l}</div>
-      </div>`).join('');
-    d.innerHTML=`
-      <div class="liquore-label-col">
-        <div class="liquore-tit">${row.it}</div>
-        <div class="liquore-sub">colore</div>
-      </div>
-      <div class="liquore-scale-col">
-        <div class="liquore-scale">${swatchesHTML}</div>
-        <div class="liquore-teas">${row.teas}</div>
-      </div>`;
+    d.className='liq-card';
+    const sw=row.swatches.map(s=>`<div class="lswatch" style="background:${s.c}" title="${s.l}"></div>`).join('');
+    d.innerHTML=`<div class="liq-swatches">${sw}</div><div class="liq-name">${row.it}</div><div class="liq-teas">${row.teas}</div>`;
     g.appendChild(d);
   });
 }
@@ -750,8 +747,22 @@ function openVocabModal(v){
   openModal();
 }
 
-function openModal(){document.getElementById('modal-bg').classList.add('open');document.body.style.overflow='hidden';}
-function closeModal(){document.getElementById('modal-bg').classList.remove('open');document.body.style.overflow='';}
+function openModal(){
+  document.getElementById('modal-bg').classList.add('open');
+  document.body.style.overflow='hidden';
+  if(!history.state||!history.state.modalOpen) history.pushState({modalOpen:true},'');
+}
+function _doClose(){
+  document.getElementById('modal-bg').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeModal(){
+  _doClose();
+  if(history.state&&history.state.modalOpen) history.back();
+}
+window.addEventListener('popstate',function(){
+  if(document.getElementById('modal-bg').classList.contains('open')) _doClose();
+});
 document.getElementById('modal-close').addEventListener('click',closeModal);
 document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
@@ -764,6 +775,19 @@ renderRuota();
 renderEvo();
 renderVocab();
 renderScheda();
+// ── progress bar ──
+(function(){
+  const pb=document.getElementById('prog-bar');
+  if(!pb) return;
+  function upd(){
+    const h=document.documentElement;
+    const tot=h.scrollHeight-h.clientHeight;
+    pb.style.width=(tot>0?(h.scrollTop||document.body.scrollTop)/tot*100:0)+'%';
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  upd();
+})();
+
 </script>
 </body>
 </html>

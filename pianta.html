@@ -14,6 +14,8 @@
   --sin:#4a9a8a;--sin-l:#7acaba;
   --ass:#c8743a;--ass-l:#e8a46a;
 }
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(201,168,76,.07);z-index:999;pointer-events:none}
+.prog-bar{height:100%;background:linear-gradient(to right,rgba(201,168,76,.35),var(--gold));width:0%;transition:width .07s linear}
 body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 8%,rgba(35,74,42,.28) 0%,transparent 50%),radial-gradient(ellipse at 85% 85%,rgba(20,55,30,.22) 0%,transparent 50%);pointer-events:none;z-index:0}
 .poster{max-width:1160px;margin:0 auto;padding:52px 44px;position:relative;z-index:1}
@@ -110,8 +112,9 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .modal-bg.open{opacity:1;pointer-events:all}
 .modal{background:var(--mid);border:1px solid rgba(201,168,76,.2);max-width:800px;width:94%;max-height:90vh;overflow-y:auto;position:relative;animation:slideUp .28s ease}
 @keyframes slideUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-close{position:absolute;top:15px;right:18px;font-size:17px;cursor:pointer;color:var(--gold);opacity:.42;z-index:2;transition:opacity .15s;line-height:1;background:none;border:none}
-.modal-close:hover{opacity:1}
+.modal-close{position:absolute;top:12px;right:12px;font-size:16px;cursor:pointer;color:var(--gold-l);z-index:2;transition:opacity .15s,background .15s;line-height:1;background:rgba(10,26,16,.85);border:1px solid rgba(201,168,76,.25);width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{opacity:1;background:rgba(201,168,76,.15)}
+@media(max-width:600px){.modal-close{width:44px;height:44px;font-size:18px;top:8px;right:8px}}
 
 .fm-top{padding:30px 34px 0}
 .fm-icon{font-size:40px;margin-bottom:8px}
@@ -180,7 +183,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   .pianta-grid{grid-template-columns:1fr}
   .pianta-center{display:none}
   .rm-body{grid-template-columns:1fr}
-  .poster{padding:28px 16px}
+  .poster{padding:36px 24px}
   h1{font-size:clamp(30px,8vw,52px)}
   .part-nav{margin-bottom:28px}
   .nav-center-label{display:none}
@@ -189,6 +192,11 @@ h1 em{font-style:italic;color:var(--gold-l)}
   .modal{width:96%;max-height:95vh}
   .fm-top,.fm-body,.rm-top,.rm-body,.ym-wrap{padding-left:20px;padding-right:20px}
   .map-top-bar{flex-direction:column;align-items:flex-start;gap:8px}
+  .border-frame{inset:10px}
+  .corner-tl{top:10px;left:10px}
+  .corner-tr{top:10px;right:10px}
+  .corner-bl{bottom:10px;left:10px}
+  .corner-br{bottom:10px;right:10px}
 }
 @media(max-width:420px){
   .factors-grid{grid-template-columns:1fr}
@@ -198,6 +206,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
 </style>
 </head>
 <body>
+<div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar"></div></div>
 <div class="poster">
   <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
   <div class="corner corner-bl"></div><div class="corner corner-br"></div>
@@ -801,8 +810,22 @@ function openYunnanZoom(){
   openModal();
 }
 
-function openModal(){document.getElementById('modal-bg').classList.add('open');document.body.style.overflow='hidden';}
-function closeModal(){document.getElementById('modal-bg').classList.remove('open');document.body.style.overflow='';}
+function openModal(){
+  document.getElementById('modal-bg').classList.add('open');
+  document.body.style.overflow='hidden';
+  if(!history.state||!history.state.modalOpen) history.pushState({modalOpen:true},'');
+}
+function _doClose(){
+  document.getElementById('modal-bg').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeModal(){
+  _doClose();
+  if(history.state&&history.state.modalOpen) history.back();
+}
+window.addEventListener('popstate',function(){
+  if(document.getElementById('modal-bg').classList.contains('open')) _doClose();
+});
 document.getElementById('modal-close').addEventListener('click',closeModal);
 document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
@@ -810,6 +833,19 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 renderPianta();
 renderFactors();
 renderMap();
+// ── progress bar ──
+(function(){
+  const pb=document.getElementById('prog-bar');
+  if(!pb) return;
+  function upd(){
+    const h=document.documentElement;
+    const tot=h.scrollHeight-h.clientHeight;
+    pb.style.width=(tot>0?(h.scrollTop||document.body.scrollTop)/tot*100:0)+'%';
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  upd();
+})();
+
 </script>
 </body>
 </html>

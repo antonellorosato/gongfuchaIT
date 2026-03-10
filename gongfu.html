@@ -12,6 +12,8 @@
   --gold:#c9a84c;--gold-l:#e8cd8a;--gold-p:#f5ecd4;
   --cream:#faf6ee;--cream-d:#ede4d0;--text:#e8dfc8;
 }
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(201,168,76,.07);z-index:999;pointer-events:none}
+.prog-bar{height:100%;background:linear-gradient(to right,rgba(201,168,76,.35),var(--gold));width:0%;transition:width .07s linear}
 body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 8%,rgba(35,74,42,.28) 0%,transparent 50%),radial-gradient(ellipse at 85% 85%,rgba(20,55,30,.22) 0%,transparent 50%);pointer-events:none;z-index:0}
 .poster{max-width:1160px;margin:0 auto;padding:52px 44px;position:relative;z-index:1}
@@ -95,8 +97,9 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .modal-bg.open{opacity:1;pointer-events:all}
 .modal{background:var(--mid);border:1px solid rgba(201,168,76,.2);max-width:780px;width:94%;max-height:90vh;overflow-y:auto;position:relative;animation:slideUp .28s ease}
 @keyframes slideUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-close{position:absolute;top:15px;right:18px;font-size:17px;cursor:pointer;color:var(--gold);opacity:.42;z-index:2;transition:opacity .15s;line-height:1;background:none;border:none}
-.modal-close:hover{opacity:1}
+.modal-close{position:absolute;top:12px;right:12px;font-size:16px;cursor:pointer;color:var(--gold-l);z-index:2;transition:opacity .15s,background .15s;line-height:1;background:rgba(10,26,16,.85);border:1px solid rgba(201,168,76,.25);width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{opacity:1;background:rgba(201,168,76,.15)}
+@media(max-width:600px){.modal-close{width:44px;height:44px;font-size:18px;top:8px;right:8px}}
 .m-top{padding:30px 34px 0}
 .m-glyph{font-size:44px;margin-bottom:8px;line-height:1}
 .m-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:var(--gold-l);margin-bottom:2px}
@@ -146,10 +149,11 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .footer a:hover{opacity:1}
 
 @media(max-width:900px){.tools-grid{grid-template-columns:repeat(4,1fr)}.params-grid,.params-grid-2{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:680px){.tools-grid{grid-template-columns:repeat(3,1fr)}.params-grid,.params-grid-2{grid-template-columns:repeat(2,1fr)}.poster{padding:28px 18px}.tp-modal-params{grid-template-columns:1fr}}
+@media(max-width:680px){.tools-grid{grid-template-columns:repeat(3,1fr)}.params-grid,.params-grid-2{grid-template-columns:repeat(2,1fr)}.poster{padding:36px 24px}.tp-modal-params{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar"></div></div>
 <div class="poster">
   <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
   <div class="corner corner-bl"></div><div class="corner corner-br"></div>
@@ -227,7 +231,7 @@ const TOOLS=[
      {t:'Dimensioni',p:'<em>120–150 ml</em> è la misura standard. Sotto i 100 ml è considerato da esperto — infusioni brevissime, grande controllo. Sopra i 200 ml si perde la concentrazione tipica del Gong Fu.'},
      {note:'Per chi inizia: un gaiwan da 120 ml in porcellana bianca è tutto quello che serve. Padroneggiarlo richiede tempo, ma diventa un\'estensione della mano.'}
    ]},
-  {glyph:'🫙',it:'Teiera Yixing',zh:'宜兴紫砂壶',pinyin:'Yí Xīng Zǐ Shā Hú',sub:'Argilla porosa dello Jiangsu',
+  {glyph:'🏺',it:'Teiera Yixing',zh:'宜兴紫砂壶',pinyin:'Yí Xīng Zǐ Shā Hú',sub:'Argilla porosa dello Jiangsu',
    desc:'Fatta di argilla zisha estratta esclusivamente a Yixing, Jiangsu. La porosità microscopica assorbe gli aromi del tè nel tempo — una Yixing ben stagionata diventa parte del tè stesso.',
    tags:['Argilla Zisha','60–200 ml','Una teiera = un tè','No detergenti'],
    sections:[
@@ -244,7 +248,7 @@ const TOOLS=[
      {t:'Materiale',p:'Il <em>vetro</em> è preferibile: permette di osservare il colore del liquore, prima indicazione della qualità. Alcune versioni hanno filtro integrato per le foglie minute.'},
      {note:'In una sessione solitaria il Cha Hai non è strettamente necessario. Ma in compagnia è essenziale per la filosofia del Gong Fu Cha.'}
    ]},
-  {glyph:'🫗',it:'Tazze',zh:'茶杯',pinyin:'Chá Bēi',sub:'Da sorseggio e dell\'aroma',
+  {glyph:'🍵',it:'Tazze',zh:'茶杯',pinyin:'Chá Bēi',sub:'Da sorseggio e dell\'aroma',
    desc:'Nel Gong Fu Cha esistono due tazze: la tazza dell\'aroma (闻香杯, wen xiang bei) alta e stretta, e la tazza da sorseggio (品茗杯, pin ming bei) bassa e aperta.',
    tags:['Wen Xiang Bei','Pin Ming Bei','30–50 ml','Porcellana'],
    sections:[
@@ -260,7 +264,7 @@ const TOOLS=[
      {t:'Materiali',p:'<em>Bambù</em>: leggero, economico, si degrada nel tempo. <em>Teak o ebano</em>: durevole, elegante, richiede manutenzione. <em>Pietra o ardesia</em>: pesante, molto longeva. <em>Ceramica con vasca</em>: facile da pulire.'},
      {note:'Non è indispensabile per iniziare. Un vassoio da cucina con panno assorbente funziona benissimo. Il Cha Pan arriva quando il rituale diventa abitudinario.'}
    ]},
-  {glyph:'⚗️',it:'Bollitore',zh:'水壶',pinyin:'Shuǐ Hú',sub:'Il controllo della temperatura',
+  {glyph:'💧',it:'Bollitore',zh:'水壶',pinyin:'Shuǐ Hú',sub:'Il controllo della temperatura',
    desc:'La temperatura dell\'acqua non è un dettaglio — è la variabile più facile da controllare e una delle più impattanti. Un bollitore a collo d\'oca con controllo digitale è l\'investimento più utile dopo il gaiwan.',
    tags:['Collo d\'oca','Controllo temperatura','700–1000 ml','±1°C'],
    sections:[
@@ -277,7 +281,7 @@ const TOOLS=[
      {t:'Necessità reale',p:'Nella pratica quotidiana si usano soprattutto <em>cha ze e cha jia</em>. Gli altri sono comodi ma sostituibili. Nei set artigianali il bambù intagliato a mano è un oggetto bello anche da soli.'},
      {note:'Per iniziare: anche solo le pinze di bambù. Evitano di scottarsi mentre si maneggia il gaiwan caldo.'}
    ]},
-  {glyph:'🔬',it:'Filtro',zh:'茶漉',pinyin:'Chá Lù',sub:'Il colino — piccolo ma utile',
+  {glyph:'🕸️',it:'Filtro',zh:'茶漉',pinyin:'Chá Lù',sub:'Il colino — piccolo ma utile',
    desc:'Un piccolo colino da posizionare sul Cha Hai per bloccare i frammenti di foglia. Non indispensabile con un gaiwan ben usato, essenziale con le teiere.',
    tags:['Acciaio o bambù','Con supporto','Frammenti','Facile da pulire'],
    sections:[
@@ -285,7 +289,7 @@ const TOOLS=[
      {t:'Materiali',p:'<em>Acciaio inossidabile</em>: il più igienico, non assorbe odori. <em>Bambù intrecciato</em>: esteticamente gradevole, va asciugato bene. Il supporto è comodo per appoggiarvi il colino tra un\'infusione e l\'altra.'},
      {note:'Accessorio da due euro che risolve un problema reale. Prendi quello in acciaio.'}
    ]},
-  {glyph:'📦',it:'Contenitore del Tè',zh:'茶叶罐',pinyin:'Chá Yè Guàn',sub:'Conservazione come rispetto',
+  {glyph:'🫙',it:'Contenitore del Tè',zh:'茶叶罐',pinyin:'Chá Yè Guàn',sub:'Conservazione come rispetto',
    desc:'Luce, aria, umidità e odori estranei degradano il profilo aromatico anche di tè eccellenti nel giro di settimane. La conservazione corretta è parte del rispetto per la foglia.',
    tags:['Opaco','Ermetico','Ceramica o stagno','Lontano da fonti di calore'],
    sections:[
@@ -293,13 +297,22 @@ const TOOLS=[
      {t:'Contenitori per ogni tè',p:'<em>Tè verde e bianco fresco</em>: sottovuoto in frigo o stagno opaco in luogo fresco. <em>Oolong tostato</em>: ceramica o stagno, temperatura ambiente. <em>Pu\'er</em>: carta o ceramica non ermetica, umidità 60–70% — deve respirare per maturare. Il pu\'er sottovuoto si blocca.'},
      {note:'Per i tè quotidiani: barattolo di ceramica opaco, coperchio ben chiuso, lontano dal fornello. Per i pregiati: separare la porzione settimanale dalla scorta.'}
    ]},
-  {glyph:'🌡️',it:'Termometro',zh:'温度计',pinyin:'Wēn Dù Jì',sub:'Strumento didattico',
-   desc:'Un termometro a lettura istantanea è lo strumento più didattico con cui iniziare. Capire come si raffredda l\'acqua, cosa significa 80°C in pratica, come varia la temperatura tra i versamenti.',
-   tags:['Lettura istantanea','±1°C','Da principiante','Poi diventa superfluo'],
+  {glyph:'🧽',it:'Cha Jin',zh:'茶巾',pinyin:'Chá Jīn',sub:'Il panno del tè',
+   desc:'La Cha Jin — letteralmente "tovagliolo del tè" — è il panno assorbente che fa parte silenziosamente di ogni sessione: asciuga le gocce, pulisce i bordi delle tazze, protegge la superficie del Cha Pan.',
+   tags:['Cotone o lino','Assorbente','Sempre a portata di mano','Si lava con acqua'],
    sections:[
-     {t:'Perché usarlo all\'inizio',p:'La sensibilità alla temperatura si sviluppa con l\'esperienza. Il termometro <em>calibra la percezione</em>: quante volte un tè verde amaro era in realtà acqua a 95°C invece di 75°C? Risponde alle domande prima che il palato impari a farlo.'},
-     {t:'Poi diventa superfluo',p:'Dopo qualche mese si impara a <em>leggere l\'acqua visivamente</em>: bolle piccole sul fondo (70°C), fruscio pre-ebollizione (85–90°C), ebollizione piena (100°C). Il bollitore con controllo digitale lo rende poi ridondante.'},
-     {note:'Costa 5–10€ e insegna più di qualsiasi descrizione. Compralo insieme al tuo primo gaiwan.'}
+     {t:'Funzione pratica',p:'Ogni versamento lascia tracce. La Cha Jin asciuga il fondo del gaiwan o della teiera prima di posarla, raccoglie le gocce dal Cha Hai, pulisce i bordi delle tazze prima di servirle. In una sessione curata, non vedi mai gocce d'acqua sui piani — la Cha Jin le fa scomparire senza interrompere il rituale.'},
+     {t:'Materiale e cura',p:'<em>Cotone</em> non trattato o <em>lino naturale</em> sono i materiali preferiti: assorbono senza lasciare pelucchi, non trasferiscono odori. La Cha Jin va lavata spesso con sola acqua calda — mai con detergenti profumati che potrebbero trasferire aromi alle tazze. Tienine almeno due: una in uso, una ad asciugare.'},
+     {note:'Una Cha Jin pulita e ben piegata sul Cha Pan è un segnale di cura. In Giappone e Taiwan, il modo in cui si piega il panno è parte del rituale quanto il modo in cui si versa il tè.'}
+   ]},
+  {glyph:'🐸',it:'Tea Pet',zh:'茶宠',pinyin:'Chá Chǒng',sub:'Il compagno della cerimonia',
+   desc:'Il Tea Pet — 茶宠, "animale domestico del tè" — è una piccola scultura in argilla zisha o gres, senza smalto, che vive sul Cha Pan e viene "nutrita" con il tè avanzato di ogni sessione. Nel tempo cambia colore, profumo, carattere.',
+   tags:['Argilla zisha non smaltata','Rana','Tartaruga','Buddha'],
+   sections:[
+     {t:'Come funziona',p:'Ogni volta che versi il tè, ne versi una parte sul Tea Pet — il risciacquo delle foglie, le gocce in eccesso, l'ultima infusione. L'argilla non smaltata <em>assorbe gli oli del tè</em> nel tempo, esattamente come la Yixing. Dopo mesi o anni, il Tea Pet cambia colore, diventa più scuro e lucido, e inizia a profumare leggermente di tè. È un compagno che cresce con te.'},
+     {t:'Le forme tradizionali',p:'La <em>rana</em> (蟾蜍, chán chú) è la più comune — simbolo di fortuna e prosperità. La <em>tartaruga</em> (龟, guī) è longevità. Il <em>Buddha Maitreya</em> (弥勒佛, mí lè fó) è abbondanza. Il <em>qilin</em> (麒麟) è buon auspicio. Alcuni Tea Pet hanno un meccanismo interno: riempiti di acqua calda, "urinano" quando bagnati — è un gioco tra i presenti.'},
+     {t:'La filosofia dietro',p:'Il Tea Pet porta nel Gong Fu Cha la stessa logica della Yixing: la <em>trasformazione lenta</em> come valore in sé. Ogni sessione lascia una traccia — invisibile ma accumulata. Tra dieci anni, il Tea Pet che tieni oggi sarà completamente diverso, saturo di ogni tè che hai bevuto in sua compagnia.'},
+     {note:'Non ha una funzione pratica — ed è proprio per questo che ce l'hai. È la prova che il Gong Fu Cha non è solo tecnica.'}
    ]},
 ];
 
@@ -388,6 +401,11 @@ function renderTools(){
     d.addEventListener('click',()=>openToolModal(t));
     g.appendChild(d);
   });
+  .border-frame{inset:10px}
+  .corner-tl{top:10px;left:10px}
+  .corner-tr{top:10px;right:10px}
+  .corner-bl{bottom:10px;left:10px}
+  .corner-br{bottom:10px;right:10px}
 }
 
 function renderRitual(){
@@ -466,8 +484,22 @@ function openParamsModal(p){
   openModal();
 }
 
-function openModal(){document.getElementById('modal-bg').classList.add('open');document.body.style.overflow='hidden';}
-function closeModal(){document.getElementById('modal-bg').classList.remove('open');document.body.style.overflow='';}
+function openModal(){
+  document.getElementById('modal-bg').classList.add('open');
+  document.body.style.overflow='hidden';
+  if(!history.state||!history.state.modalOpen) history.pushState({modalOpen:true},'');
+}
+function _doClose(){
+  document.getElementById('modal-bg').classList.remove('open');
+  document.body.style.overflow='';
+}
+function closeModal(){
+  _doClose();
+  if(history.state&&history.state.modalOpen) history.back();
+}
+window.addEventListener('popstate',function(){
+  if(document.getElementById('modal-bg').classList.contains('open')) _doClose();
+});
 document.getElementById('modal-close').addEventListener('click',closeModal);
 document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
@@ -475,6 +507,19 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 renderTools();
 renderRitual();
 renderParams();
+// ── progress bar ──
+(function(){
+  const pb=document.getElementById('prog-bar');
+  if(!pb) return;
+  function upd(){
+    const h=document.documentElement;
+    const tot=h.scrollHeight-h.clientHeight;
+    pb.style.width=(tot>0?(h.scrollTop||document.body.scrollTop)/tot*100:0)+'%';
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  upd();
+})();
+
 </script>
 </body>
 </html>

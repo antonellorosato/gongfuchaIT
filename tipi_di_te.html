@@ -12,6 +12,8 @@
   --gold:#c9a84c;--gold-l:#e8cd8a;--gold-p:#f5ecd4;
   --cream:#faf6ee;--cream-d:#ede4d0;--text:#e8dfc8;
 }
+.prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(201,168,76,.07);z-index:999;pointer-events:none}
+.prog-bar{height:100%;background:linear-gradient(to right,rgba(201,168,76,.35),var(--gold));width:0%;transition:width .07s linear}
 body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
 body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(45,90,45,.2) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(30,70,30,.15) 0%,transparent 50%);pointer-events:none;z-index:0}
 
@@ -147,7 +149,12 @@ h1 em{font-style:italic;color:var(--gold-l)}
   .teas-grid{grid-template-columns:1fr}
   .teas-grid-2{grid-template-columns:1fr}
   .modal-tea-body{grid-template-columns:1fr}
-  .poster{padding:24px 14px}
+  .poster{padding:36px 24px}
+  .border-frame{inset:10px}
+  .corner-tl{top:10px;left:10px}
+  .corner-tr{top:10px;right:10px}
+  .corner-bl{bottom:10px;left:10px}
+  .corner-br{bottom:10px;right:10px}
   h1{font-size:clamp(30px,9vw,52px)}
   .part-nav{margin-bottom:24px}
   .nav-center-label{display:none}
@@ -165,8 +172,9 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .modal-bg.open{opacity:1;pointer-events:all}
 .modal{background:var(--mid);border:1px solid rgba(201,168,76,.2);max-width:780px;width:92%;max-height:88vh;overflow-y:auto;position:relative;animation:slideUp .28s ease}
 @keyframes slideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-close{position:absolute;top:16px;right:20px;font-size:18px;cursor:pointer;color:var(--gold);opacity:.5;z-index:2;line-height:1;transition:opacity .15s}
-.modal-close:hover{opacity:1}
+.modal-close{position:absolute;top:12px;right:12px;font-size:16px;cursor:pointer;color:var(--gold-l);z-index:2;transition:opacity .15s,background .15s;line-height:1;background:rgba(10,26,16,.85);border:1px solid rgba(201,168,76,.25);width:38px;height:38px;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{opacity:1;background:rgba(201,168,76,.15)}
+@media(max-width:600px){.modal-close{width:44px;height:44px;font-size:18px;top:8px;right:8px}}
 
 /* Phase modal */
 .modal-img{width:100%;height:200px;object-fit:cover;filter:brightness(.75) saturate(.8);display:block}
@@ -202,10 +210,28 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .tea-profile-text em{color:var(--gold-l);font-style:italic}
 .modal-divider{height:1px;background:rgba(201,168,76,.1);margin:16px 0}
 
+
+/* ── CAFFEINE ── */
+.caff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:20px}
+.caff-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:20px 18px 18px;position:relative;overflow:hidden}
+.caff-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,rgba(201,168,76,.4))}
+.caff-icon{font-size:22px;margin-bottom:8px;display:block}
+.caff-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--gold-l);margin-bottom:6px;line-height:1.2}
+.caff-body{font-size:11px;color:var(--text);line-height:1.65;opacity:.85}
+.caff-body em{color:var(--gold-l);font-style:italic}
+.caff-scale{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;margin-top:6px}
+.caff-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:3px}
+.caff-bar-outer{width:100%;background:rgba(201,168,76,.06);height:48px;display:flex;align-items:flex-end;border:1px solid rgba(201,168,76,.08)}
+.caff-bar-inner{width:100%;background:linear-gradient(to top,rgba(201,168,76,.55),rgba(201,168,76,.2));transition:height .3s ease}
+.caff-bar-lbl{font-size:7.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);opacity:.5;text-align:center;line-height:1.2}
+.caff-note{background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.25);padding:10px 14px;margin-top:0;font-size:11px;font-style:italic;font-family:'Cormorant Garamond',serif;color:var(--cream-d);opacity:.72;line-height:1.6}
+@media(max-width:640px){.caff-grid{grid-template-columns:repeat(2,1fr)}.caff-scale{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:380px){.caff-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 
+<div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar"></div></div>
 <div class="poster">
   <header class="header">
     <nav class="part-nav">
@@ -251,6 +277,57 @@ h1 em{font-style:italic;color:var(--gold-l)}
     <p style="font-size:9px;color:var(--cream-d);opacity:.38;margin-top:10px;font-style:italic;font-family:'Cormorant Garamond',serif">
       ● presente &nbsp;|&nbsp; ◌ opzionale &nbsp;|&nbsp; — assente &nbsp;|&nbsp; ☀ essiccazione al sole &nbsp;|&nbsp; ●● prolungato
     </p>
+  </section>
+
+
+  <!-- CAFFEINA -->
+  <section class="sec" style="margin-bottom:52px">
+    <h2 class="sec-title">V — Caffeina — quello che davvero sappiamo (e quello che no)</h2>
+    <p class="sec-intro">La caffeina nel tè è tra gli argomenti più fraintesi. "Il tè bianco ha poca caffeina", "il risciacquo la elimina", "il verde è decaffeinato" — quasi tutto questo è falso o gravemente semplificato.</p>
+    <div class="caff-grid">
+
+      <div class="caff-card" style="--accent:rgba(150,200,150,.5)">
+        <span class="caff-icon">🌱</span>
+        <div class="caff-title">Le gemme giovani hanno <em>più</em> caffeina</div>
+        <div class="caff-body">La caffeina è prodotta dalla pianta come <em>insetticida naturale</em>: si concentra dove serve più protezione — le gemme e le foglie più giovani. Il Silver Needle (solo gemme) può contenere più caffeina di un tè nero fatto con foglie adulte. L'età della foglia conta più del colore del tè.</div>
+      </div>
+
+      <div class="caff-card" style="--accent:rgba(200,160,80,.5)">
+        <span class="caff-icon">🔥</span>
+        <div class="caff-title">La lavorazione cambia <em>poco</em> la caffeina</div>
+        <div class="caff-body">Ossidazione, tostatura, fermentazione, steaming: nessuno di questi processi altera in modo significativo il contenuto di caffeina. La caffeina è una molecola stabile al calore. Il pu'er cotto non è "meno caffeizzante" del pu'er crudo perché fermentato — il che smentisce buona parte del marketing.</div>
+      </div>
+
+      <div class="caff-card" style="--accent:rgba(100,160,220,.5)">
+        <span class="caff-icon">💧</span>
+        <div class="caff-title">Il brew è il fattore che conta davvero</div>
+        <div class="caff-body">Temperatura più alta + tempo più lungo = <em>più caffeina estratta</em>. Un tè verde a 70°C per 30 secondi ha molta meno caffeina dello stesso tè a 90°C per 3 minuti. Più che la tipologia, conta come lo prepari. Il risciacquo iniziale (5–10 sec) rimuove forse il 15–20% della caffeina — non è un metodo di decaffeinazione.</div>
+      </div>
+
+      <div class="caff-card" style="--accent:rgba(180,120,200,.5)">
+        <span class="caff-icon">🧠</span>
+        <div class="caff-title">L-Teanina — l'effetto del tè non è l'effetto del caffè</div>
+        <div class="caff-body">La <em>L-teanina</em> (presente solo nel tè e in pochi funghi) modula l'effetto della caffeina: produce uno stato di "allerta calma" invece dell'agitazione del caffè. Il rapporto caffeina/L-teanina varia per cultivar, ombreggiatura e stagione. I tè da ombra (gyokuro, matcha) e i Gushu hanno spesso il rapporto L-teanina/caffeina più favorevole.</div>
+      </div>
+
+      <div class="caff-card" style="--accent:rgba(200,100,100,.5)">
+        <span class="caff-icon">👤</span>
+        <div class="caff-title">La sensibilità individuale varia enormemente</div>
+        <div class="caff-body">La stessa tazza colpisce persone diverse in modo radicalmente diverso. Metabolismo della caffeina (gene CYP1A2), sensibilità del sistema nervoso, abitudine, orario: tutti questi fattori sono più predittivi del tipo di tè che bevi. Se il tè la sera ti sveglia, è la tua biologia — non una regola universale.</div>
+      </div>
+
+      <div class="caff-card" style="--accent:rgba(201,168,76,.5)">
+        <span class="caff-icon">📊</span>
+        <div class="caff-title">Valori indicativi — con tutte le riserve</div>
+        <div class="caff-body">Milligrammi per 200ml, stile Gong Fu (valori <em>molto approssimativi</em>, variabilità enorme):
+          <div class="caff-scale" style="margin-top:10px" id="caff-scale"></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="caff-note">
+      📎 Nessun valore di caffeina nel tè è affidabile senza conoscere: cultivar, parte della foglia raccolta, metodo di coltivazione, temperatura e tempo di brew, e peso esatto delle foglie. Le etichette che riportano "bassa caffeina" o "alta caffeina" senza contesto sono marketing, non scienza.
+    </div>
   </section>
 
   <section class="flowchart-section">
@@ -763,12 +840,19 @@ function openTeaModal(t){
 function openModal(){
   document.getElementById('modal-bg').classList.add('open');
   document.body.style.overflow='hidden';
+  if(!history.state||!history.state.modalOpen) history.pushState({modalOpen:true},'');
 }
-
-function closeModal(){
+function _doClose(){
   document.getElementById('modal-bg').classList.remove('open');
   document.body.style.overflow='';
 }
+function closeModal(){
+  _doClose();
+  if(history.state&&history.state.modalOpen) history.back();
+}
+window.addEventListener('popstate',function(){
+  if(document.getElementById('modal-bg').classList.contains('open')) _doClose();
+});
 
 document.getElementById('modal-close').addEventListener('click',closeModal);
 document.getElementById('modal-bg').addEventListener('click',e=>{
@@ -783,6 +867,19 @@ renderPhases();
 renderTeas();
 renderMatrix();
 renderFlowchart();
+// ── progress bar ──
+(function(){
+  const pb=document.getElementById('prog-bar');
+  if(!pb) return;
+  function upd(){
+    const h=document.documentElement;
+    const tot=h.scrollHeight-h.clientHeight;
+    pb.style.width=(tot>0?(h.scrollTop||document.body.scrollTop)/tot*100:0)+'%';
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  upd();
+})();
+
 </script>
 </body>
 </html>

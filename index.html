@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tè Cinese — Guida Interattiva</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0e1f0e;--mid:#1c3a1c;--light:#2d5a2d;
+  --gold:#c9a84c;--gold-l:#e8cd8a;--gold-p:#f5ecd4;
+  --cream:#faf6ee;--cream-d:#ede4d0;--text:#e8dfc8;
+}
+body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(45,90,45,.2) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(30,70,30,.15) 0%,transparent 50%);pointer-events:none;z-index:0}
+
+.poster{max-width:1120px;margin:0 auto;padding:52px 44px;position:relative;z-index:1}
+
+/* HEADER */
+.header{text-align:center;margin-bottom:54px;padding-bottom:36px}
+.eyebrow{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:14px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,5.5vw,68px);line-height:1.05;margin-bottom:6px}
+h1 em{font-style:italic;color:var(--gold-l)}
+.subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--gold-p);opacity:.65;margin-top:8px}
+.hint{font-size:11px;letter-spacing:2px;color:var(--gold);opacity:.45;margin-top:18px;text-transform:uppercase}
+.divider{display:flex;align-items:center;gap:12px;margin:22px auto 0;max-width:360px;justify-content:center}
+.dl{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold));opacity:.4}
+.dr{flex:1;height:1px;background:linear-gradient(to left,transparent,var(--gold));opacity:.4}
+.dd{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.7}
+
+/* SECTION TITLE */
+.sec-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:28px;display:flex;align-items:center;gap:14px;opacity:.85}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.35),transparent)}
+.sec-intro{font-size:11px;color:var(--cream-d);opacity:.5;margin-bottom:20px;font-style:italic;font-family:'Cormorant Garamond',serif;letter-spacing:.3px}
+
+/* PHASES */
+.phases-section{margin-bottom:60px}
+.phases-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:2px}
+.phase-card{background:var(--mid);border:1px solid rgba(201,168,76,.1);padding:18px 14px 16px;cursor:pointer;transition:background .2s,transform .15s;position:relative;overflow:hidden}
+.phase-card:hover{background:var(--light);transform:translateY(-2px)}
+.phase-card:hover::before{opacity:.5}
+.phase-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:opacity .2s}
+.phase-card .click-hint{position:absolute;top:8px;right:10px;font-size:9px;letter-spacing:1px;color:var(--gold);opacity:0;transition:opacity .2s;text-transform:uppercase}
+.phase-card:hover .click-hint{opacity:.5}
+.phase-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:rgba(201,168,76,.18);line-height:1;margin-bottom:6px;font-style:italic}
+.phase-it{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--gold-l);margin-bottom:1px}
+.phase-en{font-size:8.5px;font-weight:400;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.45;margin-bottom:3px}
+.phase-zh{font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:var(--gold-l);opacity:.5;margin-bottom:10px}
+.phase-scopo{font-size:11px;color:var(--text);line-height:1.55;opacity:.82}
+
+/* TEAS */
+.teas-section{margin-bottom:60px}
+.teas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:3px}
+.teas-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:3px}
+.tea-card{background:var(--mid);border:1px solid rgba(201,168,76,.1);padding:22px 20px 20px;cursor:pointer;transition:background .2s,transform .15s;position:relative;overflow:hidden}
+.tea-card:hover{background:var(--light);transform:translateY(-2px)}
+.tea-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;transition:opacity .2s}
+.tea-card:hover .click-hint{opacity:.5}
+.tea-emoji{font-size:24px;margin-bottom:5px;display:block}
+.tea-it{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;line-height:1.1;margin-bottom:1px}
+.tea-zh{font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;opacity:.5;color:var(--cream-d);letter-spacing:.8px;margin-bottom:10px}
+.tea-tagline{font-size:11px;color:var(--cream-d);opacity:.62;font-style:italic;font-family:'Cormorant Garamond',serif;margin-bottom:14px;border-left:1px solid rgba(201,168,76,.25);padding-left:9px;line-height:1.5}
+.flow-label{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.5;margin-bottom:6px}
+.flow{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+.fs{font-size:9.5px;padding:2px 7px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.12);color:var(--cream-d);white-space:nowrap}
+.fs.hl{background:rgba(201,168,76,.14);border-color:rgba(201,168,76,.3);color:var(--gold-l)}
+.fa{color:var(--gold);opacity:.3;font-size:9px}
+
+/* Tea accent colors */
+.bianco::after{background:linear-gradient(to right,#ddd8cc,#f0ead8)}
+.verde::after{background:linear-gradient(to right,#4a7c4a,#7ab87a)}
+.giallo::after{background:linear-gradient(to right,#b8960a,#e8c84a)}
+.oolong::after{background:linear-gradient(to right,#7a4a10,#c8843a)}
+.rosso::after{background:linear-gradient(to right,#8b2a2a,#c05050)}
+.nero::after{background:linear-gradient(to right,#2a2a3a,#5a5a7a)}
+.sheng::after{background:linear-gradient(to right,#5a4a1a,#8a7a3a)}
+.shu::after{background:linear-gradient(to right,#3a2010,#7a4a28)}
+
+.bianco .tea-it{color:#e8e0d0}
+.verde .tea-it{color:#a0d090}
+.giallo .tea-it{color:#e8c84a}
+.oolong .tea-it{color:#e0a060}
+.rosso .tea-it{color:#d08080}
+.nero .tea-it{color:#9090b8}
+.sheng .tea-it{color:#c0a84a}
+.shu .tea-it{color:#b07848}
+
+/* TABLE */
+.table-section{margin-bottom:48px}
+.matrix-table{width:100%;border-collapse:collapse;font-size:10.5px}
+.matrix-table th{padding:9px 7px;text-align:center;font-weight:400;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.65;border-bottom:1px solid rgba(201,168,76,.18)}
+.matrix-table th.rh{text-align:left;padding-left:0;opacity:.45;font-size:8.5px;letter-spacing:2px}
+.matrix-table td{padding:8px 7px;text-align:center;border-bottom:1px solid rgba(201,168,76,.04);color:var(--cream-d)}
+.matrix-table td.pl{text-align:left;padding-left:0;font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--gold-p);opacity:.78;min-width:130px}
+.matrix-table tr:hover td{background:rgba(201,168,76,.03)}
+.dot{color:var(--gold);font-size:13px}
+.dot-dim{color:rgba(201,168,76,.22);font-size:13px}
+.dot-s{color:#e8c84a;font-size:12px}
+
+/* FLOWCHART */
+.flowchart-section{margin-bottom:48px}
+.flowchart-wrap{overflow-x:auto;padding-bottom:12px}
+.flowchart-grid{display:grid;min-width:860px;grid-template-columns:160px repeat(8,1fr);position:relative}
+.fc-header{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.6;padding:0 4px 18px;text-align:center;line-height:1.4}
+.fc-header.label-h{text-align:left;padding-left:0;opacity:.4;font-size:8px;letter-spacing:2px}
+.fc-row{display:contents}
+.fc-label{padding:0 12px 0 0;display:flex;align-items:center;justify-content:flex-end;min-height:52px;position:relative}
+.fc-label-inner{text-align:right}
+.fc-label-num{font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:var(--gold);opacity:.35;line-height:1}
+.fc-label-name{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold-p);opacity:.8;line-height:1.2}
+.fc-label-zh{font-size:9px;font-style:italic;font-family:'Cormorant Garamond',serif;color:var(--gold-l);opacity:.35;letter-spacing:.5px}
+.fc-cell{display:flex;align-items:center;justify-content:center;min-height:52px;position:relative}
+.fc-cell::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;transform:translateX(-50%);background:var(--line-color,transparent);opacity:.0}
+.fc-cell.has-line::before{opacity:.35}
+.fc-cell.line-start::before{top:50%}
+.fc-cell.line-end::before{bottom:50%}
+.fc-dot{width:14px;height:14px;border-radius:50%;background:var(--dot-color,rgba(201,168,76,.3));position:relative;z-index:1;flex-shrink:0;transition:transform .15s}
+.fc-dot.dim{opacity:.25;background:rgba(201,168,76,.2)}
+.fc-dot.absent{opacity:0}
+.fc-dot.special{border:2px solid var(--dot-color);background:transparent}
+
+/* FOOTER */
+.footer{text-align:center;margin-top:44px;padding-top:24px;border-top:1px solid rgba(201,168,76,.1)}
+.footer p{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.3}
+
+/* ═══ MODAL ═══ */
+.modal-bg{position:fixed;inset:0;background:rgba(5,12,5,.88);backdrop-filter:blur(8px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-bg.open{opacity:1;pointer-events:all}
+.modal{background:var(--mid);border:1px solid rgba(201,168,76,.2);max-width:780px;width:92%;max-height:88vh;overflow-y:auto;position:relative;animation:slideUp .28s ease}
+@keyframes slideUp{from{transform:translateY(24px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:16px;right:20px;font-size:18px;cursor:pointer;color:var(--gold);opacity:.5;z-index:2;line-height:1;transition:opacity .15s}
+.modal-close:hover{opacity:1}
+
+/* Phase modal */
+.modal-img{width:100%;height:200px;object-fit:cover;filter:brightness(.75) saturate(.8);display:block}
+.modal-img-fallback{width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:48px}
+.modal-body{padding:28px 32px 32px}
+.modal-phase-num{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:rgba(201,168,76,.15);font-style:italic;line-height:1;margin-bottom:2px}
+.modal-it{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:var(--gold-l);line-height:1.1}
+.modal-en{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.5;margin-top:2px}
+.modal-zh{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--gold-l);opacity:.55;margin-top:3px;margin-bottom:18px}
+.modal-scopo{font-size:13.5px;color:var(--text);line-height:1.65;margin-bottom:22px;opacity:.9}
+.modal-vars-title{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.55;margin-bottom:10px}
+.vars-grid{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:24px}
+.var-tag{font-size:11px;padding:5px 12px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic}
+.modal-teas-title{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.55;margin-bottom:8px}
+.tea-badges{display:flex;flex-wrap:wrap;gap:6px}
+.tea-badge{font-size:10px;padding:3px 10px;border:1px solid rgba(201,168,76,.2);color:var(--gold);opacity:.7}
+
+/* Tea modal */
+.modal-tea-header{padding:28px 32px 0}
+.modal-tea-emoji{font-size:36px;margin-bottom:6px}
+.modal-tea-it{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:500;line-height:1.1;margin-bottom:2px}
+.modal-tea-zh{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;opacity:.5;color:var(--cream-d);letter-spacing:.8px;margin-bottom:10px}
+.modal-tea-tagline{font-size:13px;color:var(--cream-d);opacity:.7;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.6;border-left:2px solid rgba(201,168,76,.3);padding-left:12px;margin-bottom:0}
+.modal-tea-body{padding:24px 32px 32px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.radar-wrap{text-align:center}
+.radar-wrap svg{max-width:280px;width:100%}
+.radar-legend{display:flex;flex-direction:column;gap:4px;margin-top:10px}
+.rl-item{display:flex;align-items:center;gap:8px;font-size:10px;color:var(--cream-d);opacity:.7}
+.rl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.tea-detail-section h4{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.55;margin-bottom:8px}
+.tea-detail-flow{display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-bottom:20px}
+.tea-profile-text{font-size:12.5px;color:var(--text);line-height:1.7;opacity:.88}
+.tea-profile-text em{color:var(--gold-l);font-style:italic}
+.modal-divider{height:1px;background:rgba(201,168,76,.1);margin:16px 0}
+
+@media(max-width:640px){
+  .phases-grid{grid-template-columns:repeat(2,1fr)}
+  .teas-grid{grid-template-columns:1fr}
+  .teas-grid-2{grid-template-columns:1fr}
+  .modal-tea-body{grid-template-columns:1fr}
+  .poster{padding:32px 20px}
+}
+</style>
+</head>
+<body>
+
+<div class="poster">
+  <header class="header">
+    <p class="eyebrow">Guida interattiva alla lavorazione</p>
+    <h1>Tè <em>Cinese</em></h1>
+    <p class="subtitle">Dalla foglia alla tazza — tocca ogni elemento per esplorare</p>
+    <div class="divider"><div class="dl"></div><div class="dd"></div><div class="dr"></div></div>
+    <p class="hint">↓ clicca sulle fasi e sui tè per approfondire</p>
+  </header>
+
+  <section class="phases-section" id="phases-section">
+    <h2 class="sec-title">I — Fasi di lavorazione</h2>
+    <div id="phases-top" class="phases-grid"></div>
+    <div id="phases-bot" class="phases-grid" style="margin-top:2px"></div>
+  </section>
+
+  <section class="teas-section" id="teas-section">
+    <h2 class="sec-title">II — Tipologie di tè</h2>
+    <p class="sec-intro">In ordine di complessità crescente dell'intervento del produttore</p>
+    <div id="teas-top" class="teas-grid"></div>
+    <div id="teas-bot" class="teas-grid-2" style="margin-top:3px"></div>
+  </section>
+
+  <section class="table-section">
+    <h2 class="sec-title">III — Mappa rapida</h2>
+    <table class="matrix-table" id="matrix"></table>
+    <p style="font-size:9px;color:var(--cream-d);opacity:.38;margin-top:10px;font-style:italic;font-family:'Cormorant Garamond',serif">
+      ● presente &nbsp;|&nbsp; ◌ opzionale &nbsp;|&nbsp; — assente &nbsp;|&nbsp; ☀ essiccazione al sole &nbsp;|&nbsp; ●● prolungato
+    </p>
+  </section>
+
+  <section class="flowchart-section">
+    <h2 class="sec-title">IV — Flowchart completo</h2>
+    <p class="sec-intro">Il percorso di ogni tè attraverso le fasi di lavorazione — segui ogni colonna dall'alto verso il basso</p>
+    <div class="flowchart-wrap">
+      <div id="flowchart" class="flowchart-grid"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>Tè Cinese · Guida Interattiva · Vol. I</p>
+  </footer>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal" id="modal-inner">
+    <span class="modal-close" id="modal-close">✕</span>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════
+// DATA
+// ═══════════════════════════════
+
+const PHASES = [
+  {
+    num:'01', it:'Raccolta', en:'Picking', zh:'采摘 · Cǎi Zhāi',
+    scopo:'Selezionare foglie e gemme nel momento e al grado ottimale. La qualità della raccolta condiziona ogni fase successiva e determina buona parte del carattere finale del tè.',
+    variabili:['Stagione (primavera / estate / autunno)','Altitudine','Grado (sola gemma / 1+1 / 1+2 / 1+3)','Raccolta manuale vs meccanica','Ora del giorno (mattino preferito)','Condizioni meteo'],
+    teas:['Bianco','Verde','Giallo','Oolong','Rosso','Nero','Pu\'er'],
+    bg:'#162a16',
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'
+  },
+  {
+    num:'02', it:'Appassimento', en:'Withering', zh:'萎凋 · Wěi Diāo',
+    scopo:'Ridurre l\'umidità della foglia (dal 75–80% al 55–65%), ammorbidirla fisicamente e avviare trasformazioni enzimatiche e chimiche. Nei tè bianchi è la fase cruciale: lunga e al sole, consente una leggera ossidazione naturale.',
+    variabili:['Durata (ore — giorni per il bianco)','Temperatura ambiente','Umidità relativa','Interno vs esterno','Sole diretto vs ombra','Spessore dello strato di foglie','Ventilazione (naturale o forzata)'],
+    teas:['Bianco (prolungato)','Oolong','Rosso','Nero','Pu\'er'],
+    bg:'#1a2f1a',
+    img:'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80'
+  },
+  {
+    num:'03', it:'Scuotimento', en:'Shaking & Bruising', zh:'摇青 · Yáo Qīng',
+    scopo:'Rompere meccanicamente i bordi e la superficie delle foglie per avviare l\'ossidazione in modo controllato. È la fase distintiva degli oolong: il produttore scuote le foglie in cestini o tamburi a intervalli regolari, alternando periodi di riposo.',
+    variabili:['Intensità dello scuotimento','Numero di cicli (tipicamente 3–8)','Durata di ogni ciclo','Durata delle pause di riposo tra i cicli','Strumento usato (cestino / tamburo rotante)','Temperatura e umidità della stanza'],
+    teas:['Oolong (fondamentale)','Rosso (alcuni stili)'],
+    bg:'#1e2e18',
+    img:'https://images.unsplash.com/photo-1571934811356-5cc061b6d5df?w=800&q=80'
+  },
+  {
+    num:'04', it:'Ossidazione', en:'Oxidising', zh:'氧化 · Yǎng Huà',
+    scopo:'Le cellule rotte rilasciano enzimi (polifenolo ossidasi) che reagiscono con l\'ossigeno trasformando il colore, l\'aroma e il sapore del tè. Il grado di ossidazione è la variabile più importante nella classificazione dei tè.',
+    variabili:['Temperatura (ideale 20–25°C)','Umidità relativa (ideale 85–95%)','Durata (da 30 min a 5+ ore)','Grado di ossidazione target (15–100%)','Spessore dello strato di foglie','Ventilazione'],
+    teas:['Oolong (parziale: 15–85%)','Rosso (totale: 85–100%)','Bianco (leggera, naturale)'],
+    bg:'#221e14',
+    img:'https://images.unsplash.com/photo-1563911892-be823bfab3ef?w=800&q=80'
+  },
+  {
+    num:'05', it:'Fissaggio', en:'Fixing · Kill Green', zh:'杀青 · Shā Qīng',
+    scopo:'Disattivare gli enzimi responsabili dell\'ossidazione applicando calore. Blocca permanentemente il processo ossidativo, preservando il colore verde e gli aromi freschi. Nei tè verdi avviene subito; nel rosso avviene dopo l\'ossidazione completa.',
+    variabili:['Metodo: pan-firing (Cina) vs steaming (Giappone/alcuni CN)','Temperatura (230–280°C per pan-firing)','Durata','Livello di agitazione delle foglie','Intensità (lieve nel Pu\'er crudo per preservare attività enzimatica residua)'],
+    teas:['Verde','Giallo','Oolong','Rosso (post-ossidazione)','Nero','Pu\'er (leggero)'],
+    bg:'#2a1a0e',
+    img:'https://images.unsplash.com/photo-1566228015668-4c45dbc4e2f5?w=800&q=80'
+  },
+  {
+    num:'06', it:'Arrotolamento', en:'Rolling', zh:'揉捻 · Róu Niǎn',
+    scopo:'Dare alla foglia la forma caratteristica e rompere le pareti cellulari per favorire il rilascio di oli aromatici, polifenoli e sostanze solubili durante l\'infusione. La forma influenza anche la velocità di rilascio dei sapori.',
+    variabili:['Pressione applicata','Durata','Temperatura delle foglie al momento dell\'arrotolamento','Forma target: aghi piatti, spirali, palline, foglie ritorte, pressati','Macchina vs manuale','Umidità residua delle foglie'],
+    teas:['Verde','Giallo','Oolong','Rosso','Nero','Pu\'er'],
+    bg:'#1e2218',
+    img:'https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=800&q=80'
+  },
+  {
+    num:'07', it:'Essiccazione', en:'Drying', zh:'干燥 · Gān Zào',
+    scopo:'Ridurre l\'umidità residua della foglia al 3–5% per stabilizzare il tè e consentirne la conservazione senza deterioramento. L\'essiccazione al sole nel Pu\'er è fondamentale perché preserva l\'attività microbica ed enzimatica residua.',
+    variabili:['Metodo: sole, forno (baking), aria calda, essiccatrice','Temperatura','Durata','Umidità finale target','Numero di passaggi'],
+    teas:['Tutti — modalità diverse per tipo'],
+    bg:'#162616',
+    img:'https://images.unsplash.com/photo-1593100126453-19b562a800c1?w=800&q=80'
+  },
+  {
+    num:'08', it:'Tostatura', en:'Roasting', zh:'烘焙 · Hōng Bèi',
+    scopo:'Trasformare ulteriormente gli aromi attraverso reazioni di Maillard e caramellizzazione, aggiungere note tostate, legnose e minerali, ridurre ulteriormente l\'umidità e prolungare la vita del tè. Molto usata negli oolong pesanti (es. Da Hong Pao).',
+    variabili:['Temperatura (da 80°C leggero a 150°C+ intenso)','Durata (ore)','Numero di sessioni di tostatura','Fonte di calore (carbone di litchi, forno elettrico, carbone di legna)','Intervalli di riposo tra sessioni'],
+    teas:['Oolong (frequente, intensità variabile)','Rosso (alcuni stili)','Nero (alcuni)'],
+    bg:'#221408',
+    img:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80'
+  },
+  {
+    num:'09', it:'Fermentazione', en:'Fermentation · Wò Duī', zh:'渥堆 · Wò Duī',
+    scopo:'Trasformazione microbica profonda delle foglie tramite batteri, funghi e lieviti. Nel tè nero (Hēi Chá) avviene naturalmente in depositi; nel Pu\'er cotto viene accelerata artificialmente tramite il processo Wò Duī, inventato negli anni \'70 per simulare decenni di invecchiamento in poche settimane.',
+    variabili:['Umidità del mucchio (40–45%)','Temperatura interna del mucchio','Frequenza di rivoltamento (ogni 5–7 giorni)','Durata totale (6–8 settimane per Wò Duī standard)','Qualità dell\'acqua usata per inumidire','Ventilazione del locale'],
+    teas:['Pu\'er Cotto (Wò Duī accelerato)','Tè Nero / Dark Tea (naturale)'],
+    bg:'#1a1008',
+    img:'https://images.unsplash.com/photo-1571934811356-5cc061b6d5df?w=800&q=80'
+  },
+  {
+    num:'10', it:'Invecchiamento', en:'Aging', zh:'陈化 · Chén Huà',
+    scopo:'Evoluzione lenta e naturale nel tempo grazie a trasformazioni enzimatiche, microbiche e ossidative a bassa intensità. Sviluppa complessità, profondità e carattere unici. Il Pu\'er crudo invecchiato è tra i tè più ricercati al mondo, con valutazioni crescenti nel tempo come il vino.',
+    variabili:['Umidità di stoccaggio (secca vs umida — "dry stored" vs "wet stored")','Temperatura media del luogo','Ventilazione e circolazione d\'aria','Durata (mesi → decenni)','Compressione (sfuso vs torta pressata)','Frequenza di ispezione e gestione'],
+    teas:['Pu\'er Crudo (essenziale)','Tè Nero / Dark Tea','Pu\'er Cotto (opzionale)','Bianco (alcuni)'],
+    bg:'#100c08',
+    img:'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80'
+  }
+];
+
+const RADAR_AXES = ['Erbaceo\nVegetale','Floreale','Fruttato','Legnoso\nTerroso','Tostato\nNocciolato','Cremoso\nLattiginoso'];
+
+const TEAS = [
+  {
+    id:'bianco', it:'Tè Bianco', zh:'Bái Chá · 白茶', emoji:'⬜', cls:'bianco',
+    tagline:'Il meno lavorato. Il produttore interviene il meno possibile, lasciando alla natura il suo corso.',
+    fasi:[{t:'Raccolta',h:false,pi:0},{t:'Appassimento lungo',h:true,pi:1},{t:'Essiccazione',h:false,pi:6}],
+    profilo:'Ossidazione naturale e leggera durante il lungo appassimento — <em>nessun fissaggio</em>. Le foglie sono integre. Aromi delicati, floreali, erbacei, con dolcezza naturale. Le gemme ricoperte di peli bianchi (báiháo) caratterizzano Silver Needle e White Peony.',
+    radar:[[1,4,2,1,0,2]],radarLabels:['Bianco'],radarColors:['#c8d8c0'],
+    // flowchart: which phase indices are active, optional, absent
+    fc:[1,1,0,0,0,0,1,0,0,0] // 0=absent,1=active,2=optional,3=special
+  },
+  {
+    id:'verde', it:'Tè Verde', zh:'Lǜ Chá · 绿茶', emoji:'🟢', cls:'verde',
+    tagline:'Il fissaggio precoce blocca ogni ossidazione e preserva il colore verde e la freschezza della foglia.',
+    fasi:[{t:'Raccolta',h:false,pi:0},{t:'App. breve',h:false,pi:1},{t:'Fissaggio',h:true,pi:4},{t:'Arrot.',h:false,pi:5},{t:'Essic.',h:false,pi:6}],
+    profilo:'Il <em>fissaggio</em> avviene quasi subito dopo la raccolta. Pan-firing in Cina → profilo tostato, dolce, castagna. Steaming in Giappone → più verde, marino, umami.',
+    radar:[[4,2,1,1,3,1]],radarLabels:['Verde'],radarColors:['#7ab87a'],
+    fc:[1,1,0,0,1,1,1,0,0,0]
+  },
+  {
+    id:'giallo', it:'Tè Giallo', zh:'Huáng Chá · 黄茶', emoji:'🟡', cls:'giallo',
+    tagline:'Come il verde, con un passaggio extra di ingiallimento (Mèn Huáng) che lo rende dolce, morbido e raro.',
+    fasi:[{t:'Raccolta',h:false,pi:0},{t:'App.',h:false,pi:1},{t:'Fissaggio',h:false,pi:4},{t:'Arrot.',h:false,pi:5},{t:'Mèn Huáng',h:true,pi:null},{t:'Essic.',h:false,pi:6}],
+    profilo:'Il <em>Mèn Huáng</em> è unico: le foglie vengono avvolte in carta o tela umida e lasciate a riposare calde per ore o giorni. Una micro-ossidazione lenta e controllata elimina l\'erbaceo del verde, aggiungendo dolcezza mielata e cremosità.',
+    radar:[[2,3,1,1,1,4]],radarLabels:['Giallo'],radarColors:['#e8c84a'],
+    fc:[1,1,0,0,1,1,1,0,0,0]
+  },
+  {
+    id:'oolong', it:'Tè Oolong', zh:'Wūlóng Chá · 乌龙茶', emoji:'🟠', cls:'oolong',
+    tagline:'Il tè della complessità infinita. L\'ossidazione parziale (15–85%) crea un universo di profili tra verde e rosso.',
+    fasi:[{t:'Raccolta',h:false,pi:0},{t:'App.',h:false,pi:1},{t:'Scuotimento',h:true,pi:2},{t:'Ossid. parziale',h:true,pi:3},{t:'Fissaggio',h:false,pi:4},{t:'Arrot.',h:false,pi:5},{t:'Essic.',h:false,pi:6},{t:'Tostatura ◌',h:true,pi:7}],
+    profilo:'Lo <em>scuotimento</em> è la firma dell\'oolong: rompe i bordi e avvia un\'ossidazione che il produttore controlla e interrompe a piacere. <em>Leggero (20–30%)</em>: floreale, latteo, fruttato. <em>Pesante / tostato (60–80%+)</em>: minerale, tostato, legno.',
+    radar:[[1,5,2,1,1,3],[0,1,1,4,5,2]],radarLabels:['Oolong leggero','Oolong pesante'],radarColors:['#e0d080','#c8843a'],
+    fc:[1,1,1,1,1,1,1,2,0,0]
+  },
+  {
+    id:'rosso', it:'Tè Rosso', zh:'Hóng Chá · 红茶', emoji:'🔴', cls:'rosso',
+    tagline:'"Black tea" in Occidente. Completamente ossidato — il fissaggio arriva solo dopo.',
+    fasi:[{t:'Raccolta',h:false,pi:0},{t:'App.',h:false,pi:1},{t:'Arrot.',h:false,pi:5},{t:'Ossid. totale',h:true,pi:3},{t:'Fissaggio',h:false,pi:4},{t:'Essic.',h:false,pi:6}],
+    profilo:'L\'<em>arrotolamento</em> rompe le cellule e avvia l\'ossidazione senza bisogno di scuotimento. La trasformazione è completa (85–100%). Note di malto, frutta rossa, miele, caramello.',
+    radar:[[0,2,4,2,1,3]],radarLabels:['Rosso'],radarColors:['#c05050'],
+    fc:[1,1,0,1,1,1,1,0,0,0]
+  },
+  {
+    id:'nero', it:'Tè Nero', zh:'Hēi Chá · 黑茶', emoji:'⬛', cls:'nero',
+    tagline:'"Dark tea". Post-fermentato con microrganismi. Il Pu\'er ne è il sottotipo più celebre.',
+    fasi:[{t:'Raccolta',h:false,pi:0},{t:'App.',h:false,pi:1},{t:'Fissaggio',h:false,pi:4},{t:'Arrot.',h:false,pi:5},{t:'Ferm. microbica',h:true,pi:8},{t:'Essic.',h:false,pi:6}],
+    profilo:'Il <em>fissaggio precede la fermentazione</em> — al contrario del rosso. La fermentazione è microbica (batteri, funghi), non enzimatica. Profilo terroso, legnoso, umido.',
+    radar:[[1,0,1,4,3,1]],radarLabels:['Tè Nero'],radarColors:['#7070a0'],
+    fc:[1,1,0,0,1,1,1,0,1,2]
+  },
+  {
+    id:'sheng', it:'Pu\'er Crudo', zh:'Shēng Pú\'er · 生普洱', emoji:'🟤', cls:'sheng',
+    tagline:'Fermentazione naturale lentissima. Il tempo è il vero ingrediente — anni, spesso decenni.',
+    fasi:[{t:'Raccolta',h:false,pi:0},{t:'App.',h:false,pi:1},{t:'Fissaggio leggero',h:true,pi:4},{t:'Arrot.',h:false,pi:5},{t:'Essic. sole ☀',h:true,pi:6},{t:'Pressatura',h:false,pi:null},{t:'Invecchiamento',h:true,pi:9}],
+    profilo:'Il fissaggio è <em>volutamente incompleto</em>: enzimi e microbi restano parzialmente attivi. L\'essiccazione al sole è fondamentale — preserva questa attività residua per l\'invecchiamento.',
+    radar:[[3,3,2,1,0,1],[1,2,1,5,1,2]],radarLabels:['Giovane','Invecchiato (10+ anni)'],radarColors:['#c0d060','#a08030'],
+    fc:[1,1,0,0,1,1,3,0,0,1]
+  },
+  {
+    id:'shu', it:'Pu\'er Cotto', zh:'Shú Pú\'er · 熟普洱', emoji:'🟫', cls:'shu',
+    tagline:'Fermentazione accelerata (Wò Duī). Introdotto negli anni \'70 per simulare decenni in poche settimane.',
+    fasi:[{t:'Raccolta',h:false,pi:0},{t:'App.',h:false,pi:1},{t:'Fissaggio',h:false,pi:4},{t:'Arrot.',h:false,pi:5},{t:'Essic. sole ☀',h:false,pi:6},{t:'Wò Duī',h:true,pi:8},{t:'Essic.',h:false,pi:6},{t:'Pressatura',h:false,pi:null}],
+    profilo:'Il <em>Wò Duī</em> è il cuore del processo: le foglie vengono ammucchiate, inumidite e rivoltate per 6–8 settimane. Profilo terroso, legnoso, sottobosco, castagna.',
+    radar:[[0,0,1,5,2,3]],radarLabels:['Pu\'er Cotto'],radarColors:['#a07040'],
+    fc:[1,1,0,0,1,1,3,0,1,2]
+  }
+];
+
+// Tea colors for flowchart
+const TEA_COLORS = ['#c8d8c0','#7ab87a','#e8c84a','#c8843a','#c05050','#7070a0','#c0d060','#a07040'];
+const TEA_EMOJIS = ['⬜','🟢','🟡','🟠','🔴','⬛','🟤','🟫'];
+
+const MATRIX_DATA = {
+  rows:[
+    {label:'Raccolta',      vals:['●','●','●','●','●','●','●','●']},
+    {label:'Appassimento',  vals:['●●','◌','◌','●','●','●','●','●']},
+    {label:'Scuotimento',   vals:['—','—','—','●','◌','—','—','—']},
+    {label:'Ossidazione',   vals:['nat.','—','—','15–85%','totale','—','—','—']},
+    {label:'Fissaggio',     vals:['—','●','●','●','post-ox.','●','lieve','●']},
+    {label:'Arrotolamento', vals:['—','●','●','●','●','●','●','●']},
+    {label:'Essiccazione',  vals:['●','●','●','●','●','●','☀','☀']},
+    {label:'Tostatura',     vals:['—','—','—','◌','◌','◌','—','—']},
+    {label:'Fermentazione', vals:['—','—','—','—','—','●','→nat.','Wò Duī']},
+    {label:'Invecchiamento',vals:['◌','—','—','◌','—','◌','●','◌']},
+  ],
+  cols:['⬜ Bianco','🟢 Verde','🟡 Giallo','🟠 Oolong','🔴 Rosso','⬛ Nero','Pu\'er Crudo','Pu\'er Cotto']
+};
+
+// ═══════════════════════════════
+// RADAR SVG
+// ═══════════════════════════════
+
+function radarSVG(datasets, labels, colors) {
+  const cx=150, cy=155, maxR=100, n=6, levels=5;
+  const a0 = -Math.PI/2;
+  const step = (2*Math.PI)/n;
+
+  function pt(angle, r){ return [cx+r*Math.cos(angle), cy+r*Math.sin(angle)]; }
+
+  let s = `<svg viewBox="0 0 300 310" xmlns="http://www.w3.org/2000/svg">`;
+
+  // rings
+  for(let l=1;l<=levels;l++){
+    const r=(maxR/levels)*l;
+    const pts=Array.from({length:n},(_,i)=>pt(a0+i*step,r).join(',')).join(' ');
+    s+=`<polygon points="${pts}" fill="none" stroke="rgba(201,168,76,0.13)" stroke-width="1"/>`;
+  }
+
+  // axes
+  for(let i=0;i<n;i++){
+    const [x,y]=pt(a0+i*step,maxR);
+    s+=`<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(201,168,76,0.18)" stroke-width="1"/>`;
+  }
+
+  // data polygons
+  datasets.forEach((data,di)=>{
+    const pts=data.map((v,i)=>{ const r=(Math.min(v,5)/5)*maxR; return pt(a0+i*step,r).join(','); }).join(' ');
+    s+=`<polygon points="${pts}" fill="${colors[di]}" fill-opacity="0.22" stroke="${colors[di]}" stroke-width="2" stroke-opacity="0.75" stroke-linejoin="round"/>`;
+    // dots
+    data.forEach((v,i)=>{
+      if(v===0)return;
+      const r=(Math.min(v,5)/5)*maxR;
+      const [x,y]=pt(a0+i*step,r);
+      s+=`<circle cx="${x}" cy="${y}" r="3" fill="${colors[di]}" opacity="0.8"/>`;
+    });
+  });
+
+  // labels
+  const lineHeight=13;
+  for(let i=0;i<n;i++){
+    const angle=a0+i*step;
+    const [x,y]=pt(angle,maxR+26);
+    const anchor=x<cx-8?'end':x>cx+8?'start':'middle';
+    const lines=RADAR_AXES[i].split('\n');
+    const startY=y-(lines.length-1)*lineHeight/2;
+    lines.forEach((line,li)=>{
+      s+=`<text x="${x}" y="${startY+li*lineHeight}" text-anchor="${anchor}" font-family="Jost,sans-serif" font-size="10" fill="rgba(232,220,200,0.75)">${line}</text>`;
+    });
+  }
+
+  // level labels
+  for(let l=1;l<=levels;l++){
+    const r=(maxR/levels)*l;
+    const [lx,ly]=pt(a0,r);
+    s+=`<text x="${lx+3}" y="${ly-2}" font-family="Jost,sans-serif" font-size="8" fill="rgba(201,168,76,0.3)">${l}</text>`;
+  }
+
+  s+='</svg>';
+  return s;
+}
+
+// ═══════════════════════════════
+// RENDER PHASES
+// ═══════════════════════════════
+
+function renderPhases(){
+  const top=document.getElementById('phases-top');
+  const bot=document.getElementById('phases-bot');
+  PHASES.slice(0,5).forEach((p,i)=>top.appendChild(phaseCard(p,i)));
+  PHASES.slice(5,10).forEach((p,i)=>bot.appendChild(phaseCard(p,i+5)));
+}
+
+function phaseCard(p){
+  const d=document.createElement('div');
+  d.className='phase-card';
+  d.style.background=p.bg;
+  d.innerHTML=`
+    <span class="click-hint">scopri →</span>
+    <div class="phase-num">${p.num}</div>
+    <div class="phase-it">${p.it}</div>
+    <div class="phase-en">${p.en}</div>
+    <div class="phase-zh">${p.zh}</div>
+    <div class="phase-scopo">${p.scopo.split('.')[0]}.</div>`;
+  d.addEventListener('click',()=>openPhaseModal(p));
+  return d;
+}
+
+// ═══════════════════════════════
+// RENDER TEAS
+// ═══════════════════════════════
+
+function renderTeas(){
+  const top=document.getElementById('teas-top');
+  const bot=document.getElementById('teas-bot');
+  TEAS.slice(0,6).forEach(t=>top.appendChild(teaCard(t)));
+  TEAS.slice(6,8).forEach(t=>bot.appendChild(teaCard(t)));
+}
+
+function teaCard(t){
+  const d=document.createElement('div');
+  d.className=`tea-card ${t.cls}`;
+  const flowHTML=t.fasi.map((f,i)=>{
+    const s=`<span class="fs${f.h?' hl':''}">${f.t}</span>`;
+    return i<t.fasi.length-1?s+`<span class="fa">→</span>`:s;
+  }).join('');
+  d.innerHTML=`
+    <span class="tea-emoji">${t.emoji}</span>
+    <div class="tea-it">${t.it}</div>
+    <div class="tea-zh">${t.zh}</div>
+    <p class="tea-tagline">${t.tagline}</p>
+    <div class="flow-label">Fasi di lavorazione</div>
+    <div class="flow">${flowHTML}</div>`;
+  d.addEventListener('click',()=>openTeaModal(t));
+  return d;
+}
+
+// ═══════════════════════════════
+// RENDER MATRIX
+// ═══════════════════════════════
+
+function renderMatrix(){
+  const t=document.getElementById('matrix');
+  let h=`<thead><tr><th class="rh">Fase</th>${MATRIX_DATA.cols.map(c=>`<th>${c}</th>`).join('')}</tr></thead><tbody>`;
+  MATRIX_DATA.rows.forEach(r=>{
+    h+=`<tr><td class="pl">${r.label}</td>${r.vals.map(v=>{
+      let cls='dot-dim';
+      if(v==='●'||v==='●●')cls='dot';
+      if(v==='☀')cls='dot-s';
+      if(v.includes('%')||v==='post-ox.'||v==='lieve'||v==='nat.'||v==='→nat.'||v==='Wò Duī')cls='dot';
+      return `<td><span class="${cls}" style="font-size:${v.length>3?'9px':'13px'}">${v}</span></td>`;
+    }).join('')}</tr>`;
+  });
+  h+=`</tbody>`;
+  t.innerHTML=h;
+}
+
+// ═══════════════════════════════
+// RENDER FLOWCHART
+// ═══════════════════════════════
+
+function renderFlowchart(){
+  const fc=document.getElementById('flowchart');
+
+  // header row
+  const labelH=document.createElement('div');
+  labelH.className='fc-header label-h';
+  labelH.textContent='FASE';
+  fc.appendChild(labelH);
+
+  TEAS.forEach((t,ti)=>{
+    const h=document.createElement('div');
+    h.className='fc-header';
+    h.style.color=TEA_COLORS[ti];
+    h.innerHTML=`${TEA_EMOJIS[ti]}<br>${t.it.replace('Tè ','')}`;
+    fc.appendChild(h);
+  });
+
+  // data rows
+  PHASES.forEach((p,pi)=>{
+    // label cell
+    const lc=document.createElement('div');
+    lc.className='fc-label';
+    lc.innerHTML=`<div class="fc-label-inner">
+      <div class="fc-label-num">${p.num}</div>
+      <div class="fc-label-name">${p.it}</div>
+      <div class="fc-label-zh">${p.zh.split(' · ')[0]}</div>
+    </div>`;
+    fc.appendChild(lc);
+
+    TEAS.forEach((t,ti)=>{
+      const state=t.fc[pi]; // 0=absent,1=active,2=optional,3=special(sole)
+      const cell=document.createElement('div');
+      cell.className='fc-cell';
+      cell.style.setProperty('--dot-color', TEA_COLORS[ti]);
+      cell.style.setProperty('--line-color', TEA_COLORS[ti]);
+
+      // Determine if line should connect (any active phase before or after)
+      const hasPrev = t.fc.slice(0,pi).some(v=>v>0);
+      const hasNext = t.fc.slice(pi+1).some(v=>v>0);
+      const hasLine = state > 0 || (hasPrev && hasNext);
+
+      if(hasLine) cell.classList.add('has-line');
+      if(!hasPrev && state>0) cell.classList.add('line-start');
+      if(!hasNext && state>0) cell.classList.add('line-end');
+
+      if(state===0){
+        // absent — just show line if it bridges two active phases
+        if(hasPrev && hasNext){
+          cell.classList.add('has-line');
+          const dot=document.createElement('div');
+          dot.className='fc-dot absent';
+          cell.appendChild(dot);
+        }
+      } else {
+        const dot=document.createElement('div');
+        if(state===2) dot.className='fc-dot dim';
+        else if(state===3) dot.className='fc-dot special';
+        else dot.className='fc-dot';
+
+        // clickable
+        dot.style.cursor='pointer';
+        dot.title=p.it;
+        dot.addEventListener('click',(e)=>{ e.stopPropagation(); openPhaseModal(p); });
+
+        // tooltip label
+        const label=document.createElement('div');
+        label.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 6px);background:var(--mid);border:1px solid rgba(201,168,76,.25);font-size:9px;padding:3px 7px;white-space:nowrap;color:var(--gold-l);pointer-events:none;opacity:0;transition:opacity .15s;z-index:10;font-family:'Jost',sans-serif`;
+        label.textContent=p.it;
+        cell.appendChild(label);
+
+        dot.addEventListener('mouseenter',()=>label.style.opacity='1');
+        dot.addEventListener('mouseleave',()=>label.style.opacity='0');
+
+        cell.appendChild(dot);
+      }
+
+      fc.appendChild(cell);
+    });
+  });
+}
+
+// ═══════════════════════════════
+// MODALS
+// ═══════════════════════════════
+
+function openPhaseModal(p){
+  const varsHTML=p.variabili.map(v=>`<span class="var-tag">${v}</span>`).join('');
+  const teasHTML=p.teas.map(t=>`<span class="tea-badge">${t}</span>`).join('');
+  document.getElementById('modal-content').innerHTML=`
+    <img class="modal-img" src="${p.img}" alt="${p.it}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="modal-img-fallback" style="display:none;background:${p.bg}">🍃</div>
+    <div class="modal-body">
+      <div class="modal-phase-num">${p.num}</div>
+      <div class="modal-it">${p.it}</div>
+      <div class="modal-en">${p.en}</div>
+      <div class="modal-zh">${p.zh}</div>
+      <p class="modal-scopo">${p.scopo}</p>
+      <div class="modal-divider"></div>
+      <div class="modal-vars-title">Variabili controllabili dal produttore</div>
+      <div class="vars-grid">${varsHTML}</div>
+      <div class="modal-teas-title">Presente in</div>
+      <div class="tea-badges">${teasHTML}</div>
+    </div>`;
+  openModal();
+}
+
+function openTeaModal(t){
+  // Build clickable flow steps
+  const flowHTML=t.fasi.map((f,i)=>{
+    const clickable = f.pi !== null && f.pi !== undefined;
+    const cls=`fs${f.h?' hl':''}${clickable?' phase-link':''}`;
+    const style=clickable?`cursor:pointer;text-decoration:underline;text-decoration-style:dotted;text-decoration-color:rgba(201,168,76,.4)`:'';
+    const s=`<span class="${cls}" style="${style}" ${clickable?`data-pi="${f.pi}"`:''}>${f.t}</span>`;
+    return i<t.fasi.length-1?s+`<span class="fa">→</span>`:s;
+  }).join('');
+
+  const legendHTML=t.radarLabels.map((l,i)=>`
+    <div class="rl-item">
+      <div class="rl-dot" style="background:${t.radarColors[i]};opacity:.8"></div>
+      <span>${l}</span>
+    </div>`).join('');
+
+  document.getElementById('modal-content').innerHTML=`
+    <div class="modal-tea-header">
+      <div class="modal-tea-emoji">${t.emoji}</div>
+      <div class="modal-tea-it" style="color:${t.radarColors[0]}">${t.it}</div>
+      <div class="modal-tea-zh">${t.zh}</div>
+      <p class="modal-tea-tagline">${t.tagline}</p>
+    </div>
+    <div class="modal-tea-body">
+      <div class="radar-wrap">
+        ${radarSVG(t.radar, RADAR_AXES, t.radarColors)}
+        <div class="radar-legend">${legendHTML}</div>
+      </div>
+      <div class="tea-detail-section">
+        <h4>Fasi di lavorazione <span style="opacity:.4;font-size:8px;letter-spacing:1px;text-transform:uppercase"> — clicca una fase per i dettagli</span></h4>
+        <div class="tea-detail-flow">${flowHTML}</div>
+        <div class="modal-divider"></div>
+        <h4>Profilo &amp; note</h4>
+        <p class="tea-profile-text">${t.profilo}</p>
+      </div>
+    </div>`;
+
+  // Attach click handlers to phase links
+  document.querySelectorAll('.phase-link').forEach(el=>{
+    el.addEventListener('click',e=>{
+      e.stopPropagation();
+      const pi=parseInt(el.dataset.pi);
+      openPhaseModal(PHASES[pi]);
+    });
+  });
+
+  openModal();
+}
+
+function openModal(){
+  document.getElementById('modal-bg').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeModal(){
+  document.getElementById('modal-bg').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+document.getElementById('modal-close').addEventListener('click',closeModal);
+document.getElementById('modal-bg').addEventListener('click',e=>{
+  if(e.target===e.currentTarget)closeModal();
+});
+document.addEventListener('keydown',e=>{ if(e.key==='Escape')closeModal(); });
+
+// ═══════════════════════════════
+// INIT
+// ═══════════════════════════════
+renderPhases();
+renderTeas();
+renderMatrix();
+renderFlowchart();
+</script>
+</body>
+</html>

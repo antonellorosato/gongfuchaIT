@@ -110,15 +110,23 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .scheda-descriptors{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
 .sd{font-size:10px;padding:3px 9px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic;cursor:pointer;transition:background .15s,border-color .15s}
 .sd.active{background:rgba(201,168,76,.18);border-color:rgba(201,168,76,.45);color:var(--gold-l)}
-.scheda-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
-.btn-scheda{font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;cursor:pointer;font-family:'Jost',sans-serif;transition:all .18s}
+.scheda-header-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px}
+.scheda-tabs-area{display:flex;align-items:center;gap:3px;flex-wrap:wrap;flex:1}
+.inf-tab{font-size:10px;padding:5px 12px;background:var(--bg);border:1px solid rgba(201,168,76,.12);color:var(--cream-d);cursor:pointer;font-family:'Cormorant Garamond',serif;transition:background .15s;position:relative}
+.inf-tab.active{background:var(--light);border-color:rgba(201,168,76,.35);color:var(--gold-l)}
+.inf-tab .tab-del{display:none;position:absolute;top:-6px;right:-6px;width:16px;height:16px;background:rgba(180,60,60,.7);border:none;border-radius:50%;color:#fff;font-size:9px;cursor:pointer;line-height:16px;text-align:center;padding:0}
+.inf-tab:hover .tab-del{display:block}
+.btn-add-inf{font-size:14px;width:28px;height:28px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);cursor:pointer;transition:background .15s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.btn-add-inf:hover{background:rgba(201,168,76,.2)}
+.scheda-actions{display:flex;gap:8px;flex-shrink:0;align-items:center}
+.btn-scheda{font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;cursor:pointer;font-family:'Jost',sans-serif;transition:all .18s}
 .btn-scheda.primary{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35);color:var(--gold-l)}
 .btn-scheda.primary:hover{background:rgba(201,168,76,.22);border-color:var(--gold)}
 .btn-scheda.secondary{background:transparent;border:1px solid rgba(201,168,76,.15);color:var(--cream-d);opacity:.5}
 .btn-scheda.secondary:hover{opacity:1}
-.scheda-infusions-row{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:16px}
-.inf-tab{font-size:10px;padding:5px 12px;background:var(--bg);border:1px solid rgba(201,168,76,.12);color:var(--cream-d);cursor:pointer;font-family:'Cormorant Garamond',serif;transition:background .15s}
-.inf-tab.active{background:var(--light);border-color:rgba(201,168,76,.35);color:var(--gold-l)}
+.btn-excel{background:rgba(30,100,50,.25);border:1px solid rgba(80,160,80,.3);color:#90d090}
+.btn-excel:hover{background:rgba(30,100,50,.45);border-color:rgba(80,160,80,.6)}
+@media(max-width:600px){.scheda-header-row{flex-direction:column}.scheda-actions{width:100%;justify-content:flex-end}}
 
 /* ── MODAL ── */
 .modal-bg{position:fixed;inset:0;background:rgba(4,10,6,.92);backdrop-filter:blur(12px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
@@ -188,6 +196,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   .corner-br{bottom:10px;right:10px}
 }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 <div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar"></div></div>
@@ -604,171 +613,247 @@ function renderVocab(){
   });
 }
 
-// ── SCHEDA ──
+// ── SCHEDA MULTI-INFUSIONE ──
+var DESCR_AROMA=['Floreale','Fruttato','Vegetale','Tostato','Terroso','Speziato','Dolce','Minerale','Muschio','Fumo','Miele','Orchidea'];
+var DESCR_GUSTO=['Dolce','Amaro','Acido','Salato','Umami','Astringente','Secco','Cremoso','Rotondo','Piatto'];
+var DESCR_CORPO=['Leggero','Medio','Pieno','Oleoso','Vellutato','Setoso','Acquoso'];
+var infData={};
+var currentInf=1;
+var infCount=1;
+
+function emptyInf(){
+  return {te:'',colore:'',temp:'',tempo:'',aromaInt:5,aromaDesc:[],gustoInt:5,gustoDesc:[],corpo:[],huigan:2,note:''};
+}
+
 function renderScheda(){
-  const wrap=document.getElementById('scheda-wrap');
-  const DESCR_AROMA=['Floreale','Fruttato','Vegetale','Tostato','Terroso','Speziato','Dolce','Minerale','Muschio','Fumo','Miele','Orchidea'];
-  const DESCR_GUSTO=['Dolce','Amaro','Acido','Salato','Umami','Astringente','Secco','Cremoso','Rotondo','Piatto'];
-  const DESCR_CORPO=['Leggero','Medio','Pieno','Oleoso','Vellutato','Setoso','Acquoso'];
+  var wrap=document.getElementById('scheda-wrap');
+  infData[1]=emptyInf();
+  var header=document.createElement('div');
+  header.innerHTML='<div class="scheda-title">Scheda di Degustazione</div><div class="scheda-sub">Compila per ogni infusione &middot; usa + per aggiungerne &middot; esporta in Excel a fine sessione</div>';
+  var headerRow=document.createElement('div');
+  headerRow.className='scheda-header-row';
+  var tabsArea=document.createElement('div');
+  tabsArea.className='scheda-tabs-area';
+  tabsArea.id='inf-tabs-area';
+  var actions=document.createElement('div');
+  actions.className='scheda-actions';
+  var btnClear=document.createElement('button');
+  btnClear.className='btn-scheda secondary';
+  btnClear.textContent='Azzera infusione';
+  btnClear.onclick=clearCurrent;
+  var btnExcel=document.createElement('button');
+  btnExcel.className='btn-scheda primary btn-excel';
+  btnExcel.textContent='\u2193 Esporta Excel';
+  btnExcel.onclick=exportExcel;
+  actions.appendChild(btnClear);
+  actions.appendChild(btnExcel);
+  headerRow.appendChild(tabsArea);
+  headerRow.appendChild(actions);
+  var formArea=document.createElement('div');
+  formArea.id='scheda-form-area';
+  wrap.appendChild(header);
+  wrap.appendChild(headerRow);
+  wrap.appendChild(formArea);
+  renderTabs();
+  renderForm();
+}
 
-  let infTabs='';
-  for(let i=1;i<=6;i++) infTabs+=`<div class="inf-tab${i===1?' active':''}" onclick="switchInf(${i})">${i}ª</div>`;
+function renderTabs(){
+  var area=document.getElementById('inf-tabs-area');
+  area.innerHTML='';
+  for(var i=1;i<=infCount;i++){
+    (function(n){
+      var tab=document.createElement('div');
+      tab.className='inf-tab'+(n===currentInf?' active':'');
+      tab.textContent=n+'\u00aa';
+      tab.onclick=function(){switchInf(n);};
+      if(infCount>1){
+        var del=document.createElement('button');
+        del.className='tab-del';
+        del.textContent='\u00d7';
+        del.onclick=function(e){e.stopPropagation();deleteInf(n);};
+        tab.insertBefore(del,tab.firstChild);
+      }
+      area.appendChild(tab);
+    })(i);
+  }
+  var addBtn=document.createElement('button');
+  addBtn.className='btn-add-inf';
+  addBtn.textContent='+';
+  addBtn.title='Aggiungi infusione';
+  addBtn.onclick=addInf;
+  area.appendChild(addBtn);
+}
 
-  wrap.innerHTML=`
-    <div class="scheda-title">Scheda di Degustazione</div>
-    <div class="scheda-sub">Compila per ogni infusione · I dati restano in memoria durante la sessione</div>
-    <div class="scheda-infusions-row">${infTabs}</div>
-    <div class="scheda-grid">
-      <div>
-        <div class="scheda-field"><label>Tè / Cultivar</label><input type="text" id="sf-te" placeholder="es. Tie Guan Yin, Anxi 2024"></div>
-        <div class="scheda-field"><label>Infusione №<span id="sf-inf-lbl">1</span></label></div>
-        <div class="scheda-field"><label>Colore del liquore</label><input type="text" id="sf-colore" placeholder="es. giallo dorato, ambra ramata…"></div>
-        <div class="scheda-field"><label>Temperatura usata</label><input type="text" id="sf-temp" placeholder="es. 85°C"></div>
-        <div class="scheda-field"><label>Tempo di infusione</label><input type="text" id="sf-tempo" placeholder="es. 30 secondi"></div>
-        <div class="scheda-field">
-          <label>Intensità aroma (1–10)</label>
-          <div class="scheda-slider-wrap">
-            <input type="range" class="scheda-slider" min="1" max="10" value="5" id="sf-aroma-int" oninput="document.getElementById('sf-aroma-int-val').textContent=this.value">
-            <span class="scheda-slider-val" id="sf-aroma-int-val">5</span>
-          </div>
-        </div>
-        <div class="scheda-field">
-          <label>Descrittori aroma</label>
-          <div class="scheda-descriptors">${DESCR_AROMA.map(d=>`<span class="sd" onclick="this.classList.toggle('active')">${d}</span>`).join('')}</div>
-        </div>
-      </div>
-      <div>
-        <div class="scheda-field">
-          <label>Intensità gusto (1–10)</label>
-          <div class="scheda-slider-wrap">
-            <input type="range" class="scheda-slider" min="1" max="10" value="5" id="sf-gusto-int" oninput="document.getElementById('sf-gusto-int-val').textContent=this.value">
-            <span class="scheda-slider-val" id="sf-gusto-int-val">5</span>
-          </div>
-        </div>
-        <div class="scheda-field">
-          <label>Descrittori gusto</label>
-          <div class="scheda-descriptors">${DESCR_GUSTO.map(d=>`<span class="sd" onclick="this.classList.toggle('active')">${d}</span>`).join('')}</div>
-        </div>
-        <div class="scheda-field">
-          <label>Corpo</label>
-          <div class="scheda-descriptors">${DESCR_CORPO.map(d=>`<span class="sd" onclick="this.classList.toggle('active')">${d}</span>`).join('')}</div>
-        </div>
-        <div class="scheda-field">
-          <label>Intensità Huigan (1–5)</label>
-          <div class="scheda-slider-wrap">
-            <input type="range" class="scheda-slider" min="0" max="5" value="2" id="sf-huigan" oninput="document.getElementById('sf-huigan-val').textContent=this.value">
-            <span class="scheda-slider-val" id="sf-huigan-val">2</span>
-          </div>
-        </div>
-        <div class="scheda-field"><label>Note libere</label><textarea id="sf-note" placeholder="Qualsiasi osservazione — cambiamenti rispetto all'infusione precedente, sorprese, domande…"></textarea></div>
-      </div>
-    </div>
-    <div class="scheda-actions">
-      <button class="btn-scheda secondary" onclick="clearScheda()">Azzera</button>
-      <button class="btn-scheda primary" onclick="stampaScheda()">Stampa / Salva PDF</button>
-    </div>`;
+function mkField(labelTxt, el){
+  var wrap=document.createElement('div');
+  wrap.className='scheda-field';
+  var lbl=document.createElement('label');
+  lbl.textContent=labelTxt;
+  wrap.appendChild(lbl);
+  wrap.appendChild(el);
+  return wrap;
+}
+
+function mkSlider(id, min, max, val, valId){
+  var wrap=document.createElement('div');
+  wrap.className='scheda-slider-wrap';
+  var sl=document.createElement('input');
+  sl.type='range';sl.className='scheda-slider';sl.min=min;sl.max=max;sl.value=val;sl.id=id;
+  var lbl=document.createElement('span');
+  lbl.className='scheda-slider-val';lbl.id=valId;lbl.textContent=val;
+  sl.oninput=function(){lbl.textContent=this.value;};
+  wrap.appendChild(sl);wrap.appendChild(lbl);
+  return wrap;
+}
+
+function mkChips(arr, active, groupKey){
+  var wrap=document.createElement('div');
+  wrap.className='scheda-descriptors';
+  arr.forEach(function(x){
+    var chip=document.createElement('span');
+    chip.className='sd'+(active.indexOf(x)>=0?' active':'');
+    chip.textContent=x;
+    chip.setAttribute('data-group', groupKey);
+    chip.setAttribute('data-val', x);
+    chip.onclick=function(){this.classList.toggle('active');};
+    wrap.appendChild(chip);
+  });
+  return wrap;
+}
+
+function renderForm(){
+  var area=document.getElementById('scheda-form-area');
+  area.innerHTML='';
+  var d=infData[currentInf]||emptyInf();
+  var grid=document.createElement('div');
+  grid.className='scheda-grid';
+
+  // LEFT column
+  var left=document.createElement('div');
+  var teInput=document.createElement('input');
+  teInput.type='text';teInput.id='sf-te';teInput.value=d.te;teInput.placeholder='es. Tie Guan Yin, Anxi 2024';
+  left.appendChild(mkField('Tè / Cultivar', teInput));
+  var infLbl=document.createElement('div');
+  infLbl.className='scheda-field';
+  infLbl.innerHTML='<label>Infusione &nbsp;N\u00ba'+currentInf+'</label>';
+  left.appendChild(infLbl);
+  var colInput=document.createElement('input');
+  colInput.type='text';colInput.id='sf-colore';colInput.value=d.colore;colInput.placeholder='es. giallo dorato, ambra ramata\u2026';
+  left.appendChild(mkField('Colore del liquore', colInput));
+  var tempInput=document.createElement('input');
+  tempInput.type='text';tempInput.id='sf-temp';tempInput.value=d.temp;tempInput.placeholder='es. 85\u00b0C';
+  left.appendChild(mkField('Temperatura usata', tempInput));
+  var tempoInput=document.createElement('input');
+  tempoInput.type='text';tempoInput.id='sf-tempo';tempoInput.value=d.tempo;tempoInput.placeholder='es. 30 sec';
+  left.appendChild(mkField('Tempo di infusione', tempoInput));
+  left.appendChild(mkField('Intensit\u00e0 aroma (1\u201310)', mkSlider('sf-aroma-int',1,10,d.aromaInt,'sf-aroma-int-val')));
+  var aromaWrap=document.createElement('div');
+  aromaWrap.className='scheda-field';
+  var aromaLbl=document.createElement('label');aromaLbl.textContent='Descrittori aroma';
+  aromaWrap.appendChild(aromaLbl);
+  aromaWrap.appendChild(mkChips(DESCR_AROMA, d.aromaDesc, 'aroma'));
+  left.appendChild(aromaWrap);
+
+  // RIGHT column
+  var right=document.createElement('div');
+  right.appendChild(mkField('Intensit\u00e0 gusto (1\u201310)', mkSlider('sf-gusto-int',1,10,d.gustoInt,'sf-gusto-int-val')));
+  var gustoWrap=document.createElement('div');
+  gustoWrap.className='scheda-field';
+  var gustoLbl=document.createElement('label');gustoLbl.textContent='Descrittori gusto';
+  gustoWrap.appendChild(gustoLbl);
+  gustoWrap.appendChild(mkChips(DESCR_GUSTO, d.gustoDesc, 'gusto'));
+  right.appendChild(gustoWrap);
+  var corpoWrap=document.createElement('div');
+  corpoWrap.className='scheda-field';
+  var corpoLbl=document.createElement('label');corpoLbl.textContent='Corpo';
+  corpoWrap.appendChild(corpoLbl);
+  corpoWrap.appendChild(mkChips(DESCR_CORPO, d.corpo, 'corpo'));
+  right.appendChild(corpoWrap);
+  right.appendChild(mkField('Intensit\u00e0 Huigan (0\u20135)', mkSlider('sf-huigan',0,5,d.huigan,'sf-huigan-val')));
+  var noteEl=document.createElement('textarea');
+  noteEl.id='sf-note';noteEl.value=d.note;
+  noteEl.placeholder='Osservazioni, cambiamenti rispetto alla precedente\u2026';
+  right.appendChild(mkField('Note libere', noteEl));
+
+  grid.appendChild(left);
+  grid.appendChild(right);
+  area.appendChild(grid);
+}
+
+function collectCurrent(){
+  var d=infData[currentInf]||emptyInf();
+  var get=function(id){var el=document.getElementById(id);return el?el.value:'';};
+  var getN=function(id){var el=document.getElementById(id);return el?+el.value:0;};
+  d.te=get('sf-te');d.colore=get('sf-colore');d.temp=get('sf-temp');d.tempo=get('sf-tempo');d.note=get('sf-note');
+  d.aromaInt=getN('sf-aroma-int');d.gustoInt=getN('sf-gusto-int');d.huigan=getN('sf-huigan');
+  d.aromaDesc=[];d.gustoDesc=[];d.corpo=[];
+  document.querySelectorAll('.sd.active').forEach(function(el){
+    var g=el.getAttribute('data-group');var v=el.getAttribute('data-val');
+    if(g==='aroma') d.aromaDesc.push(v);
+    else if(g==='gusto') d.gustoDesc.push(v);
+    else if(g==='corpo') d.corpo.push(v);
+  });
+  infData[currentInf]=d;
 }
 
 function switchInf(n){
-  document.querySelectorAll('.inf-tab').forEach((t,i)=>t.classList.toggle('active',i+1===n));
-  document.getElementById('sf-inf-lbl').textContent=n;
-}
-function clearScheda(){
-  document.querySelectorAll('.sd.active').forEach(d=>d.classList.remove('active'));
-  ['sf-te','sf-colore','sf-temp','sf-tempo','sf-note'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-}
-function stampaScheda(){window.print();}
-
-// ════════════════════════════════════
-// MODALS
-// ════════════════════════════════════
-
-function openSensoModal(s){
-  const sects=s.sections.map((sec,i)=>`
-    ${i>0?'<div class="m-div"></div>':''}
-    <div class="m-sec"><h4>${sec.t}</h4><p>${sec.p}</p></div>`).join('');
-  const domande=s.domande.map(d=>`<li>${d}</li>`).join('');
-  document.getElementById('modal-content').innerHTML=`
-    <div class="m-top">
-      <div class="m-icon">${s.icon}</div>
-      <div class="m-title">${s.it}</div>
-      <div class="m-sub">${s.sub}</div>
-    </div>
-    <div class="m-body">
-      <div class="m-sec"><h4>In sintesi</h4><p>${s.desc}</p>
-        <div class="m-tags">${s.tags.map(t=>`<span class="m-tag">${t}</span>`).join('')}</div>
-      </div>
-      <div class="m-div"></div>
-      <div class="m-sec"><h4>Domande da farti</h4><ul>${domande}</ul></div>
-      <div class="m-div"></div>${sects}
-    </div>`;
-  openModal();
+  collectCurrent();
+  currentInf=n;
+  if(!infData[n]) infData[n]=emptyInf();
+  renderTabs();
+  renderForm();
 }
 
-function openRuotaCat(cat){
-  const terms=cat.terms.map((t,i)=>`
-    ${i>0?'<div class="m-div"></div>':''}
-    <div class="m-sec"><h4 style="color:${cat.color}">${t.t}</h4><p>${t.d}</p></div>`).join('');
-  document.getElementById('modal-content').innerHTML=`
-    <div class="m-top">
-      <div class="m-title" style="color:${cat.color}">${cat.name}</div>
-      <div class="m-sub">famiglia aromatica</div>
-    </div>
-    <div class="m-body">${terms}</div>`;
-  openModal();
+function addInf(){
+  collectCurrent();
+  infCount++;
+  infData[infCount]=emptyInf();
+  if(infData[infCount-1]) infData[infCount].te=infData[infCount-1].te;
+  currentInf=infCount;
+  renderTabs();
+  renderForm();
 }
 
-function openTermModal(term,color,desc){
-  document.getElementById('modal-content').innerHTML=`
-    <div class="m-top">
-      <div class="m-title" style="color:${color}">${term}</div>
-      <div class="m-sub">descrittore aromatico</div>
-    </div>
-    <div class="m-body">
-      <div class="m-sec"><p>${desc}</p></div>
-    </div>`;
-  openModal();
+function deleteInf(n){
+  collectCurrent();
+  if(infCount<=1) return;
+  var newData={},newIdx=1;
+  for(var i=1;i<=infCount;i++){
+    if(i!==n && infData[i]){newData[newIdx]=infData[i];newIdx++;}
+  }
+  infData=newData;infCount--;
+  currentInf=Math.min(currentInf,infCount);
+  renderTabs();renderForm();
 }
 
-function openVocabModal(v){
-  const sects=v.sections.map((s,i)=>`
-    ${i>0?'<div class="m-div"></div>':''}
-    <div class="m-sec"><h4>${s.t}</h4><p>${s.p}</p></div>`).join('');
-  document.getElementById('modal-content').innerHTML=`
-    <div class="m-top">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:54px;color:rgba(201,168,76,.18);line-height:1;margin-bottom:4px">${v.zh}</div>
-      <div class="m-title">${v.it}</div>
-      <div class="m-sub">${v.pinyin}</div>
-    </div>
-    <div class="m-body">
-      <div class="m-sec"><h4>In sintesi</h4><p>${v.desc}</p></div>
-      <div class="m-div"></div>${sects}
-    </div>`;
-  openModal();
+function clearCurrent(){
+  var prev=infData[currentInf]?infData[currentInf].te:'';
+  infData[currentInf]=emptyInf();
+  if(prev) infData[currentInf].te=prev;
+  renderForm();
 }
 
-function openModal(){
-  document.getElementById('modal-bg').classList.add('open');
-  document.body.style.overflow='hidden';
-  if(!history.state||!history.state.modalOpen) history.pushState({modalOpen:true},'');
+function exportExcel(){
+  collectCurrent();
+  var rows=[];
+  rows.push(['Scheda di Degustazione \u2014 Gong Fu Cha']);
+  rows.push(['Data',new Date().toLocaleDateString('it-IT')]);
+  rows.push([]);
+  rows.push(['Infusione','T\u00e8 / Cultivar','Colore liquore','Temperatura','Tempo','Int. Aroma (1-10)','Descrittori Aroma','Int. Gusto (1-10)','Descrittori Gusto','Corpo','Huigan (0-5)','Note']);
+  for(var i=1;i<=infCount;i++){
+    var d=infData[i]||emptyInf();
+    rows.push([i+'\u00aa',d.te,d.colore,d.temp,d.tempo,d.aromaInt,d.aromaDesc.join(', '),d.gustoInt,d.gustoDesc.join(', '),d.corpo.join(', '),d.huigan,d.note]);
+  }
+  var wb=XLSX.utils.book_new();
+  var ws=XLSX.utils.aoa_to_sheet(rows);
+  ws['!cols']=[{wch:10},{wch:25},{wch:18},{wch:14},{wch:12},{wch:18},{wch:32},{wch:18},{wch:32},{wch:22},{wch:14},{wch:40}];
+  XLSX.utils.book_append_sheet(wb,ws,'Degustazione');
+  var teName=(infData[1]&&infData[1].te)||'degustazione';
+  var safeName=teName.replace(/[^\w\s-]/g,'').substring(0,30).trim();
+  XLSX.writeFile(wb,'scheda_'+(safeName||'te')+'_'+new Date().toISOString().slice(0,10)+'.xlsx');
 }
-function _doClose(){
-  document.getElementById('modal-bg').classList.remove('open');
-  document.body.style.overflow='';
-}
-function closeModal(){
-  _doClose();
-  if(history.state&&history.state.modalOpen) history.back();
-}
-window.addEventListener('popstate',function(){
-  if(document.getElementById('modal-bg').classList.contains('open')) _doClose();
-});
-document.getElementById('modal-close').addEventListener('click',closeModal);
-document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 
-// INIT
-renderSensi();
 renderLiquore();
 renderAromi();
 renderRuota();

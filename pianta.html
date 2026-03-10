@@ -164,6 +164,10 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .nav-part-num{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:2px;opacity:.7}
 .nav-part-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;display:block;line-height:1.2}
 .nav-center-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.32}
+.nav-home{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--gold);opacity:.48;transition:opacity .22s;min-width:80px;text-align:center}
+.nav-home:hover{opacity:1}
+.nav-home-icon{font-size:18px;line-height:1;display:block}
+.nav-home-lbl{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block}
 .nav-placeholder{min-width:120px}
 
 .footer{text-align:center;margin-top:44px;padding-top:22px;border-top:1px solid rgba(201,168,76,.08)}
@@ -180,6 +184,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   h1{font-size:clamp(30px,8vw,52px)}
   .part-nav{margin-bottom:28px}
   .nav-center-label{display:none}
+  .nav-home-lbl{display:none}
   .nav-part-title{font-size:12px}
   .modal{width:96%;max-height:95vh}
   .fm-top,.fm-body,.rm-top,.rm-body,.ym-wrap{padding-left:20px;padding-right:20px}
@@ -201,7 +206,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   <header class="header">
     <nav class="part-nav">
       <div class="nav-placeholder"></div>
-      <a href="index.html" class="nav-center-label" style="text-decoration:none;pointer-events:all;opacity:.38;transition:opacity .2s" onmouseover="this.style.opacity=.8" onmouseout="this.style.opacity=.38">Guida al Tè Cinese</a>
+      <a href="index.html" class="nav-center-label" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
       <a href="tipi_di_te.html" class="nav-arrow nav-next" title="Parte II — Varietà di Tè">
         <div class="nav-part">
           <span class="nav-part-num">Parte II</span>
@@ -254,7 +259,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   <footer class="footer">
     <nav class="part-nav" style="margin-bottom:20px;margin-top:0">
       <div class="nav-placeholder"></div>
-      <a href="index.html" class="nav-center-label" style="text-decoration:none;pointer-events:all;opacity:.38;transition:opacity .2s" onmouseover="this.style.opacity=.8" onmouseout="this.style.opacity=.38">Guida al Tè Cinese</a>
+      <a href="index.html" class="nav-center-label" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
       <a href="tipi_di_te.html" class="nav-arrow nav-next">
         <div class="nav-part"><span class="nav-part-num">Parte II</span><span class="nav-part-title">Varietà di Tè</span></div>
         <span class="nav-arr">→</span>

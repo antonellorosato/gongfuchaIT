@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Degustare il Tè — Guida alla Degustazione</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a1a10;--mid:#162a1c;--light:#234a2a;
+  --gold:#c9a84c;--gold-l:#e8cd8a;--gold-p:#f5ecd4;
+  --cream:#faf6ee;--cream-d:#ede4d0;--text:#e8dfc8;
+}
+body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 8%,rgba(35,74,42,.28) 0%,transparent 50%),radial-gradient(ellipse at 85% 85%,rgba(20,55,30,.22) 0%,transparent 50%);pointer-events:none;z-index:0}
+.poster{max-width:1160px;margin:0 auto;padding:52px 44px;position:relative;z-index:1}
+.border-frame{position:absolute;inset:16px;border:1px solid rgba(201,168,76,.16);pointer-events:none}
+.border-frame::before{content:'';position:absolute;inset:6px;border:1px solid rgba(201,168,76,.07)}
+.corner{position:absolute;width:28px;height:28px;border-color:var(--gold);border-style:solid;opacity:.5}
+.corner-tl{top:16px;left:16px;border-width:2px 0 0 2px}
+.corner-tr{top:16px;right:16px;border-width:2px 2px 0 0}
+.corner-bl{bottom:16px;left:16px;border-width:0 0 2px 2px}
+.corner-br{bottom:16px;right:16px;border-width:0 2px 2px 0}
+
+.header{text-align:center;margin-bottom:58px}
+.eyebrow{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);opacity:.72;margin-bottom:14px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5vw,66px);line-height:1.05;margin-bottom:4px}
+h1 em{font-style:italic;color:var(--gold-l)}
+.subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--gold-p);opacity:.58;margin-top:8px}
+.nav-hint{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.35;margin-top:16px}
+.divider{display:flex;align-items:center;gap:12px;margin:20px auto 0;max-width:360px;justify-content:center}
+.dl{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold));opacity:.32}
+.dr{flex:1;height:1px;background:linear-gradient(to left,transparent,var(--gold));opacity:.32}
+.dd{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.55}
+
+.sec{margin-bottom:64px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:14px;opacity:.8}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.28),transparent)}
+.sec-intro{font-size:11.5px;color:var(--cream-d);opacity:.5;margin-bottom:28px;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.65;max-width:720px}
+
+/* ── SENSI: 5-column grid ── */
+.sensi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.senso-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:24px 18px 20px;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .15s}
+.senso-card:hover{background:var(--light);transform:translateY(-2px)}
+.senso-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--gold));opacity:0;transition:opacity .2s}
+.senso-card:hover::before{opacity:.6}
+.senso-icon{font-size:30px;margin-bottom:12px;display:block}
+.senso-it{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--gold-l);margin-bottom:2px;line-height:1.15}
+.senso-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.42;margin-bottom:10px}
+.senso-desc{font-size:11px;color:var(--text);line-height:1.6;opacity:.8}
+.senso-prompts{margin-top:10px;display:flex;flex-direction:column;gap:3px}
+.sprompt{font-size:9.5px;color:var(--cream-d);opacity:.55;font-style:italic;font-family:'Cormorant Garamond',serif;padding-left:8px;border-left:1px solid rgba(201,168,76,.18)}
+
+/* ── RUOTA SVG ── */
+.ruota-wrap{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.ruota-svg-col{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ruota-svg-col svg{width:100%;max-width:380px;display:block}
+.ruota-legend-col{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:24px}
+.ruota-cat{margin-bottom:18px}
+.ruota-cat-title{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.5;margin-bottom:8px}
+.ruota-terms{display:flex;flex-wrap:wrap;gap:4px}
+.rterm{font-size:10px;padding:3px 9px;border:1px solid;font-family:'Cormorant Garamond',serif;font-style:italic;cursor:pointer;transition:background .15s,opacity .15s}
+.rterm:hover{opacity:1}
+
+/* ── LIQUORE COLORS ── */
+.liquore-section{display:flex;flex-direction:column;gap:3px}
+.liquore-row{display:grid;grid-template-columns:140px 1fr;gap:3px}
+.liquore-label-col{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:14px 18px;display:flex;flex-direction:column;justify-content:center}
+.liquore-tit{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;color:var(--gold-l);margin-bottom:2px}
+.liquore-sub{font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.42}
+.liquore-scale-col{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:14px 18px}
+.liquore-scale{display:flex;gap:4px;align-items:center;margin-bottom:5px}
+.lswatch{width:28px;height:28px;border-radius:50%;border:1px solid rgba(201,168,76,.12);cursor:pointer;transition:transform .15s,box-shadow .15s;flex-shrink:0}
+.lswatch:hover{transform:scale(1.2);box-shadow:0 0 10px rgba(201,168,76,.25)}
+.lswatch-lbl{font-size:8.5px;font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--cream-d);opacity:.5;margin-top:2px;text-align:center;width:28px}
+.lswatch-wrap{display:flex;flex-direction:column;align-items:center}
+.liquore-teas{font-size:10px;color:var(--cream-d);opacity:.45;font-style:italic;font-family:'Cormorant Garamond',serif;margin-top:2px}
+
+/* ── EVOLUTION TABLE ── */
+.evo-table{width:100%;border-collapse:collapse}
+.evo-table th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.5;padding:8px 12px;text-align:left;border-bottom:1px solid rgba(201,168,76,.12)}
+.evo-table td{font-size:11.5px;color:var(--text);line-height:1.55;opacity:.85;padding:10px 12px;border-bottom:1px solid rgba(201,168,76,.05);vertical-align:top}
+.evo-table tr:hover td{background:rgba(201,168,76,.03)}
+.evo-table td.inf-num{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;font-style:italic;color:rgba(201,168,76,.25);width:50px;text-align:center}
+.evo-table td em{color:var(--gold-l);font-style:italic}
+
+/* ── VOCAB CARDS ── */
+.vocab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.vocab-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:20px 18px 18px;cursor:pointer;transition:background .2s,transform .15s;position:relative;overflow:hidden}
+.vocab-card:hover{background:var(--light);transform:translateY(-2px)}
+.vocab-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:opacity .2s}
+.vocab-card:hover::before{opacity:.45}
+.vocab-zh{font-family:'Cormorant Garamond',serif;font-size:28px;color:rgba(201,168,76,.2);line-height:1;margin-bottom:6px}
+.vocab-it{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;color:var(--gold-l);margin-bottom:1px;line-height:1.2}
+.vocab-pinyin{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.42;margin-bottom:8px}
+.vocab-desc{font-size:11px;color:var(--text);line-height:1.58;opacity:.78}
+
+/* ── SCHEDA INTERATTIVA ── */
+.scheda-wrap{background:var(--mid);border:1px solid rgba(201,168,76,.12);padding:32px}
+.scheda-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--gold-l);margin-bottom:4px}
+.scheda-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:24px}
+.scheda-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.scheda-field{margin-bottom:14px}
+.scheda-field label{display:block;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.45;margin-bottom:5px}
+.scheda-field input,.scheda-field textarea,.scheda-field select{width:100%;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.14);color:var(--cream);font-family:'Jost',sans-serif;font-size:12px;font-weight:300;padding:8px 12px;outline:none;transition:border-color .18s;resize:vertical}
+.scheda-field input:focus,.scheda-field textarea:focus,.scheda-field select:focus{border-color:rgba(201,168,76,.4)}
+.scheda-field textarea{min-height:72px}
+.scheda-slider-wrap{display:flex;align-items:center;gap:12px}
+.scheda-slider{-webkit-appearance:none;width:100%;height:3px;background:rgba(201,168,76,.12);outline:none}
+.scheda-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;background:var(--gold);border-radius:50%;cursor:pointer}
+.scheda-slider-val{font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold-l);min-width:24px;text-align:right}
+.scheda-descriptors{display:flex;flex-wrap:wrap;gap:5px;margin-top:6px}
+.sd{font-size:10px;padding:3px 9px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic;cursor:pointer;transition:background .15s,border-color .15s}
+.sd.active{background:rgba(201,168,76,.18);border-color:rgba(201,168,76,.45);color:var(--gold-l)}
+.scheda-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+.btn-scheda{font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:8px 18px;cursor:pointer;font-family:'Jost',sans-serif;transition:all .18s}
+.btn-scheda.primary{background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.35);color:var(--gold-l)}
+.btn-scheda.primary:hover{background:rgba(201,168,76,.22);border-color:var(--gold)}
+.btn-scheda.secondary{background:transparent;border:1px solid rgba(201,168,76,.15);color:var(--cream-d);opacity:.5}
+.btn-scheda.secondary:hover{opacity:1}
+.scheda-infusions-row{display:flex;gap:3px;flex-wrap:wrap;margin-bottom:16px}
+.inf-tab{font-size:10px;padding:5px 12px;background:var(--bg);border:1px solid rgba(201,168,76,.12);color:var(--cream-d);cursor:pointer;font-family:'Cormorant Garamond',serif;transition:background .15s}
+.inf-tab.active{background:var(--light);border-color:rgba(201,168,76,.35);color:var(--gold-l)}
+
+/* ── MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(4,10,6,.92);backdrop-filter:blur(12px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-bg.open{opacity:1;pointer-events:all}
+.modal{background:var(--mid);border:1px solid rgba(201,168,76,.2);max-width:780px;width:94%;max-height:90vh;overflow-y:auto;position:relative;animation:slideUp .28s ease}
+@keyframes slideUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:15px;right:18px;font-size:17px;cursor:pointer;color:var(--gold);opacity:.42;z-index:2;transition:opacity .15s;background:none;border:none}
+.modal-close:hover{opacity:1}
+.m-top{padding:30px 34px 0}
+.m-icon{font-size:42px;margin-bottom:8px}
+.m-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:var(--gold-l);margin-bottom:2px}
+.m-sub{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.42;margin-bottom:14px}
+.m-body{padding:18px 34px 34px}
+.m-sec{margin-bottom:18px}
+.m-sec h4{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.45;margin-bottom:8px}
+.m-sec p{font-size:13px;color:var(--text);line-height:1.72;opacity:.9}
+.m-sec p em{color:var(--gold-l);font-style:italic}
+.m-sec ul{font-size:12.5px;color:var(--text);line-height:1.75;opacity:.88;padding-left:16px}
+.m-sec ul li{margin-bottom:2px}
+.m-sec ul li em{color:var(--gold-l);font-style:italic}
+.m-div{height:1px;background:rgba(201,168,76,.09);margin:16px 0}
+.m-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.m-tag{font-size:11px;padding:4px 11px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.16);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic}
+.m-note{background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.28);padding:10px 14px;margin-top:10px}
+.m-note p{font-size:12px;color:var(--cream-d);line-height:1.6;opacity:.75;font-style:italic;font-family:'Cormorant Garamond',serif}
+
+/* ── NAV ── */
+.part-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;padding:0 2px}
+.nav-arrow{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--gold);opacity:.42;transition:opacity .22s;min-width:120px}
+.nav-arrow:hover{opacity:.9}
+.nav-arrow.nav-next{flex-direction:row-reverse}
+.nav-arrow.nav-next .nav-part{text-align:right}
+.nav-arr{font-size:28px;line-height:1;font-family:'Cormorant Garamond',serif;flex-shrink:0}
+.nav-part-num{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:2px;opacity:.7}
+.nav-part-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;display:block;line-height:1.2}
+.nav-home{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--gold);opacity:.48;transition:opacity .22s;min-width:80px;text-align:center}
+.nav-home:hover{opacity:1}
+.nav-home-icon{font-size:18px;line-height:1;display:block}
+.nav-home-lbl{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block}
+.nav-placeholder{min-width:120px}
+
+.footer{text-align:center;margin-top:44px;padding-top:22px;border-top:1px solid rgba(201,168,76,.08)}
+.footer p{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.3;line-height:1.8}
+.footer a{color:var(--gold);opacity:.55;text-decoration:none;transition:opacity .18s}
+.footer a:hover{opacity:1}
+
+@media(max-width:900px){
+  .sensi-grid{grid-template-columns:repeat(3,1fr)}
+  .ruota-wrap{grid-template-columns:1fr}
+  .vocab-grid{grid-template-columns:1fr 1fr}
+  .scheda-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .sensi-grid{grid-template-columns:1fr 1fr}
+  .vocab-grid{grid-template-columns:1fr}
+  .poster{padding:28px 18px}
+  .nav-home-lbl{display:none}
+}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+  <div class="border-frame"></div>
+
+  <nav class="part-nav">
+    <a href="gongfu.html" class="nav-arrow nav-prev">
+      <span class="nav-arr">←</span>
+      <div class="nav-part"><span class="nav-part-num">Parte III</span><span class="nav-part-title">Gong Fu Cha</span></div>
+    </a>
+    <a href="index.html" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
+    <div class="nav-placeholder"></div>
+  </nav>
+
+  <header class="header">
+    <p class="eyebrow">Guida interattiva · Vol. IV</p>
+    <h1>Degustare il <em>Tè</em></h1>
+    <p class="subtitle">Come guardare, annusare, assaggiare e leggere una tazza</p>
+    <div class="divider"><div class="dl"></div><div class="dd"></div><div class="dr"></div></div>
+    <p class="nav-hint">↓ clicca su ogni elemento per esplorare</p>
+  </header>
+
+  <!-- I — I CINQUE SENSI -->
+  <section class="sec">
+    <h2 class="sec-title">I — I Cinque Sensi nel Tè</h2>
+    <p class="sec-intro">La degustazione non è un atto unico — è una sequenza. Prima l'occhio, poi il naso (in tre momenti distinti), poi la bocca, poi il corpo. Chi li percorre tutti riceve molto di più da ogni tazza.</p>
+    <div class="sensi-grid" id="sensi-grid"></div>
+  </section>
+
+  <!-- II — IL COLORE DEL LIQUORE -->
+  <section class="sec">
+    <h2 class="sec-title">II — Il Colore del Liquore</h2>
+    <p class="sec-intro">Il colore è la prima informazione — racconta il grado di ossidazione, la temperatura di estrazione, lo stato di conservazione e l'età del tè. Imparare a leggerlo è il primo atto della degustazione.</p>
+    <div class="liquore-section" id="liquore-section"></div>
+  </section>
+
+  <!-- III — AROMA: I QUATTRO MOMENTI -->
+  <section class="sec">
+    <h2 class="sec-title">III — L'Aroma: i Quattro Momenti</h2>
+    <p class="sec-intro">L'aroma non è uno — sono almeno quattro esperienze distinte, ciascuna con una propria finestra di accesso. Ognuna rivela qualcosa di diverso sulla foglia e sull'infusione.</p>
+    <div id="aroma-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px"></div>
+  </section>
+
+  <!-- IV — LA RUOTA DEGLI AROMI -->
+  <section class="sec">
+    <h2 class="sec-title">IV — La Ruota degli Aromi</h2>
+    <p class="sec-intro">Il vocabolario degli aromi nel tè è vasto quanto quello del vino. Questa mappa aiuta a trovare le parole giuste per quello che si percepisce. Clicca su ogni termine per la descrizione.</p>
+    <div class="ruota-wrap">
+      <div class="ruota-svg-col">
+        <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" id="ruota-svg"></svg>
+        <p style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.28;margin-top:12px;text-align:center">Clicca i segmenti per esplorare</p>
+      </div>
+      <div class="ruota-legend-col" id="ruota-legend"></div>
+    </div>
+  </section>
+
+  <!-- V — EVOLUZIONE INFUSIONE PER INFUSIONE -->
+  <section class="sec">
+    <h2 class="sec-title">V — Come Evolve il Tè Infusione per Infusione</h2>
+    <p class="sec-intro">Ogni infusione racconta un capitolo diverso. La struttura generale è simile per quasi tutti i tè — ma le sfumature cambiano radicalmente tra una tipologia e l'altra.</p>
+    <table class="evo-table">
+      <thead>
+        <tr>
+          <th style="width:50px;text-align:center">№</th>
+          <th>Fase</th>
+          <th>Cosa aspettarsi</th>
+          <th>Dove guardare</th>
+        </tr>
+      </thead>
+      <tbody id="evo-tbody"></tbody>
+    </table>
+  </section>
+
+  <!-- VI — VOCABOLARIO -->
+  <section class="sec">
+    <h2 class="sec-title">VI — Vocabolario della Degustazione</h2>
+    <p class="sec-intro">I termini cinesi della degustazione descrivono esperienze che in italiano non hanno una parola unica. Impararli cambia il modo di degustare — dare un nome a qualcosa permette di cercarlo attivamente.</p>
+    <div class="vocab-grid" id="vocab-grid"></div>
+  </section>
+
+  <!-- VII — SCHEDA DI DEGUSTAZIONE -->
+  <section class="sec">
+    <h2 class="sec-title">VII — Scheda di Degustazione Interattiva</h2>
+    <p class="sec-intro">Usa questa scheda durante una sessione. Puoi stamparla o compilarla direttamente qui per ogni infusione.</p>
+    <div class="scheda-wrap" id="scheda-wrap"></div>
+  </section>
+
+  <nav class="part-nav" style="margin-bottom:0">
+    <a href="gongfu.html" class="nav-arrow nav-prev">
+      <span class="nav-arr">←</span>
+      <div class="nav-part"><span class="nav-part-num">Parte III</span><span class="nav-part-title">Gong Fu Cha</span></div>
+    </a>
+    <a href="index.html" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
+    <div class="nav-placeholder"></div>
+  </nav>
+
+  <footer class="footer">
+    <p>Guida al Tè Cinese &middot; a cura di <a href="https://github.com/antonellorosato/gongfuchaIT" target="_blank">Antonello Rosato</a> &middot; <a href="https://github.com/antonellorosato/gongfuchaIT" target="_blank">github.com/antonellorosato/gongfuchaIT</a></p>
+  </footer>
+</div>
+
+<div class="modal-bg" id="modal-bg">
+  <div class="modal" id="modal-inner">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════
+// DATA
+// ════════════════════════════════════
+
+const SENSI=[
+  {icon:'👁️',it:'La Vista',sub:'Colore, limpidezza, corpo visivo',accent:'#c9c090',
+   desc:'Il primo atto della degustazione è guardare. Il liquore parla prima ancora che tu lo annusi.',
+   tags:['Colore del liquore','Limpidezza','Viscosità visiva','Foglia secca e umida'],
+   domande:['Che colore è? (Giallo pallido? Ambra? Rosso mogano? Nero-marrone?)','È limpido o torbido? (torbido non è difetto — dipende dal tè)','Si muove lentamente nel bicchiere? (corpo)','Com\'è la foglia secca — intera, rotta, velosa, arrotolata?','Com\'è la foglia umida dopo l\'infusione — aperta, uniforme, di che colore?'],
+   sections:[
+     {t:'Il liquore',p:'Il colore del liquore è direttamente correlato al <em>grado di ossidazione</em> e alla temperatura di estrazione. Giallo pallido = tè verde o bianco giovane. Ambra dorata = oolong leggero o tè giallo. Arancio rame = oolong medio o tè rosso leggero. Rosso intenso = tè rosso pieno. Mogano scuro = pu\'er invecchiato, dark tea. Un colore diverso da quello atteso può indicare sovra-estrazione, acqua troppo calda, o tè di qualità diversa da quanto dichiarato.'},
+     {t:'La limpidezza',p:'Un tè <em>limpido</em> indica foglie intere di qualità e corretta estrazione. La torbidità può indicare: polvere di foglia (tè di bassa qualità), temperature troppo basse per certi tè, oppure — in certi pu\'er giovani — composti naturali che si dissolvono con infusioni successive. Non è necessariamente un difetto.'},
+     {t:'La foglia',p:'La foglia secca racconta la <em>qualità della raccolta e della lavorazione</em>: foglie intere uniformi indicano cura, rotta disomogenea indica lavorazione industriale. La foglia umida dopo l\'infusione rivela l\'ossidazione reale (verde = poco ossidato, marrone = molto) e la freschezza (foglie che si aprono completamente = raccolta giovane e cura nella lavorazione).'},
+   ]},
+  {icon:'👃',it:'Il Naso',sub:'Quattro momenti distinti',accent:'#a0c090',
+   desc:'Il naso è il senso più ricco nella degustazione. Nel tè si ha accesso all\'aroma in almeno quattro momenti separati — ognuno rivela qualcosa di diverso.',
+   tags:['Foglia secca','Coperchio (gaiwan)','Tazza vuota','In tazza'],
+   domande:['Foglia secca: cosa senti prima ancora di aggiungere acqua?','Coperchio appena sollevato: l\'aroma primario, concentrato','Tazza vuota ancora calda: retroaroma persistente','In tazza: come cambia l\'aroma mentre il tè si raffredda?'],
+   sections:[
+     {t:'Aroma 1 — Foglia secca',p:'Prima di aggiungere l\'acqua, <em>annusa le foglie nel gaiwan caldo</em>. Questo è l\'aroma grezzo, non ancora modificato dall\'acqua. Nei tè verdi si sentono note vegetali fresche; negli oolong tostati note di torrefazione; nel pu\'er note terrose e di foresta. Spesso l\'aroma della foglia secca anticipa il profilo — ma l\'acqua può rivelare sorprese.'},
+     {t:'Aroma 2 — Il coperchio',p:'Subito dopo aver versato il liquore, porta il coperchio al naso. È il momento di <em>massima concentrazione</em> degli aromi volatili — trattenuti durante l\'infusione, ora si liberano. Questo è dove si trovano i profumi più alti e floreali. Negli oolong e nei pu\'er di qualità, il coperchio può essere straordinariamente complesso.'},
+     {t:'Aroma 3 — Tazza vuota',p:'Dopo aver bevuto, annusa la tazza vuota ancora calda. Questo è il <em>beidixiang</em> (杯底香) — il profumo del fondo della tazza. Rivela la persistenza e la "profondità" dell\'aroma: negli oolong di qualità dura molti minuti. In un tè mediocre svanisce in secondi. È uno degli indicatori di qualità più affidabili.'},
+     {t:'Aroma 4 — In tazza',p:'Il liquore stesso, annusato direttamente, rivela gli <em>aromi di media volatilità</em> — quelli troppo pesanti per stare nel coperchio ma troppo leggeri per restare in bocca. Nota come cambia mentre il tè si raffredda: certi aromi floreali emergono solo sotto i 55°C, altri aromi minerali si rivelano solo quando il tè è quasi freddo.'},
+   ]},
+  {icon:'👅',it:'La Bocca',sub:'Sapore, corpo e texture',accent:'#d0a070',
+   desc:'La bocca registra almeno tre dimensioni separate: il sapore (i cinque gusti), la texture (il mouthfeel) e il corpo (la densità percepita del liquore).',
+   tags:['I cinque gusti','Corpo','Astringenza','Texture','Dolcezza'],
+   domande:['Quali dei cinque gusti percepisci per primi? (dolce, amaro, acido, salato, umami)','L\'astringenza è piacevole o sgradevole? Dove la senti (gengive, lingua, palato)?','Il corpo è leggero come acqua o denso come brodo?','La texture è setosa, vellutata, secca, cremosa?','Come cambia in bocca con il tempo — si apre o si chiude?'],
+   sections:[
+     {t:'I cinque gusti',p:'Il tè attiva tutti e cinque i gusti di base: <em>dolce</em> (L-teanina e zuccheri semplici — spesso percepita come dolcezza nell\'aftertaste piuttosto che in bocca), <em>amaro</em> (caffeina e catechine — inevitabile, desiderabile in dosi moderate), <em>acido</em> (raro, segnale di tè verde troppo ossidato o fermentazione anomala), <em>salato</em> (minerale — "yan yun" dello yancha wuyi), <em>umami</em> (L-teanina ad alta concentrazione — gyokuro, tè bianchi di qualità, Gushu).'},
+     {t:'Corpo e texture',p:'Il <em>corpo</em> è la densità percepita del liquore — la differenza tra un pu\'er Gushu (denso, quasi oleoso) e un tè verde leggero (acquoso, fresco). La <em>texture</em> è il mouthfeel: setosa (molti oolong high-mountain), vellutata (pu\'er invecchiato), secca/astringente (tè giovani ricchi di catechine), cremosa (certi tè gialli e Tie Guan Yin). L\'astringenza è la sensazione di "restringimento" — è diversa dall\'amaro ed è causata dai tannini che interagiscono con le proteine della saliva.'},
+     {t:'Dove senti cosa',p:'La lingua ha zone di sensibilità diverse: <em>punta</em> (dolce, primo impatto), <em>lati</em> (acido e salato), <em>retro</em> (amaro — l\'amaro del tè buono va sentito alla fine, non all\'inizio). Il <em>palato</em> è dove si percepisce il corpo e la persistenza. Le <em>gengive</em> sono dove si sente l\'astringenza. Localizzare dove nasce ogni sensazione è un esercizio che affina molto rapidamente la percezione.'},
+   ]},
+  {icon:'🫀',it:'Il Retrogusto',sub:'Huigan, persistenza e Cha Qi',accent:'#9090c0',
+   desc:'Quello che succede dopo la deglutizione è spesso la parte più rivelatrice di un tè di qualità. L\'huigan, la persistenza e il cha qi sono i segnali che distinguono un tè eccezionale da uno buono.',
+   tags:['Huigan 回甘','Kuwei 苦味','Beidixiang 杯底香','Cha Qi 茶气'],
+   domande:['C\'è dolcezza che ritorna in gola dopo 10–30 secondi? (huigan)','L\'amaro si trasforma in dolcezza o rimane piatto?','Il sapore dura 10 secondi, 1 minuto, 5 minuti?','Senti calore nel petto o nelle mani? (cha qi)','Stai salivando di più dopo aver bevuto?'],
+   sections:[
+     {t:'Huigan 回甘 — il dolce che ritorna',p:'L\'<em>huigan</em> è la dolcezza che emerge in gola 10–30 secondi dopo la deglutizione — non in bocca, ma più in profondità. Non è residuo zuccherino: è una reazione fisiologica in cui certi polifenoli interagiscono con i recettori del palato e stimolano la produzione di saliva dolce. Più è intenso e persistente, più il tè è di qualità. Un Gushu di Lao Banzhang può avere un huigan che dura 10–15 minuti.'},
+     {t:'Kuwei 苦味 — l\'amaro piacevole',p:'Il <em>kuwei</em> è l\'amaro "buono" del tè — non l\'amaro piatto e sgradevole dell\'over-estrazione, ma quello che si apre, si ammorbidisce e si trasforma in dolcezza. È la caratteristica più difficile da spiegare e la più cercata nei pu\'er di qualità. La differenza tra kuwei e amaro cattivo: il kuwei si trasforma, l\'altro rimane piatto o peggiora.'},
+     {t:'Cha Qi 茶气 — l\'energia del tè',p:'Il <em>cha qi</em> è la sensazione fisica che il tè trasmette al corpo — calore, formicolio, apertura del petto, sudorazione leggera, senso di presenza. Non è misticismo: caffeina, L-teanina e centinaia di altri composti attivi influenzano concretamente il sistema nervoso e la circolazione. I tè Gushu e i pu\'er invecchiati di qualità sono noti per cha qi particolarmente intenso.'},
+   ]},
+  {icon:'🧠',it:'Il Tempo',sub:'Infusione per infusione',accent:'#80b0a0',
+   desc:'Un tè di qualità non è mai lo stesso due volte. La sua bellezza sta nell\'evoluzione — ogni infusione è un capitolo, e leggere la sequenza è parte dell\'esperienza.',
+   tags:['Evoluzione','Picco','Declino','Persistenza'],
+   domande:['Quando il tè è al suo picco di complessità? (spesso 2ª–4ª infusione)','Come cambia il colore del liquore infusione dopo infusione?','L\'aroma si mantiene o evolve verso note diverse?','Quanto dura il tè prima che diventi piatto?','C\'è un\'infusione dove emerge qualcosa di inaspettato?'],
+   sections:[
+     {t:'La struttura di una sessione',p:'Quasi tutti i tè Gong Fu seguono una curva simile: <em>apertura</em> (1ª–2ª infusione, le foglie si schiudono, i profili si stabiliscono), <em>picco</em> (3ª–5ª infusione, massima complessità e corpo), <em>sviluppo</em> (5ª–8ª, il profilo si ammorbidisce, emergono note secondarie), <em>declino</em> (8ª in poi, il tè si semplifica, la dolcezza aumenta, il corpo diminuisce). Ogni fase merita attenzione.'},
+     {t:'Prendere note durante la sessione',p:'Notare i cambiamenti <em>infusione per infusione</em> affina rapidamente la percezione. Non servono parole tecniche — basta notare se qualcosa è cambiato: più dolce, meno amaro, nuovo aroma floreale, corpo diminuito. Con il tempo le note diventano più precise e il confronto tra sessioni diverse rivela pattern.'},
+     {t:'Il tè che sorprende',p:'I tè di qualità eccezionale spesso hanno un momento di "<em>apertura tardiva</em>" — un\'infusione, di solito tra la 4ª e la 6ª, in cui il profilo si rivela completamente diverso dalle prime. Un pu\'er Gushu amaro nelle prime infusioni può aprirsi in qualcosa di straordinariamente floreale e dolce. Questa imprevedibilità è parte della ricerca.'},
+   ]},
+];
+
+const LIQUORE_SCALE=[
+  {it:'Giallo pallido',teas:'Tè verde fresco, tè bianco giovane, tè giallo',
+   swatches:[{c:'#f8f0c8',l:'cristallino'},{c:'#f0e8a8',l:'paglierino'},{c:'#e8d878',l:'giallo vivo'}]},
+  {it:'Ambra dorata',teas:'Oolong leggero, tè bianco invecchiato, oolong floreale',
+   swatches:[{c:'#e8c870',l:'dorato'},{c:'#d8a840',l:'ambra'},{c:'#c88820',l:'rame chiaro'}]},
+  {it:'Arancio rame',teas:'Oolong medio, tè rosso leggero (Keemun giovane)',
+   swatches:[{c:'#d07830',l:'arancio'},{c:'#c06020',l:'rame'},{c:'#a84818',l:'rame scuro'}]},
+  {it:'Rosso intenso',teas:'Tè rosso (Dian Hong, Lapsang), Pu\'er crudo giovane',
+   swatches:[{c:'#983020',l:'rosso rubino'},{c:'#802010',l:'rosso scuro'},{c:'#601808',l:'bordeaux'}]},
+  {it:'Mogano / Bruno',teas:'Pu\'er invecchiato, Pu\'er cotto, Dark Tea',
+   swatches:[{c:'#583018',l:'mogano'},{c:'#402010',l:'bruno scuro'},{c:'#281408',l:'nero-marrone'}]},
+];
+
+const AROMA_MOMENTS=[
+  {icon:'🍃',it:'Foglia Secca',zh:'干茶香',pinyin:'Gān Chá Xiāng',
+   desc:'Prima dell\'acqua, la foglia nel gaiwan caldo. L\'aroma grezzo e concentrato — non ancora trasformato dall\'estrazione.',
+   note:'Riscalda il gaiwan vuoto, inserisci le foglie, copri 5 secondi, poi annusa. Tieni il polso sul pomolo — senti anche il calore.'},
+  {icon:'🫖',it:'Coperchio',zh:'盖香',pinyin:'Gài Xiāng',
+   desc:'Appena dopo aver versato il liquore, il coperchio concentra i volatili più leggeri — floreali, fruttati, erbacei. È la firma aromatica più alta del tè.',
+   note:'Porta il coperchio al naso subito, prima che si raffreddi. Annusa in tre momenti: caldo (60°C+), tiepido (40°C), fresco (25°C). Cambiano completamente.'},
+  {icon:'🫗',it:'Tazza Vuota',zh:'杯底香',pinyin:'Bēi Dǐ Xiāng',
+   desc:'Il beidixiang — il profumo del fondo della tazza vuota, ancora calda. Misura la persistenza aromatica. Nei tè di qualità dura minuti.',
+   note:'Dopo aver bevuto, capovolgi mentalmente la tua attenzione sulla tazza vuota. Negli oolong di alta montagna questo profumo può durare 10–15 minuti. È uno degli indicatori di qualità più onesti.'},
+  {icon:'🌡️',it:'In Tazza',zh:'汤香',pinyin:'Tāng Xiāng',
+   desc:'L\'aroma del liquore stesso, che cambia con la temperatura. Certi profumi floreali emergono solo sotto i 50°C — non bere subito.',
+   note:'Avvicina la tazza al naso a tre temperature: appena versato (bollente), tiepido, quasi freddo. In certi tè l\'aroma al fresco è irriconoscibile rispetto a quello al caldo — è dove si nascondono le sorprese.'},
+];
+
+const RUOTA_CATS=[
+  {name:'Floreale',color:'#c8a0d8',angle:0,
+   terms:[
+     {t:'Orchidea',d:'Nota caratteristica di certi oolong: Tie Guan Yin, Jin Xuan, Oriental Beauty. Un\'orchidea dolce e leggermente cremosa, non la fragranza tagliente dei fiori recisi.'},
+     {t:'Gelsomino',d:'Spesso indotta con fiori (tè al gelsomino), ma presente naturalmente in alcuni Bi Luo Chun e Long Jing primaverili.'},
+     {t:'Rosa',d:'Nota floreale presente in certi Keemun e tè rossi di alta qualità. Più profonda e meno volatile dell\'orchidea.'},
+     {t:'Lilium',d:'Nota bianca, polveriosa, caratteristica di certi tè bianchi Silver Needle di Fuding.'},
+     {t:'Osmanto',d:'Nota dolce e speziata, quasi apricot-floreale. Caratteristica di certi Dan Cong e tè di Guangdong.'},
+   ]},
+  {name:'Fruttato',color:'#d8c060',angle:72,
+   terms:[
+     {t:'Pesca',d:'Nota matura e succosa. Caratteristica dell\'Oriental Beauty e certi oolong taiwanesi estivi. Legata alla presenza di terpeni da stress da insetto (ECBF).'},
+     {t:'Albicocca',d:'Nota secca e leggermente acidula. Frequente nei Wuyi oolong di media ossidazione e in certi tè bianchi invecchiati.'},
+     {t:'Uva passa',d:'Nota scura, densa. Caratteristica dei tè rossi maltati come Dian Hong e Yunnan gold.'},
+     {t:'Frutti rossi',d:'Note di ciliegia e ribes. Presenti in certi tè rossi leggeri e nei Sheng giovani di alta qualità.'},
+     {t:'Agrumi',d:'Limone, bergamotto. Nota fresca e tagliente. Presente in certi tè verdi primaverili e in alcuni Baozhong.'},
+   ]},
+  {name:'Vegetale',color:'#90c878',angle:144,
+   terms:[
+     {t:'Erba fresca',d:'La firma dei tè verdi giapponesi e di molti Long Jing. Clorofilla e aldeidi vegetali che evocano un prato tagliato.'},
+     {t:'Alghe / Nori',d:'Nota marina e iodica. Caratteristica del gyokuro giapponese ma presente anche in certi Anji Bai Cha e tè bianchi nebbiosi.'},
+     {t:'Spinaci cotti',d:'Nota verde scura, quasi "cotta". Segno di un tè verde poco fresco o estratto a temperatura troppo alta.'},
+     {t:'Asparagi',d:'Nota primavera fresca e delicata. Presente nei tè verdi pre-Qingming di altissima qualità.'},
+     {t:'Bamb\u00f9',d:'Nota fresca e legnosa insieme. Caratteristica di certi tè verdi montani e di alcuni Baozhong.'},
+   ]},
+  {name:'Tostato / Speziato',color:'#d09848',angle:216,
+   terms:[
+     {t:'Miele',d:'Dolcezza calda e leggermente cerosa. Caratteristica dei Dan Cong tostati, dei Dian Hong maturi e dell\'Oriental Beauty.'},
+     {t:'Cannella',d:'Nota speziata e leggermente piccante. Caratteristica del Rougui wuyi (il nome significa proprio "scorza di cannella").'},
+     {t:'Fumo',d:'Da legno di pino. Caratteristica distintiva del Lapsang Souchong tradizionale. Presente anche in certi pu\'er crudi.'},
+     {t:'Caramello',d:'Dolcezza bruciata. Presente nei tè rossi molto ossidati e negli oolong con tostatura pesante.'},
+     {t:'Noce',d:'Castagna, noce tostata. Caratteristica del Long Jing tostato in padella e di certi Wuyi.'},
+   ]},
+  {name:'Terroso / Legnoso',color:'#a08860',angle:288,
+   terms:[
+     {t:'Terra umida',d:'Petrichor — il profumo della terra dopo la pioggia. Caratteristica dei pu\'er invecchiati ben conservati e dei dark tea.'},
+     {t:'Muschio',d:'Nota silvestre, di sottobosco. Presente nei pu\'er Gushu di foresta e nell\'Oriental Beauty.'},
+     {t:'Cedro',d:'Legno secco e aromatico. Presente in certi pu\'er crudi invecchiati e negli oolong rocciosi wuyi.'},
+     {t:'Muffa nobile',d:'La "cantina" — un\'umidità aromatica accettabile che indica invecchiamento corretto. Diversa dalla muffa cattiva (sgradevole, soffocante).'},
+     {t:'Cuoio',d:'Nota animale e secca. Presente in certi pu\'er cotti maturi e nei dark tea fermentati.'},
+   ]},
+];
+
+const EVO_ROWS=[
+  {n:'1–2',fase:'Apertura',what:'Le foglie si schiudono, i profili si stabiliscono. Spesso la prima infusione è più semplice — una sorta di presentazione. Amaro più presente, corpo ancora trattenuto.',dove:'Colore del liquore, struttura di base. Come cambia tra 1ª e 2ª?'},
+  {n:'3–4',fase:'Picco',what:'La massima complessità aromatica e il corpo più pieno. Le foglie sono completamente aperte, tutti i composti estratti in equilibrio. <em>Questa è l\'infusione a cui fare più attenzione.</em>',dove:'Aroma del coperchio (massima intensità), corpo in bocca, primo huigan.'},
+  {n:'5–6',fase:'Sviluppo',what:'Il profilo si ammorbidisce. Emergono note secondarie che nelle prime infusioni erano coperte dall\'intensità. Spesso il momento più delicato e poetico — note floreali tardive, mineralità.',dove:'Tazza vuota (persistenza aromatica), evoluzione del retrogusto.'},
+  {n:'7–8',fase:'Maturità',what:'Il corpo diminuisce, la dolcezza aumenta. Il tè diventa più gentile. Questo è dove si sente meglio l\'huigan, perché l\'amaro non lo copre più.',dove:'Huigan — ora il più evidente. Come si muove la dolcezza nella gola?'},
+  {n:'9–12',fase:'Finale',what:'Le foglie sono quasi esaurite. Il liquore si fa chiaro e dolce, quasi acquoso. Il profilo torna semplice, ma spesso con una nota finale inaspettata — il "congedo" del tè.',dove:'L\'ultima nota aromatica persistente. Spesso rivela la vera "anima" del tè.'},
+  {n:'∞',fase:'Ultima infusione',what:'Lascia riposare le foglie 2–3 minuti con acqua bollente. A volte — non sempre — un tè di qualità regala ancora qualcosa. È una scommessa con la foglia.',dove:'Non aspettarti niente di straordinario, ma sii pronto a sorprenderti.'},
+];
+
+const VOCAB=[
+  {zh:'回甘',it:'Huigan',pinyin:'Huí Gān',
+   desc:'La dolcezza che ritorna in gola 10–60 secondi dopo la deglutizione. Non è residuo in bocca: emerge più in profondità, dalla gola verso su. Indica qualità del tè e ricchezza di aminoacidi.',
+   sections:[
+     {t:'Come riconoscerlo',p:'Dopo aver inghiottito, aspetta in silenzio 15–30 secondi. Se sale una sensazione di dolcezza dalla gola — non sulle papille, ma più indietro — è huigan. In un Lao Banzhang di qualità può durare fino a 15 minuti e riacutizzarsi ondata dopo ondata.'},
+     {t:'Cosa lo causa',p:'I polifenoli del tè — in particolare alcune catechine complesse — interagiscono con i recettori del palato posteriore stimolando la produzione di saliva ricca di componenti dolci. È una risposta fisiologica reale, non una percezione soggettiva.'},
+   ]},
+  {zh:'苦味',it:'Kuwei',pinyin:'Kǔ Wèi',
+   desc:'L\'amaro "buono" del tè — quello che si apre, si trasforma e diventa dolcezza. Diverso dall\'amaro piatto dell\'over-estrazione.',
+   sections:[
+     {t:'La distinzione fondamentale',p:'L\'amaro da <em>buona qualità</em> (kuwei) si percepisce chiaramente ma <em>si trasforma</em>: dopo 10–20 secondi inizia a cedere e diventa huigan. L\'amaro da sovra-estrazione o tè di bassa qualità rimane piatto, non evolve, può diventare metallico. Imparare a distinguerli è uno dei progressi più importanti nella degustazione.'},
+     {t:'Dove si sente',p:'Il kuwei si percepisce prevalentemente sul <em>retro della lingua</em> e sulla gola, non sulla punta. Se senti amaro sulla punta della lingua fin dall\'ingresso, è probabile sia da estrazione eccessiva.'},
+   ]},
+  {zh:'杯底香',it:'Beidixiang',pinyin:'Bēi Dǐ Xiāng',
+   desc:'Il profumo del fondo della tazza vuota, ancora calda. La persistenza aromatica — uno degli indicatori di qualità più affidabili.',
+   sections:[
+     {t:'Come misurarlo',p:'Dopo aver bevuto, annusa la tazza a intervalli: subito, dopo 1 minuto, dopo 3 minuti. In un oolong di alta montagna di qualità eccellente il profumo è ancora riconoscibile dopo 10–15 minuti. In un tè mediocre svanisce in meno di 30 secondi.'},
+     {t:'Cosa rivela',p:'Il beidixiang rivela la <em>complessità molecolare</em> del tè: i composti aromatici a media volatilità (quelli che restano) riflettono la ricchezza genetica della cultivar, la qualità del terroir e la cura nella lavorazione.'},
+   ]},
+  {zh:'茶气',it:'Cha Qi',pinyin:'Chá Qì',
+   desc:'L\'energia che il tè trasmette al corpo — calore, formicolio, chiarezza mentale. Non è misticismo: caffeina e L-teanina agiscono concretamente sul sistema nervoso.',
+   sections:[
+     {t:'Cosa senti fisicamente',p:'Il cha qi si manifesta come: <em>calore</em> che sale dal centro del petto verso le braccia, <em>sudorazione leggera</em> sulla fronte, <em>formicolio</em> nelle mani e sullo scalpo, <em>chiarezza mentale</em> senza agitazione (l\'effetto sinergico di caffeina + L-teanina). I tè Gushu e i pu\'er invecchiati sono rinomati per cha qi particolarmente intenso.'},
+     {t:'La chimica dietro',p:'La L-teanina <em>modula</em> l\'effetto eccitante della caffeina, producendo uno stato di "allerta calma" diverso dal caffè. I polifenoli attivi influenzano la circolazione periferica (il calore). In tè molto vecchi e fermentati ci sono altri composti non ancora completamente catalogati che contribuiscono all\'effetto.'},
+   ]},
+  {zh:'岩韵',it:'Yan Yun',pinyin:'Yán Yùn',
+   desc:'La "risonanza della roccia" — la mineralità caratteristica dei tè wuyi cresciuti sulle rocce vulcaniche rosse del Fujian.',
+   sections:[
+     {t:'Come si manifesta',p:'Lo yan yun non è un sapore unico — è una <em>qualità trasversale</em>: una profondità minerale che attraversa ogni strato del profilo, una persistenza quasi pietrosa in gola, una sensazione di "peso" e solidità. Chi dice di sentire pietra bagnata, gesso, ferro, sale di roccia — sta probabilmente descrivendo yan yun.'},
+     {t:'Perché esiste',p:'Le rocce danxia del Wuyi Shan — scisto rosso vulcanico ricco di ferro, manganese, zinco — si trasferiscono lentamente nel suolo e poi nella foglia attraverso l\'assorbimento radicale. La mineralità è letteralmente un trasferimento geologico in tazza.'},
+   ]},
+  {zh:'生津',it:'Sheng Jin',pinyin:'Shēng Jīn',
+   desc:'La salivazione che il tè stimola — "produrre fluido". Un tè di qualità ti fa venire acquolina in bocca dopo averlo bevuto.',
+   sections:[
+     {t:'Perché conta',p:'La <em>salivazione abbondante</em> dopo la deglutizione è segno che il tè ha stimolato i recettori del palato in modo complesso. È correlata all\'huigan — spesso si salivano insieme. Tè che "secano" la bocca (astringenza senza sheng jin) indicano tannini non equilibrati da altri componenti.'},
+     {t:'Dove sentirla',p:'Sotto la lingua e ai lati, nella ghiandola parotide. In un tè con forte sheng jin, dopo alcuni secondi dalla deglutizione senti letteralmente la bocca riempirsi di saliva — è una risposta fisica reale e misurata.'},
+   ]},
+];
+
+// ════════════════════════════════════
+// RENDER FUNCTIONS
+// ════════════════════════════════════
+
+function renderSensi(){
+  const g=document.getElementById('sensi-grid');
+  SENSI.forEach(s=>{
+    const d=document.createElement('div');
+    d.className='senso-card';
+    d.style.setProperty('--accent',s.accent);
+    d.innerHTML=`
+      <span class="senso-icon">${s.icon}</span>
+      <div class="senso-it">${s.it}</div>
+      <div class="senso-sub">${s.sub}</div>
+      <div class="senso-desc">${s.desc}</div>
+      <div class="senso-prompts">${s.domande.slice(0,2).map(q=>`<div class="sprompt">${q}</div>`).join('')}</div>`;
+    d.addEventListener('click',()=>openSensoModal(s));
+    g.appendChild(d);
+  });
+}
+
+function renderLiquore(){
+  const g=document.getElementById('liquore-section');
+  LIQUORE_SCALE.forEach(row=>{
+    const d=document.createElement('div');
+    d.className='liquore-row';
+    const swatchesHTML=row.swatches.map(s=>`
+      <div class="lswatch-wrap">
+        <div class="lswatch" style="background:${s.c}" title="${s.l}"></div>
+        <div class="lswatch-lbl">${s.l}</div>
+      </div>`).join('');
+    d.innerHTML=`
+      <div class="liquore-label-col">
+        <div class="liquore-tit">${row.it}</div>
+        <div class="liquore-sub">colore</div>
+      </div>
+      <div class="liquore-scale-col">
+        <div class="liquore-scale">${swatchesHTML}</div>
+        <div class="liquore-teas">${row.teas}</div>
+      </div>`;
+    g.appendChild(d);
+  });
+}
+
+function renderAromi(){
+  const g=document.getElementById('aroma-grid');
+  AROMA_MOMENTS.forEach(a=>{
+    const d=document.createElement('div');
+    d.style.cssText='background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:22px 18px 20px;cursor:pointer;transition:background .2s,transform .15s;position:relative;overflow:hidden';
+    d.innerHTML=`
+      <div style="font-size:26px;margin-bottom:10px">${a.icon}</div>
+      <div style="font-family:\'Cormorant Garamond\',serif;font-size:18px;font-weight:500;color:var(--gold-l);margin-bottom:1px">${a.it}</div>
+      <div style="font-family:\'Cormorant Garamond\',serif;font-size:11px;font-style:italic;color:var(--cream-d);opacity:.38;letter-spacing:.5px;margin-bottom:8px">${a.zh} · ${a.pinyin}</div>
+      <div style="font-size:11px;color:var(--text);line-height:1.58;opacity:.8">${a.desc}</div>
+      <div style="background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.22);padding:8px 10px;margin-top:10px;font-size:10.5px;font-style:italic;font-family:\'Cormorant Garamond\',serif;color:var(--cream-d);opacity:.68;line-height:1.55">${a.note}</div>`;
+    d.addEventListener('mouseenter',()=>{d.style.background='var(--light)';d.style.transform='translateY(-2px)';});
+    d.addEventListener('mouseleave',()=>{d.style.background='var(--mid)';d.style.transform='';});
+    g.appendChild(d);
+  });
+}
+
+function renderRuota(){
+  const svg=document.getElementById('ruota-svg');
+  const cx=200,cy=200,R=180,r=70;
+  const n=RUOTA_CATS.length;
+  const slice=360/n;
+  let paths='';
+
+  RUOTA_CATS.forEach((cat,i)=>{
+    const a1=(i*slice-90)*Math.PI/180;
+    const a2=((i+1)*slice-90)*Math.PI/180;
+    const x1=cx+R*Math.cos(a1),y1=cy+R*Math.sin(a1);
+    const x2=cx+R*Math.cos(a2),y2=cy+R*Math.sin(a2);
+    const ix1=cx+r*Math.cos(a1),iy1=cy+r*Math.sin(a1);
+    const ix2=cx+r*Math.cos(a2),iy2=cy+r*Math.sin(a2);
+    const am=(a1+a2)/2;
+    const lx=cx+(R*0.65)*Math.cos(am),ly=cy+(R*0.65)*Math.sin(am);
+
+    paths+=`<g class="ruota-seg" data-cat="${i}" style="cursor:pointer">
+      <path d="M${ix1},${iy1} L${x1},${y1} A${R},${R} 0 0 1 ${x2},${y2} L${ix2},${iy2} A${r},${r} 0 0 0 ${ix1},${iy1} Z"
+        fill="${cat.color}" opacity="0.22" stroke="rgba(10,26,16,0.8)" stroke-width="1.5"
+        style="transition:opacity .18s"/>
+      <text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle"
+        font-family="Cormorant Garamond,serif" font-size="11" font-style="italic"
+        fill="${cat.color}" opacity="0.85" style="pointer-events:none">${cat.name}</text>
+    </g>`;
+  });
+
+  // Center circle
+  paths+=`<circle cx="${cx}" cy="${cy}" r="${r-4}" fill="rgba(10,26,16,0.9)" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+  <text x="${cx}" y="${cy-6}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="11" fill="rgba(201,168,76,0.5)" font-style="italic">Ruota</text>
+  <text x="${cx}" y="${cy+8}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="11" fill="rgba(201,168,76,0.5)" font-style="italic">degli</text>
+  <text x="${cx}" y="${cy+22}" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="11" fill="rgba(201,168,76,0.5)" font-style="italic">Aromi</text>`;
+
+  svg.innerHTML=paths;
+
+  // Hover + click on segments
+  svg.querySelectorAll('.ruota-seg').forEach(seg=>{
+    const path=seg.querySelector('path');
+    const i=parseInt(seg.dataset.cat);
+    seg.addEventListener('mouseenter',()=>path.style.opacity='.5');
+    seg.addEventListener('mouseleave',()=>path.style.opacity='');
+    seg.addEventListener('click',()=>openRuotaCat(RUOTA_CATS[i]));
+  });
+
+  // Legend
+  const leg=document.getElementById('ruota-legend');
+  RUOTA_CATS.forEach(cat=>{
+    const d=document.createElement('div');
+    d.className='ruota-cat';
+    const terms=cat.terms.map(t=>`<span class="rterm" style="border-color:${cat.color}40;color:${cat.color}" onclick="openTermModal('${t.t.replace("'","\\'")}','${cat.color}','${t.d.replace("'","\\'")}')">${t.t}</span>`).join('');
+    d.innerHTML=`<div class="ruota-cat-title" style="color:${cat.color}">${cat.name}</div><div class="ruota-terms">${terms}</div>`;
+    leg.appendChild(d);
+  });
+}
+
+function renderEvo(){
+  const tbody=document.getElementById('evo-tbody');
+  EVO_ROWS.forEach(r=>{
+    tbody.innerHTML+=`<tr>
+      <td class="inf-num">${r.n}</td>
+      <td style="font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--gold-l);white-space:nowrap">${r.fase}</td>
+      <td>${r.what}</td>
+      <td style="font-style:italic;font-family:'Cormorant Garamond',serif;font-size:12px;opacity:.7">${r.dove}</td>
+    </tr>`;
+  });
+}
+
+function renderVocab(){
+  const g=document.getElementById('vocab-grid');
+  VOCAB.forEach(v=>{
+    const d=document.createElement('div');
+    d.className='vocab-card';
+    d.innerHTML=`
+      <div class="vocab-zh">${v.zh}</div>
+      <div class="vocab-it">${v.it}</div>
+      <div class="vocab-pinyin">${v.pinyin}</div>
+      <div class="vocab-desc">${v.desc}</div>`;
+    d.addEventListener('click',()=>openVocabModal(v));
+    g.appendChild(d);
+  });
+}
+
+// ── SCHEDA ──
+function renderScheda(){
+  const wrap=document.getElementById('scheda-wrap');
+  const DESCR_AROMA=['Floreale','Fruttato','Vegetale','Tostato','Terroso','Speziato','Dolce','Minerale','Muschio','Fumo','Miele','Orchidea'];
+  const DESCR_GUSTO=['Dolce','Amaro','Acido','Salato','Umami','Astringente','Secco','Cremoso','Rotondo','Piatto'];
+  const DESCR_CORPO=['Leggero','Medio','Pieno','Oleoso','Vellutato','Setoso','Acquoso'];
+
+  let infTabs='';
+  for(let i=1;i<=6;i++) infTabs+=`<div class="inf-tab${i===1?' active':''}" onclick="switchInf(${i})">${i}ª</div>`;
+
+  wrap.innerHTML=`
+    <div class="scheda-title">Scheda di Degustazione</div>
+    <div class="scheda-sub">Compila per ogni infusione · I dati restano in memoria durante la sessione</div>
+    <div class="scheda-infusions-row">${infTabs}</div>
+    <div class="scheda-grid">
+      <div>
+        <div class="scheda-field"><label>Tè / Cultivar</label><input type="text" id="sf-te" placeholder="es. Tie Guan Yin, Anxi 2024"></div>
+        <div class="scheda-field"><label>Infusione №<span id="sf-inf-lbl">1</span></label></div>
+        <div class="scheda-field"><label>Colore del liquore</label><input type="text" id="sf-colore" placeholder="es. giallo dorato, ambra ramata…"></div>
+        <div class="scheda-field"><label>Temperatura usata</label><input type="text" id="sf-temp" placeholder="es. 85°C"></div>
+        <div class="scheda-field"><label>Tempo di infusione</label><input type="text" id="sf-tempo" placeholder="es. 30 secondi"></div>
+        <div class="scheda-field">
+          <label>Intensità aroma (1–10)</label>
+          <div class="scheda-slider-wrap">
+            <input type="range" class="scheda-slider" min="1" max="10" value="5" id="sf-aroma-int" oninput="document.getElementById('sf-aroma-int-val').textContent=this.value">
+            <span class="scheda-slider-val" id="sf-aroma-int-val">5</span>
+          </div>
+        </div>
+        <div class="scheda-field">
+          <label>Descrittori aroma</label>
+          <div class="scheda-descriptors">${DESCR_AROMA.map(d=>`<span class="sd" onclick="this.classList.toggle('active')">${d}</span>`).join('')}</div>
+        </div>
+      </div>
+      <div>
+        <div class="scheda-field">
+          <label>Intensità gusto (1–10)</label>
+          <div class="scheda-slider-wrap">
+            <input type="range" class="scheda-slider" min="1" max="10" value="5" id="sf-gusto-int" oninput="document.getElementById('sf-gusto-int-val').textContent=this.value">
+            <span class="scheda-slider-val" id="sf-gusto-int-val">5</span>
+          </div>
+        </div>
+        <div class="scheda-field">
+          <label>Descrittori gusto</label>
+          <div class="scheda-descriptors">${DESCR_GUSTO.map(d=>`<span class="sd" onclick="this.classList.toggle('active')">${d}</span>`).join('')}</div>
+        </div>
+        <div class="scheda-field">
+          <label>Corpo</label>
+          <div class="scheda-descriptors">${DESCR_CORPO.map(d=>`<span class="sd" onclick="this.classList.toggle('active')">${d}</span>`).join('')}</div>
+        </div>
+        <div class="scheda-field">
+          <label>Intensità Huigan (1–5)</label>
+          <div class="scheda-slider-wrap">
+            <input type="range" class="scheda-slider" min="0" max="5" value="2" id="sf-huigan" oninput="document.getElementById('sf-huigan-val').textContent=this.value">
+            <span class="scheda-slider-val" id="sf-huigan-val">2</span>
+          </div>
+        </div>
+        <div class="scheda-field"><label>Note libere</label><textarea id="sf-note" placeholder="Qualsiasi osservazione — cambiamenti rispetto all'infusione precedente, sorprese, domande…"></textarea></div>
+      </div>
+    </div>
+    <div class="scheda-actions">
+      <button class="btn-scheda secondary" onclick="clearScheda()">Azzera</button>
+      <button class="btn-scheda primary" onclick="stampaScheda()">Stampa / Salva PDF</button>
+    </div>`;
+}
+
+function switchInf(n){
+  document.querySelectorAll('.inf-tab').forEach((t,i)=>t.classList.toggle('active',i+1===n));
+  document.getElementById('sf-inf-lbl').textContent=n;
+}
+function clearScheda(){
+  document.querySelectorAll('.sd.active').forEach(d=>d.classList.remove('active'));
+  ['sf-te','sf-colore','sf-temp','sf-tempo','sf-note'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+}
+function stampaScheda(){window.print();}
+
+// ════════════════════════════════════
+// MODALS
+// ════════════════════════════════════
+
+function openSensoModal(s){
+  const sects=s.sections.map((sec,i)=>`
+    ${i>0?'<div class="m-div"></div>':''}
+    <div class="m-sec"><h4>${sec.t}</h4><p>${sec.p}</p></div>`).join('');
+  const domande=s.domande.map(d=>`<li>${d}</li>`).join('');
+  document.getElementById('modal-content').innerHTML=`
+    <div class="m-top">
+      <div class="m-icon">${s.icon}</div>
+      <div class="m-title">${s.it}</div>
+      <div class="m-sub">${s.sub}</div>
+    </div>
+    <div class="m-body">
+      <div class="m-sec"><h4>In sintesi</h4><p>${s.desc}</p>
+        <div class="m-tags">${s.tags.map(t=>`<span class="m-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="m-div"></div>
+      <div class="m-sec"><h4>Domande da farti</h4><ul>${domande}</ul></div>
+      <div class="m-div"></div>${sects}
+    </div>`;
+  openModal();
+}
+
+function openRuotaCat(cat){
+  const terms=cat.terms.map((t,i)=>`
+    ${i>0?'<div class="m-div"></div>':''}
+    <div class="m-sec"><h4 style="color:${cat.color}">${t.t}</h4><p>${t.d}</p></div>`).join('');
+  document.getElementById('modal-content').innerHTML=`
+    <div class="m-top">
+      <div class="m-title" style="color:${cat.color}">${cat.name}</div>
+      <div class="m-sub">famiglia aromatica</div>
+    </div>
+    <div class="m-body">${terms}</div>`;
+  openModal();
+}
+
+function openTermModal(term,color,desc){
+  document.getElementById('modal-content').innerHTML=`
+    <div class="m-top">
+      <div class="m-title" style="color:${color}">${term}</div>
+      <div class="m-sub">descrittore aromatico</div>
+    </div>
+    <div class="m-body">
+      <div class="m-sec"><p>${desc}</p></div>
+    </div>`;
+  openModal();
+}
+
+function openVocabModal(v){
+  const sects=v.sections.map((s,i)=>`
+    ${i>0?'<div class="m-div"></div>':''}
+    <div class="m-sec"><h4>${s.t}</h4><p>${s.p}</p></div>`).join('');
+  document.getElementById('modal-content').innerHTML=`
+    <div class="m-top">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:54px;color:rgba(201,168,76,.18);line-height:1;margin-bottom:4px">${v.zh}</div>
+      <div class="m-title">${v.it}</div>
+      <div class="m-sub">${v.pinyin}</div>
+    </div>
+    <div class="m-body">
+      <div class="m-sec"><h4>In sintesi</h4><p>${v.desc}</p></div>
+      <div class="m-div"></div>${sects}
+    </div>`;
+  openModal();
+}
+
+function openModal(){document.getElementById('modal-bg').classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal-bg').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('modal-close').addEventListener('click',closeModal);
+document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+// INIT
+renderSensi();
+renderLiquore();
+renderAromi();
+renderRuota();
+renderEvo();
+renderVocab();
+renderScheda();
+</script>
+</body>
+</html>

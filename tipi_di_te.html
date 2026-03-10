@@ -130,6 +130,10 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .nav-part-num{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:2px;opacity:.7}
 .nav-part-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;display:block;line-height:1.2}
 .nav-center-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.32}
+.nav-home{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--gold);opacity:.48;transition:opacity .22s;min-width:80px;text-align:center}
+.nav-home:hover{opacity:1}
+.nav-home-icon{font-size:18px;line-height:1;display:block}
+.nav-home-lbl{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block}
 .nav-placeholder{min-width:120px}
 
 /* FOOTER */
@@ -147,6 +151,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   h1{font-size:clamp(30px,9vw,52px)}
   .part-nav{margin-bottom:24px}
   .nav-center-label{display:none}
+  .nav-home-lbl{display:none}
   .nav-part-title{font-size:12px}
   .modal{width:96%;max-height:95vh}
   .modal-body{padding:20px 18px 24px}
@@ -211,7 +216,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
           <span class="nav-part-title">La Pianta</span>
         </div>
       </a>
-      <a href="index.html" class="nav-center-label" style="text-decoration:none;pointer-events:all;opacity:.38;transition:opacity .2s" onmouseover="this.style.opacity=.8" onmouseout="this.style.opacity=.38">Guida al Tè Cinese</a>
+      <a href="index.html" class="nav-center-label" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
       <a href="gongfu.html" class="nav-arrow nav-next" title="Parte III — Gong Fu Cha">
         <div class="nav-part">
           <span class="nav-part-num">Parte III</span>
@@ -262,7 +267,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
         <span class="nav-arr">←</span>
         <div class="nav-part"><span class="nav-part-num">Parte I</span><span class="nav-part-title">La Pianta</span></div>
       </a>
-      <a href="index.html" class="nav-center-label" style="text-decoration:none;pointer-events:all;opacity:.38;transition:opacity .2s" onmouseover="this.style.opacity=.8" onmouseout="this.style.opacity=.38">Guida al Tè Cinese</a>
+      <a href="index.html" class="nav-center-label" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
       <a href="gongfu.html" class="nav-arrow nav-next">
         <div class="nav-part"><span class="nav-part-num">Parte III</span><span class="nav-part-title">Gong Fu Cha</span></div>
         <span class="nav-arr">→</span>

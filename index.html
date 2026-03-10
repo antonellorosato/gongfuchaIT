@@ -53,7 +53,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .dd{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.5}
 
 /* ── CARDS ── */
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;margin-bottom:16px}
 .card{
   background:var(--mid);border:1px solid rgba(201,168,76,.1);
   padding:32px 28px 28px;text-decoration:none;color:inherit;
@@ -100,7 +100,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .footer a:hover{opacity:1}
 
 @media(max-width:700px){
-  .cards{grid-template-columns:1fr}
+  .cards{grid-template-columns:1fr 1fr}
   .page{padding:40px 20px 36px}
   h1{font-size:clamp(40px,12vw,72px)}
 }
@@ -155,21 +155,37 @@ h1 em{font-style:italic;color:var(--gold-l)}
       <div class="card-cta">Esplora →</div>
     </a>
 
-    <!-- PARTE III (coming soon) -->
-    <div class="card card-coming">
-      <div class="card-badge">Prossimamente</div>
+    <!-- PARTE III -->
+    <a href="gongfu.html" class="card">
       <div class="card-num">III</div>
       <div class="card-eyebrow">Parte Terza</div>
       <div class="card-title">Gong Fu Cha</div>
       <div class="card-zh">功夫茶 · Gōng Fū Chá</div>
-      <p class="card-desc">Gli strumenti della cerimonia, come preparare il tè, tempi e temperature per ogni tipologia. Il rituale come pratica di presenza.</p>
+      <p class="card-desc">Gli strumenti della cerimonia, il rituale passo per passo, e i parametri di infusione per ogni tipologia di tè.</p>
       <div class="card-tags">
-        <span class="ctag">Gaiwan</span>
-        <span class="ctag">Yixing</span>
+        <span class="ctag">Gaiwan & Yixing</span>
+        <span class="ctag">10 passi</span>
         <span class="ctag">Temperature</span>
         <span class="ctag">Infusioni</span>
       </div>
-    </div>
+      <div class="card-cta">Esplora →</div>
+    </a>
+
+    <!-- PARTE IV -->
+    <a href="degustazione.html" class="card">
+      <div class="card-num">IV</div>
+      <div class="card-eyebrow">Parte Quarta</div>
+      <div class="card-title">Degustazione</div>
+      <div class="card-zh">品茶 · Pǐn Chá</div>
+      <p class="card-desc">Come leggere una tazza: i cinque sensi, il colore del liquore, la ruota degli aromi, l'evoluzione infusione per infusione e il vocabolario della degustazione.</p>
+      <div class="card-tags">
+        <span class="ctag">Ruota aromi</span>
+        <span class="ctag">Huigan</span>
+        <span class="ctag">Cha Qi</span>
+        <span class="ctag">Scheda</span>
+      </div>
+      <div class="card-cta">Esplora →</div>
+    </a>
 
   </div>
 

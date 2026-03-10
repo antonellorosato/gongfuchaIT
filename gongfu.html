@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gong Fu Cha — Strumenti & Rituale</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a1a10;--mid:#162a1c;--light:#234a2a;
+  --gold:#c9a84c;--gold-l:#e8cd8a;--gold-p:#f5ecd4;
+  --cream:#faf6ee;--cream-d:#ede4d0;--text:#e8dfc8;
+}
+body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 8%,rgba(35,74,42,.28) 0%,transparent 50%),radial-gradient(ellipse at 85% 85%,rgba(20,55,30,.22) 0%,transparent 50%);pointer-events:none;z-index:0}
+.poster{max-width:1160px;margin:0 auto;padding:52px 44px;position:relative;z-index:1}
+.border-frame{position:absolute;inset:16px;border:1px solid rgba(201,168,76,.16);pointer-events:none}
+.border-frame::before{content:'';position:absolute;inset:6px;border:1px solid rgba(201,168,76,.07)}
+.corner{position:absolute;width:28px;height:28px;border-color:var(--gold);border-style:solid;opacity:.5}
+.corner-tl{top:16px;left:16px;border-width:2px 0 0 2px}
+.corner-tr{top:16px;right:16px;border-width:2px 2px 0 0}
+.corner-bl{bottom:16px;left:16px;border-width:0 0 2px 2px}
+.corner-br{bottom:16px;right:16px;border-width:0 2px 2px 0}
+.header{text-align:center;margin-bottom:58px}
+.eyebrow{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);opacity:.72;margin-bottom:14px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5vw,66px);line-height:1.05;margin-bottom:4px}
+h1 em{font-style:italic;color:var(--gold-l)}
+.subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--gold-p);opacity:.58;margin-top:8px}
+.nav-hint{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.35;margin-top:16px}
+.divider{display:flex;align-items:center;gap:12px;margin:20px auto 0;max-width:360px;justify-content:center}
+.dl{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold));opacity:.32}
+.dr{flex:1;height:1px;background:linear-gradient(to left,transparent,var(--gold));opacity:.32}
+.dd{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.55}
+.sec{margin-bottom:64px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:14px;opacity:.8}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.28),transparent)}
+.sec-intro{font-size:11.5px;color:var(--cream-d);opacity:.5;margin-bottom:28px;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.65;max-width:720px}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.tool-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:20px 16px 18px;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .15s}
+.tool-card:hover{background:var(--light);transform:translateY(-2px)}
+.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:opacity .2s}
+.tool-card:hover::before{opacity:.5}
+.tool-glyph{font-size:26px;margin-bottom:10px;display:block;line-height:1}
+.tool-it{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--gold-l);margin-bottom:1px;line-height:1.2}
+.tool-zh{font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:var(--cream-d);opacity:.38;margin-bottom:8px;letter-spacing:.5px}
+.tool-desc{font-size:10.5px;color:var(--text);line-height:1.55;opacity:.75}
+
+/* RITUAL */
+.ritual-steps{display:flex;flex-direction:column;gap:3px}
+.step-row{display:grid;grid-template-columns:56px 1fr;background:var(--mid);border:1px solid rgba(201,168,76,.08);transition:background .18s}
+.step-row:hover{background:var(--light)}
+.step-num-col{display:flex;align-items:flex-start;justify-content:center;padding-top:20px;border-right:1px solid rgba(201,168,76,.08)}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;font-style:italic;color:rgba(201,168,76,.25);line-height:1}
+.step-body{padding:18px 22px 18px 20px}
+.step-header{display:flex;align-items:baseline;gap:10px;margin-bottom:6px;flex-wrap:wrap}
+.step-it{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--gold-l);line-height:1.1}
+.step-zh{font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;color:var(--cream-d);opacity:.4;letter-spacing:.5px}
+.step-pinyin{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.38}
+.step-text{font-size:12px;color:var(--text);line-height:1.65;opacity:.85}
+.step-text em{color:var(--gold-l);font-style:italic}
+.step-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.stag{font-size:9px;padding:2px 7px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.13);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic}
+.step-tip{background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.25);padding:8px 12px;margin-top:8px;font-size:11px;font-style:italic;font-family:'Cormorant Garamond',serif;color:var(--cream-d);opacity:.72;line-height:1.55}
+
+/* PARAMS */
+.params-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-bottom:3px}
+.params-grid-2{display:grid;grid-template-columns:repeat(5,1fr);gap:3px}
+.tp-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:18px 16px 16px;cursor:pointer;transition:background .2s,transform .15s;position:relative;overflow:hidden;padding-bottom:22px}
+.tp-card:hover{background:var(--light);transform:translateY(-2px)}
+.tp-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;opacity:.7}
+.tp-emoji{font-size:20px;margin-bottom:6px;display:block;line-height:1}
+.tp-it{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;line-height:1.2;margin-bottom:10px}
+.tp-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;border-bottom:1px solid rgba(201,168,76,.05)}
+.tp-row:last-child{border-bottom:none}
+.tp-lbl{font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold);opacity:.42}
+.tp-val{font-size:10.5px;color:var(--cream-d);opacity:.82;font-family:'Cormorant Garamond',serif}
+.tp-temp{font-size:15px;font-family:'Cormorant Garamond',serif;color:var(--gold-l);font-weight:500;margin-bottom:10px;display:block}
+
+.tp-bianco::after{background:linear-gradient(to right,#c8c0b0,#e8dfc8)}.tp-bianco .tp-it{color:#ccc4b4}
+.tp-verde::after{background:linear-gradient(to right,#4a7c4a,#7ab87a)}.tp-verde .tp-it{color:#8ac878}
+.tp-giallo::after{background:linear-gradient(to right,#a08010,#d8b840)}.tp-giallo .tp-it{color:#d4a830}
+.tp-oolong-l::after{background:linear-gradient(to right,#6a8840,#a0b860)}.tp-oolong-l .tp-it{color:#a0c060}
+.tp-oolong-t::after{background:linear-gradient(to right,#7a4a10,#c0803a)}.tp-oolong-t .tp-it{color:#d09050}
+.tp-rosso::after{background:linear-gradient(to right,#882828,#c04848)}.tp-rosso .tp-it{color:#d07070}
+.tp-sheng-j::after{background:linear-gradient(to right,#5a7030,#8aaa50)}.tp-sheng-j .tp-it{color:#a8c060}
+.tp-sheng-i::after{background:linear-gradient(to right,#3a4820,#6a7840)}.tp-sheng-i .tp-it{color:#90a060}
+.tp-shu::after{background:linear-gradient(to right,#3a2010,#7a4a28)}.tp-shu .tp-it{color:#b07848}
+.tp-nero::after{background:linear-gradient(to right,#2a2a3a,#5a5a7a)}.tp-nero .tp-it{color:#9090b8}
+
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(4,10,6,.92);backdrop-filter:blur(12px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-bg.open{opacity:1;pointer-events:all}
+.modal{background:var(--mid);border:1px solid rgba(201,168,76,.2);max-width:780px;width:94%;max-height:90vh;overflow-y:auto;position:relative;animation:slideUp .28s ease}
+@keyframes slideUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:15px;right:18px;font-size:17px;cursor:pointer;color:var(--gold);opacity:.42;z-index:2;transition:opacity .15s;line-height:1;background:none;border:none}
+.modal-close:hover{opacity:1}
+.m-top{padding:30px 34px 0}
+.m-glyph{font-size:44px;margin-bottom:8px;line-height:1}
+.m-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:var(--gold-l);margin-bottom:2px}
+.m-zh{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--cream-d);opacity:.45;margin-bottom:4px}
+.m-pinyin{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.42;margin-bottom:14px}
+.m-body{padding:18px 34px 34px}
+.m-sec{margin-bottom:18px}
+.m-sec h4{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.45;margin-bottom:8px}
+.m-sec p{font-size:13px;color:var(--text);line-height:1.72;opacity:.9}
+.m-sec p em{color:var(--gold-l);font-style:italic}
+.m-div{height:1px;background:rgba(201,168,76,.09);margin:16px 0}
+.m-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.m-tag{font-size:11px;padding:4px 11px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.16);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic}
+.m-note{background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.28);padding:10px 14px;margin-top:10px}
+.m-note p{font-size:12px;color:var(--cream-d);line-height:1.6;opacity:.75;font-style:italic;font-family:'Cormorant Garamond',serif}
+.tp-modal-params{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-bottom:20px}
+.tp-param{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.1);padding:14px 16px}
+.tp-param-lbl{font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.45;margin-bottom:4px}
+.tp-param-val{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--gold-l);line-height:1.1}
+.tp-param-sub{font-size:10px;color:var(--cream-d);opacity:.45;margin-top:2px}
+.temp-bar{height:4px;border-radius:2px;margin-top:8px;background:linear-gradient(to right,rgba(74,154,200,.5),rgba(220,80,50,.85));position:relative}
+.temp-indicator{position:absolute;top:-4px;width:3px;height:12px;background:var(--gold);border-radius:1px;transform:translateX(-50%)}
+.infusion-row{display:flex;gap:3px;flex-wrap:wrap;margin-top:8px}
+.inf-bubble{display:flex;flex-direction:column;align-items:center;background:var(--mid);border:1px solid rgba(201,168,76,.1);padding:6px 10px;min-width:44px}
+.inf-bubble.hl{background:var(--light);border-color:rgba(201,168,76,.3)}
+.inf-n{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);opacity:.45;margin-bottom:2px}
+.inf-t{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:500;color:var(--gold-l)}
+
+/* NAV */
+.part-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;padding:0 2px}
+.nav-arrow{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--gold);opacity:.42;transition:opacity .22s;min-width:120px}
+.nav-arrow:hover{opacity:.9}
+.nav-arrow.nav-next{flex-direction:row-reverse}
+.nav-arrow.nav-next .nav-part{text-align:right}
+.nav-arr{font-size:28px;line-height:1;font-family:'Cormorant Garamond',serif;flex-shrink:0}
+.nav-part-num{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:2px;opacity:.7}
+.nav-part-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;display:block;line-height:1.2}
+.nav-center-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.32}
+.nav-home{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--gold);opacity:.48;transition:opacity .22s;min-width:80px;text-align:center}
+.nav-home:hover{opacity:1}
+.nav-home-icon{font-size:18px;line-height:1;display:block}
+.nav-home-lbl{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block}
+.nav-placeholder{min-width:120px}
+.footer{text-align:center;margin-top:44px;padding-top:22px;border-top:1px solid rgba(201,168,76,.08)}
+.footer p{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.3;line-height:1.8}
+.footer a{color:var(--gold);opacity:.55;text-decoration:none;transition:opacity .18s}
+.footer a:hover{opacity:1}
+
+@media(max-width:900px){.tools-grid{grid-template-columns:repeat(4,1fr)}.params-grid,.params-grid-2{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.tools-grid{grid-template-columns:repeat(3,1fr)}.params-grid,.params-grid-2{grid-template-columns:repeat(2,1fr)}.poster{padding:28px 18px}.tp-modal-params{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+  <div class="border-frame"></div>
+
+  <nav class="part-nav">
+    <a href="tipi_di_te.html" class="nav-arrow nav-prev">
+      <span class="nav-arr">←</span>
+      <div class="nav-part"><span class="nav-part-num">Parte II</span><span class="nav-part-title">Varietà di Tè</span></div>
+    </a>
+    <a href="index.html" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
+    <a href="degustazione.html" class="nav-arrow nav-next"><span class="nav-arr">→</span><div class="nav-part"><span class="nav-part-num">Parte IV</span><span class="nav-part-title">Degustazione</span></div></a>
+  </nav>
+
+  <header class="header">
+    <p class="eyebrow">Guida interattiva · Vol. III</p>
+    <h1>Gong Fu <em>Cha</em></h1>
+    <p class="subtitle">功夫茶 — gli strumenti, il rituale, temperatura e tempi per ogni tè</p>
+    <div class="divider"><div class="dl"></div><div class="dd"></div><div class="dr"></div></div>
+    <p class="nav-hint">↓ clicca su ogni elemento per esplorare</p>
+  </header>
+
+  <section class="sec">
+    <h2 class="sec-title">I — Gli Strumenti</h2>
+    <p class="sec-intro">Il Gong Fu Cha non richiede un set completo per cominciare — un gaiwan e una tazza bastano. Ma ogni strumento ha una logica precisa: capirla è parte del rituale stesso.</p>
+    <div class="tools-grid" id="tools-grid"></div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-title">II — Il Rituale passo per passo</h2>
+    <p class="sec-intro">Il Gong Fu Cha non è una procedura da seguire meccanicamente — è un'attenzione ripetuta. Ogni passaggio ha una ragione chimica e una ragione estetica.</p>
+    <div class="ritual-steps" id="ritual-steps"></div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-title">III — Temperatura, quantità e tempi per tipologia</h2>
+    <p class="sec-intro">I parametri variano molto tra le tipologie. Queste sono le linee guida di partenza — poi l'esperienza e il gusto personale guidano gli aggiustamenti. Clicca su ogni tè per vedere la sequenza completa delle infusioni.</p>
+    <div class="params-grid" id="params-row1"></div>
+    <div style="height:3px"></div>
+    <div class="params-grid-2" id="params-row2"></div>
+    <p style="font-size:10px;color:var(--cream-d);opacity:.28;margin-top:10px;font-style:italic;font-family:'Cormorant Garamond',serif;text-align:center;line-height:1.5">
+      I tempi si riferiscono a un rapporto foglie/acqua da Gong Fu: ~5–7g per 100ml. Per infusioni Western-style: dimezzare le foglie, triplicare i tempi.
+    </p>
+  </section>
+
+  <nav class="part-nav" style="margin-bottom:0">
+    <a href="tipi_di_te.html" class="nav-arrow nav-prev">
+      <span class="nav-arr">←</span>
+      <div class="nav-part"><span class="nav-part-num">Parte II</span><span class="nav-part-title">Varietà di Tè</span></div>
+    </a>
+    <a href="index.html" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
+    <a href="degustazione.html" class="nav-arrow nav-next"><span class="nav-arr">→</span><div class="nav-part"><span class="nav-part-num">Parte IV</span><span class="nav-part-title">Degustazione</span></div></a>
+  </nav>
+
+  <footer class="footer">
+    <p>Guida al Tè Cinese &middot; a cura di <a href="https://github.com/antonellorosato/gongfuchaIT" target="_blank">Antonello Rosato</a> &middot; <a href="https://github.com/antonellorosato/gongfuchaIT" target="_blank">github.com/antonellorosato/gongfuchaIT</a></p>
+  </footer>
+</div>
+
+<div class="modal-bg" id="modal-bg">
+  <div class="modal" id="modal-inner">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+const TOOLS=[
+  {glyph:'🫖',it:'Gaiwan',zh:'盖碗',pinyin:'Gài Wǎn',sub:'La tazza con coperchio',
+   desc:'Il gaiwan è la scelta più versatile del Gong Fu Cha: funziona per ogni tipo di tè, permette di osservare le foglie, controllare l\'infusione e gustare il profumo sotto il coperchio.',
+   tags:['Porcellana','120–150 ml','Universale','Per tutti i tè'],
+   sections:[
+     {t:'Come funziona',p:'Il coperchio trattiene gli <em>aromi durante l\'infusione</em> e filtra le foglie al versamento. Si tiene con pollice e medio sul bordo, l\'indice sul pomolo, inclinando per far defluire il liquore. La tecnica richiede pratica per non scottarsi.'},
+     {t:'Materiali',p:'La <em>porcellana bianca</em> è la scelta classica: non assorbe aromi, è facile da pulire, mostra il colore del liquore. Esistono gaiwan in vetro (per osservare le foglie aprirsi), in argilla e in gres.'},
+     {t:'Dimensioni',p:'<em>120–150 ml</em> è la misura standard. Sotto i 100 ml è considerato da esperto — infusioni brevissime, grande controllo. Sopra i 200 ml si perde la concentrazione tipica del Gong Fu.'},
+     {note:'Per chi inizia: un gaiwan da 120 ml in porcellana bianca è tutto quello che serve. Padroneggiarlo richiede tempo, ma diventa un\'estensione della mano.'}
+   ]},
+  {glyph:'🫙',it:'Teiera Yixing',zh:'宜兴紫砂壶',pinyin:'Yí Xīng Zǐ Shā Hú',sub:'Argilla porosa dello Jiangsu',
+   desc:'Fatta di argilla zisha estratta esclusivamente a Yixing, Jiangsu. La porosità microscopica assorbe gli aromi del tè nel tempo — una Yixing ben stagionata diventa parte del tè stesso.',
+   tags:['Argilla Zisha','60–200 ml','Una teiera = un tè','No detergenti'],
+   sections:[
+     {t:'La magia della porosità',p:'L\'argilla zisha <em>assorbe lentamente gli oli aromatici</em> di ogni infusione. Dopo anni con lo stesso tipo di tè, la teiera ha accumulato uno strato invisibile che arricchisce ogni sessione. Mai lavarla con detergenti — solo acqua calda.'},
+     {t:'Una teiera, un tè',p:'Regola tradizionale: <em>dedicare ogni Yixing a un solo tipo di tè</em>. Una per il Wuyi yancha, una per il pu\'er cotto, una per il dan cong. Mescolare tè diversi contamina il profilo accumulato negli anni.'},
+     {t:'Come sceglierla',p:'<em>Zini</em> (viola scuro): versatile, per oolong e pu\'er. <em>Zhuni</em> (rosso vivo): tè rossi e oolong del Fujian. <em>Duanni</em> (giallo-verde): tè verdi e oolong leggeri. La qualità si riconosce dalla chiusura precisa del coperchio e dal suono metallico al toc leggero.'},
+     {note:'Una buona Yixing artigianale costa da 50€ a migliaia. Per iniziare: argilla vera (non stampata a macchina), volume 100–120 ml.'}
+   ]},
+  {glyph:'🍶',it:'Cha Hai',zh:'公道杯',pinyin:'Gōng Dào Bēi',sub:'La caraffa dell\'equità',
+   desc:'La caraffa intermedia dove si versa il tè estratto prima di distribuirlo nelle tazze. Uniforma il liquore, ferma l\'estrazione, e garantisce che ogni tazza abbia la stessa concentrazione.',
+   tags:['Vetro o porcellana','150–300 ml','Ferma l\'infusione','Uniforma'],
+   sections:[
+     {t:'Perché è fondamentale',p:'Versare direttamente dal gaiwan alle tazze in sequenza significa che la <em>prima tazza è meno concentrata</em> dell\'ultima — l\'infusione continua mentre si versa. Il Cha Hai raccoglie tutto insieme, uniforma, poi si distribuisce. "Equità" nel senso letterale.'},
+     {t:'Materiale',p:'Il <em>vetro</em> è preferibile: permette di osservare il colore del liquore, prima indicazione della qualità. Alcune versioni hanno filtro integrato per le foglie minute.'},
+     {note:'In una sessione solitaria il Cha Hai non è strettamente necessario. Ma in compagnia è essenziale per la filosofia del Gong Fu Cha.'}
+   ]},
+  {glyph:'🫗',it:'Tazze',zh:'茶杯',pinyin:'Chá Bēi',sub:'Da sorseggio e dell\'aroma',
+   desc:'Nel Gong Fu Cha esistono due tazze: la tazza dell\'aroma (闻香杯, wen xiang bei) alta e stretta, e la tazza da sorseggio (品茗杯, pin ming bei) bassa e aperta.',
+   tags:['Wen Xiang Bei','Pin Ming Bei','30–50 ml','Porcellana'],
+   sections:[
+     {t:'Wen Xiang Bei — la tazza dell\'aroma',p:'Alta e stretta, trattiene i <em>composti volatili</em>. Si versa il tè dentro, si copre con la tazza da sorseggio, si capovolge — il tè passa nella tazza bassa. La tazza alta svuotata si avvicina al naso: l\'aroma dell\'oolong si rivela in tutta la complessità. Tradizione del Fujian e Taiwan.'},
+     {t:'Pin Ming Bei — la tazza da sorseggio',p:'Bassa e aperta, <em>rilascia i profumi</em>. Dimensione tipica 30–50 ml: ogni sorso è un rito. Le tazze alte tipo espresso sono sbagliate — troppo grandi, il tè si raffredda, non si percepisce la progressione delle infusioni.'},
+     {note:'Per iniziare: quattro tazze da 40 ml in porcellana bianca liscia. La semplicità mette in risalto il tè, non il contenitore.'}
+   ]},
+  {glyph:'🪵',it:'Cha Pan',zh:'茶盘',pinyin:'Chá Pán',sub:'Il vassoio del tè',
+   desc:'Il vassoio raccoglie l\'acqua di scarto — quella usata per riscaldare gli strumenti, il primo risciacquo delle foglie, i gocciolii. Tiene tutto in ordine e permette di operare con fluidità.',
+   tags:['Bambù / Legno','Ceramica','Con canale di scolo','Ordine visivo'],
+   sections:[
+     {t:'Funzione pratica',p:'Durante il Gong Fu Cha si usa molta acqua calda: per riscaldare il gaiwan, le tazze, il risciacquo delle foglie. Il Cha Pan con canale di scolo raccoglie tutto senza interrompere il rituale. L\'<em>ordine visivo è parte dell\'esperienza</em>.'},
+     {t:'Materiali',p:'<em>Bambù</em>: leggero, economico, si degrada nel tempo. <em>Teak o ebano</em>: durevole, elegante, richiede manutenzione. <em>Pietra o ardesia</em>: pesante, molto longeva. <em>Ceramica con vasca</em>: facile da pulire.'},
+     {note:'Non è indispensabile per iniziare. Un vassoio da cucina con panno assorbente funziona benissimo. Il Cha Pan arriva quando il rituale diventa abitudinario.'}
+   ]},
+  {glyph:'⚗️',it:'Bollitore',zh:'水壶',pinyin:'Shuǐ Hú',sub:'Il controllo della temperatura',
+   desc:'La temperatura dell\'acqua non è un dettaglio — è la variabile più facile da controllare e una delle più impattanti. Un bollitore a collo d\'oca con controllo digitale è l\'investimento più utile dopo il gaiwan.',
+   tags:['Collo d\'oca','Controllo temperatura','700–1000 ml','±1°C'],
+   sections:[
+     {t:'Perché la temperatura conta',p:'Acqua troppo calda <em>estrae troppo velocemente</em>: catechine amare, tannini astringenti, perdita dei volatili delicati. Sotto i 70°C l\'estrazione è incompleta. Ogni tipologia ha il suo range: tè verdi e bianchi soffrono con acqua bollente, oolong tostati e pu\'er la richiedono.'},
+     {t:'Il collo d\'oca',p:'Il becco lungo e curvo permette <em>controllo preciso del flusso</em> — importante per versare sul gaiwan. Un getto violento agita le foglie, accelera l\'estrazione in modo irregolare. La lentezza del versamento è parte del Gong Fu.'},
+     {t:'Leggere la temperatura senza strumenti',p:'<em>70°C</em>: bolle piccole sul fondo, vapore leggero. <em>80°C</em>: bolle medie che salgono, vapore costante. <em>90°C</em>: pre-ebollizione, bolle grandi. Acqua bollente lasciata aperta 2–3 minuti: cala di circa 10–15°C.'},
+     {note:'Un bollitore elettrico con controllo temperatura è lo strumento che cambia di più il risultato in tazza. Priorità assoluta dopo il gaiwan.'}
+   ]},
+  {glyph:'🥢',it:'Cha Dao',zh:'茶道六君子',pinyin:'Chá Dào Liù Jūn Zǐ',sub:'I sei gentiluomini',
+   desc:'Il set di sei utensili in bambù o legno: misurino (cha ze), pinze (cha jia), spatola (cha chi), ago (cha zhen), imbuto (cha lou), porta-utensili (cha tong). Ornamentali, ma ciascuno ha una funzione.',
+   tags:['Bambù / Legno','Misurino','Pinze','Ago / Spatola'],
+   sections:[
+     {t:'I sei pezzi',p:'<em>Cha Ze</em> 茶则: misurino per le foglie. <em>Cha Jia</em> 茶夹: pinze per tenere le tazze calde senza scottarsi. <em>Cha Chi</em> 茶匙: spatola per spostare le foglie. <em>Cha Zhen</em> 茶针: ago per sbloccare il beccuccio della Yixing. <em>Cha Lou</em> 茶漏: imbuto per inserire le foglie. <em>Cha Tong</em> 茶筒: il porta-utensili.'},
+     {t:'Necessità reale',p:'Nella pratica quotidiana si usano soprattutto <em>cha ze e cha jia</em>. Gli altri sono comodi ma sostituibili. Nei set artigianali il bambù intagliato a mano è un oggetto bello anche da soli.'},
+     {note:'Per iniziare: anche solo le pinze di bambù. Evitano di scottarsi mentre si maneggia il gaiwan caldo.'}
+   ]},
+  {glyph:'🔬',it:'Filtro',zh:'茶漉',pinyin:'Chá Lù',sub:'Il colino — piccolo ma utile',
+   desc:'Un piccolo colino da posizionare sul Cha Hai per bloccare i frammenti di foglia. Non indispensabile con un gaiwan ben usato, essenziale con le teiere.',
+   tags:['Acciaio o bambù','Con supporto','Frammenti','Facile da pulire'],
+   sections:[
+     {t:'Quando serve',p:'Il gaiwan ben inclinato filtra naturalmente. Ma i <em>tè rotti o molto piccoli</em> (certi oolong taiwanesi, tè rossi) passano comunque. Essenziale con le Yixing senza filtro nel beccuccio e con i pu\'er in mattone dove i frammenti sono inevitabili.'},
+     {t:'Materiali',p:'<em>Acciaio inossidabile</em>: il più igienico, non assorbe odori. <em>Bambù intrecciato</em>: esteticamente gradevole, va asciugato bene. Il supporto è comodo per appoggiarvi il colino tra un\'infusione e l\'altra.'},
+     {note:'Accessorio da due euro che risolve un problema reale. Prendi quello in acciaio.'}
+   ]},
+  {glyph:'📦',it:'Contenitore del Tè',zh:'茶叶罐',pinyin:'Chá Yè Guàn',sub:'Conservazione come rispetto',
+   desc:'Luce, aria, umidità e odori estranei degradano il profilo aromatico anche di tè eccellenti nel giro di settimane. La conservazione corretta è parte del rispetto per la foglia.',
+   tags:['Opaco','Ermetico','Ceramica o stagno','Lontano da fonti di calore'],
+   sections:[
+     {t:'I nemici del tè',p:'<em>Luce</em>: degrada la clorofilla, ossida i polifenoli. <em>Aria</em>: ossidazione progressiva. <em>Umidità</em>: muffa e perdita di aromi. <em>Odori forti</em>: la foglia assorbe tutto — no spezie, caffè, detersivi vicini. <em>Calore</em>: accelera ogni degradazione.'},
+     {t:'Contenitori per ogni tè',p:'<em>Tè verde e bianco fresco</em>: sottovuoto in frigo o stagno opaco in luogo fresco. <em>Oolong tostato</em>: ceramica o stagno, temperatura ambiente. <em>Pu\'er</em>: carta o ceramica non ermetica, umidità 60–70% — deve respirare per maturare. Il pu\'er sottovuoto si blocca.'},
+     {note:'Per i tè quotidiani: barattolo di ceramica opaco, coperchio ben chiuso, lontano dal fornello. Per i pregiati: separare la porzione settimanale dalla scorta.'}
+   ]},
+  {glyph:'🌡️',it:'Termometro',zh:'温度计',pinyin:'Wēn Dù Jì',sub:'Strumento didattico',
+   desc:'Un termometro a lettura istantanea è lo strumento più didattico con cui iniziare. Capire come si raffredda l\'acqua, cosa significa 80°C in pratica, come varia la temperatura tra i versamenti.',
+   tags:['Lettura istantanea','±1°C','Da principiante','Poi diventa superfluo'],
+   sections:[
+     {t:'Perché usarlo all\'inizio',p:'La sensibilità alla temperatura si sviluppa con l\'esperienza. Il termometro <em>calibra la percezione</em>: quante volte un tè verde amaro era in realtà acqua a 95°C invece di 75°C? Risponde alle domande prima che il palato impari a farlo.'},
+     {t:'Poi diventa superfluo',p:'Dopo qualche mese si impara a <em>leggere l\'acqua visivamente</em>: bolle piccole sul fondo (70°C), fruscio pre-ebollizione (85–90°C), ebollizione piena (100°C). Il bollitore con controllo digitale lo rende poi ridondante.'},
+     {note:'Costa 5–10€ e insegna più di qualsiasi descrizione. Compralo insieme al tuo primo gaiwan.'}
+   ]},
+];
+
+const STEPS=[
+  {num:'零',it:'Svegliare il set',zh:'醒具',pinyin:'Xǐng Jù',
+   text:'Prima di ogni sessione, <em>scalda ogni strumento con acqua bollente</em> — gaiwan, Cha Hai, tazze. Non è solo riscaldamento fisico: è il momento in cui porti la tua attenzione al rituale. Senti il calore nella ceramica, il vapore che sale, il profumo dei tè precedenti che si risveglia nella teiera stagionata. Il set si ricorda.',
+   tags:['Prima di tutto','Acqua bollente','Gaiwan','Tazze','Cha Hai'],
+   tip:'Con una Yixing stagionata, questo momento è particolarmente bello: il profumo dei tè accumulati negli anni emerge con il vapore. Annusala — è la memoria del set.'},
+{num:'一',it:'Preparare l\'acqua',zh:'备水',pinyin:'Bèi Shuǐ',
+   text:'Porta l\'acqua alla <em>temperatura corretta per il tè che userai</em> (vedi Sezione III). L\'acqua di sorgente o filtrata è preferibile: cloro e minerali interferiscono con i profili aromatici delicati. Non riutilizzare acqua già bollita — l\'ossigeno disciolto è diminuito e il tè risulta piatto.',
+   tags:['Acqua filtrata o di sorgente','Temperatura precisa','No acqua ribollita'],
+   tip:'Per tè verdi e bianchi: porta a ebollizione e lascia raffreddare con il coperchio aperto. Più veloce di aspettare il bollitore a 75°C — e si può fare con qualsiasi bollitore.'},
+  {num:'二',it:'Riscaldare gli strumenti',zh:'温壶温杯',pinyin:'Wēn Hú Wēn Bēi',
+   text:'Versa acqua calda nel gaiwan, lascia 10 secondi, poi riversala nelle tazze. Questo <em>pre-riscalda ogni superficie</em>: il tè versato su ceramica fredda perde immediatamente 5–10°C. È anche un momento di rallentamento — il rituale inizia qui.',
+   tags:['Gaiwan','Tazze','Cha Hai','10–15 secondi'],
+   tip:'L\'acqua usata per riscaldare le tazze viene poi gettata nel Cha Pan. Non si beve — è già "sporcata" dagli aromi residui degli strumenti.'},
+  {num:'三',it:'Inserire le foglie',zh:'置茶',pinyin:'Zhì Chá',
+   text:'Inserisci le foglie nel gaiwan asciutto e caldo. Quantità: <em>5–7g per 100ml</em> per il Gong Fu Cha classico. Le foglie a contatto con la ceramica calda iniziano già a rilasciare profumo — annusa il gaiwan con il coperchio prima di aggiungere l\'acqua: è la foglia secca, il punto di partenza.',
+   tags:['5–7g per 100ml','Usa Cha Ze','Annusa le foglie secche'],
+   tip:'Le foglie arrotolate (oolong, tè verde a palline) occupano poco spazio asciutte ma si espandono molto. Non preoccuparti se sembrano poche.'},
+  {num:'四',it:'Il risciacquo delle foglie',zh:'醒茶',pinyin:'Xǐng Chá',
+   text:'Versa acqua calda sulle foglie, copri, e versa <em>immediatamente via</em> — 3–5 secondi al massimo. Questo "risveglio" idrata le foglie per una prima apertura uniforme, porta a temperatura il sistema e lava eventuali residui. Non si beve, ma si annusa.',
+   tags:['3–5 secondi','Si getta','Risveglia le foglie','Non per tutti i tè'],
+   tip:'Per tè verdi delicati e bianchi freschi il risciacquo si può saltare — le foglie sono fragili. Per oolong, pu\'er e tè invecchiati è praticamente obbligatorio.'},
+  {num:'五',it:'Prima infusione',zh:'泡茶',pinyin:'Pào Chá',
+   text:'Versa l\'acqua alla temperatura giusta su tutta la superficie delle foglie con un <em>gesto circolare lento</em>. Copri. Rispetta il tempo dell\'infusione. La prima infusione è spesso la più delicata — le foglie già idratate cedono subito.',
+   tags:['Temperatura precisa','Gesto circolare','Copri sempre','Rispetta i tempi'],
+   tip:'Non aprire il gaiwan durante l\'infusione per "controllare" — ogni apertura disperde calore e aromi. Fidati del tempo e della temperatura.'},
+  {num:'六',it:'Versare nel Cha Hai',zh:'出汤',pinyin:'Chū Tāng',
+   text:'Quando il tempo è scaduto, <em>versa tutto immediatamente</em> nel Cha Hai. Non lasciare nemmeno una goccia: ogni secondo extra è estrazione extra, e l\'ultima goccia è la più concentrata. Il gaiwan va svuotato completamente.',
+   tags:['Versare tutto','Subito','Usa il filtro se serve'],
+   tip:'"L\'ultima goccia" (滴滴黄金, le gocce d\'oro) è la più densa di aromi — i professionisti ci tengono molto a versarla.'},
+  {num:'七',it:'Distribuire e sorseggiare',zh:'分茶品茶',pinyin:'Fēn Chá Pǐn Chá',
+   text:'Dal Cha Hai, distribuisci nelle tazze a livello uguale. <em>Prima osserva il colore</em>, poi annusa la tazza vuota, poi sorseggia lentamente tenendo il tè in bocca un momento. Nota la dolcezza, l\'astringenza, il finale in gola (huigan).',
+   tags:['Osserva il colore','Annusa la tazza vuota','Sorseggio lento','Nota il finale (huigan)'],
+   tip:'La sequenza sensoriale classica: colore → profumo → sapore → finale in gola → retrogusto. Ogni elemento si evolve infusione dopo infusione.'},
+  {num:'八',it:'Infusioni successive',zh:'续泡',pinyin:'Xù Pào',
+   text:'Ripeti dalla quinta fase aggiungendo <em>5–15 secondi a ogni infusione</em>. Un buon tè Gong Fu dura 6–15 infusioni. Osserva come cambia il colore, come si aprono le foglie, come evolvono gli aromi: dal floreale al minerale, dal fruttato al legnoso.',
+   tags:['Aggiungi tempo progressivamente','6–15 infusioni','Le foglie si aprono','Il profilo evolve'],
+   tip:'Quando il tè perde corpo e dolcezza, le foglie sono esaurite. Un\'ultima infusione lunga (2–3 minuti) a fine sessione a volte regala sorprese.'},
+  {num:'九',it:'Lavaggio e messa a posto',zh:'洗具收具',pinyin:'Xǐ Jù Shōu Jù',
+   text:'Alla fine della sessione, <em>risciacqua tutto con acqua calda pulita</em> — niente detergenti, niente sapone. Per il gaiwan e le tazze basta acqua calda; per la Yixing, un risciacquo abbondante e lasciala asciugare con il coperchio aperto, mai chiusa bagnata. Asciuga tutto con un panno pulito e asciutto. Poi rimetti ogni pezzo al suo posto.',
+   tags:['Acqua calda — no sapone','Yixing: coperchio aperto','Asciugare bene','Ogni pezzo al suo posto'],
+   tip:'La Yixing bagnata con il coperchio chiuso sviluppa odori sgradevoli nel giro di ore. Lasciala sempre aperta ad asciugare. Se hai usato foglie arrotolate, togli le foglie espanse prima che si compattino di nuovo — vengono via più facilmente da calde.'}
+];
+
+const TEA_PARAMS=[
+  {it:'Tè Bianco',emoji:'⬜',cls:'tp-bianco',temp:'75–80°C',tempPct:37,foglie:'3–4g / 100ml',risciacquo:'no',materiale:'Gaiwan o Yixing Duanni',
+   infusioni:[{n:1,t:40},{n:2,t:50},{n:3,t:60},{n:4,t:75},{n:5,t:90},{n:6,t:120},{n:7,t:180}],
+   note:'Le foglie poco lavorate sono delicate. Acqua troppo calda crea astringenza immediata. Tempi generosi — il bianco non ha fretta.'},
+  {it:'Tè Verde',emoji:'🟢',cls:'tp-verde',temp:'70–80°C',tempPct:25,foglie:'3–4g / 100ml',risciacquo:'no',materiale:'Gaiwan in porcellana bianca o vetro',
+   infusioni:[{n:1,t:25},{n:2,t:30},{n:3,t:40},{n:4,t:55},{n:5,t:75},{n:6,t:120}],
+   note:'La tipologia più sensibile alla temperatura. Sopra 85°C diventa amaro irreversibilmente. Prima infusione brevissima.'},
+  {it:'Tè Giallo',emoji:'🟡',cls:'tp-giallo',temp:'75–82°C',tempPct:32,foglie:'3–4g / 100ml',risciacquo:'no',materiale:'Gaiwan in porcellana bianca',
+   infusioni:[{n:1,t:35},{n:2,t:45},{n:3,t:55},{n:4,t:70},{n:5,t:90}],
+   note:'Simile al verde ma più robusto — il processo di "smoldering" (men huan) lo ha ammorbidito. Profilo morbido e dolce.'},
+  {it:'Oolong leggero',emoji:'🟠',cls:'tp-oolong-l',temp:'85–90°C',tempPct:58,foglie:'6–8g / 100ml',risciacquo:'sì (5 sec)',materiale:'Gaiwan o Yixing Duanni/Zini',
+   infusioni:[{n:1,t:20},{n:2,t:25},{n:3,t:30},{n:4,t:40},{n:5,t:55},{n:6,t:70},{n:7,t:90},{n:8,t:120}],
+   note:'Tie Guan Yin, Baozhong, high-mountain Taiwan: ossidazione 15–30%. Alta quantità di foglie, tempi brevi. La complessità emerge dalla 3ª infusione in poi.'},
+  {it:'Oolong tostato',emoji:'🟤',cls:'tp-oolong-t',temp:'90–95°C',tempPct:72,foglie:'6–8g / 100ml',risciacquo:'sì (5 sec)',materiale:'Yixing Zini o Zhuni',
+   infusioni:[{n:1,t:30},{n:2,t:35},{n:3,t:45},{n:4,t:55},{n:5,t:70},{n:6,t:90},{n:7,t:120},{n:8,t:180}],
+   note:'Wuyi Yancha, Dong Ding tostato, Dan Cong: temperatura alta per sciogliere i composti torrefatti. Il risciacquo è fondamentale.'},
+  {it:'Tè Rosso',emoji:'🔴',cls:'tp-rosso',temp:'90–95°C',tempPct:72,foglie:'4–5g / 100ml',risciacquo:'opzionale',materiale:'Gaiwan o Yixing Zhuni',
+   infusioni:[{n:1,t:15},{n:2,t:20},{n:3,t:25},{n:4,t:35},{n:5,t:50},{n:6,t:70},{n:7,t:100}],
+   note:'Totalmente ossidato, resistente alla temperatura. Prima infusione brevissima: esce subito molto. Keemun e Dian Hong hanno profili fragili.'},
+  {it:"Pu'er Crudo giovane",emoji:'🟢',cls:'tp-sheng-j',temp:'85–90°C',tempPct:62,foglie:'6–8g / 100ml',risciacquo:'sì (5–8 sec)',materiale:'Gaiwan o Yixing Zini',
+   infusioni:[{n:1,t:15},{n:2,t:20},{n:3,t:25},{n:4,t:30},{n:5,t:40},{n:6,t:55},{n:7,t:70},{n:8,t:90},{n:9,t:120},{n:10,t:180}],
+   note:'I Sheng giovani possono essere intensamente amari — temperatura più bassa e tempi brevi aiutano. La potenza è parte del carattere.'},
+  {it:"Pu'er Crudo invecchiato",emoji:'🟤',cls:'tp-sheng-i',temp:'95–100°C',tempPct:88,foglie:'6–8g / 100ml',risciacquo:'sì (8–10 sec)',materiale:'Yixing Zini dedicata, pre-riscaldata',
+   infusioni:[{n:1,t:20},{n:2,t:25},{n:3,t:30},{n:4,t:35},{n:5,t:45},{n:6,t:60},{n:7,t:80},{n:8,t:100},{n:9,t:130},{n:10,t:180},{n:11,t:240},{n:12,t:300}],
+   note:'Tra le esperienze più complesse del tè. Richiedono acqua bollente per sbloccare i composti sviluppati nell\'invecchiamento. Pazienza: le prime infusioni sono un preludio.'},
+  {it:"Pu'er Cotto",emoji:'🟫',cls:'tp-shu',temp:'95–100°C',tempPct:92,foglie:'6–8g / 100ml',risciacquo:'sì (2× da 5 sec)',materiale:'Yixing Zini dedicata (non usarla per altro)',
+   infusioni:[{n:1,t:20},{n:2,t:25},{n:3,t:30},{n:4,t:40},{n:5,t:55},{n:6,t:70},{n:7,t:90},{n:8,t:120},{n:9,t:180}],
+   note:'Il doppio risciacquo è importante: la fermentazione accelerata lascia odori nelle foglie nuove che si dissolvono solo con acqua bollente ripetuta.'},
+  {it:'Tè Nero / Dark Tea',emoji:'⬛',cls:'tp-nero',temp:'95–100°C',tempPct:92,foglie:'5–7g / 100ml',risciacquo:'sì (5 sec)',materiale:'Gaiwan o teiera robusta',
+   infusioni:[{n:1,t:25},{n:2,t:30},{n:3,t:40},{n:4,t:55},{n:5,t:70},{n:6,t:90},{n:7,t:120},{n:8,t:180}],
+   note:'Fu Brick, Liu Bao, Anhua Dark Tea: fermentazione microbica prolungata. Temperature alte obbligatorie per sciogliere i composti compressi.'},
+];
+
+function renderTools(){
+  const g=document.getElementById('tools-grid');
+  TOOLS.forEach(t=>{
+    const d=document.createElement('div');
+    d.className='tool-card';
+    d.innerHTML=`<span class="tool-glyph">${t.glyph}</span><div class="tool-it">${t.it}</div><div class="tool-zh">${t.zh} · ${t.pinyin}</div><div class="tool-desc">${t.sub}</div>`;
+    d.addEventListener('click',()=>openToolModal(t));
+    g.appendChild(d);
+  });
+}
+
+function renderRitual(){
+  const g=document.getElementById('ritual-steps');
+  STEPS.forEach(s=>{
+    const d=document.createElement('div');
+    d.className='step-row';
+    d.innerHTML=`
+      <div class="step-num-col"><div class="step-num">${s.num}</div></div>
+      <div class="step-body">
+        <div class="step-header">
+          <span class="step-it">${s.it}</span>
+          <span class="step-zh">${s.zh}</span>
+          <span class="step-pinyin">${s.pinyin}</span>
+        </div>
+        <div class="step-text">${s.text}</div>
+        <div class="step-tags">${s.tags.map(t=>`<span class="stag">${t}</span>`).join('')}</div>
+        ${s.tip?`<div class="step-tip">${s.tip}</div>`:''}
+      </div>`;
+    g.appendChild(d);
+  });
+}
+
+function renderParams(){
+  TEA_PARAMS.forEach((p,i)=>{
+    const d=document.createElement('div');
+    d.className=`tp-card ${p.cls}`;
+    d.innerHTML=`
+      <span class="tp-emoji">${p.emoji}</span>
+      <div class="tp-it">${p.it}</div>
+      <span class="tp-temp">${p.temp}</span>
+      <div class="tp-row"><span class="tp-lbl">Foglie</span><span class="tp-val">${p.foglie}</span></div>
+      <div class="tp-row"><span class="tp-lbl">Risciacquo</span><span class="tp-val">${p.risciacquo}</span></div>
+      <div class="tp-row"><span class="tp-lbl">Infusioni</span><span class="tp-val">${p.infusioni.length}+</span></div>`;
+    d.addEventListener('click',()=>openParamsModal(p));
+    document.getElementById(i<5?'params-row1':'params-row2').appendChild(d);
+  });
+}
+
+function openToolModal(t){
+  const sects=t.sections.map((s,i)=>`${i>0?'<div class="m-div"></div>':''}<div class="m-sec"><h4>${s.t}</h4><p>${s.p}</p>${s.note?`<div class="m-note"><p>${s.note}</p></div>`:''}</div>`).join('');
+  document.getElementById('modal-content').innerHTML=`
+    <div class="m-top"><div class="m-glyph">${t.glyph}</div><div class="m-title">${t.it}</div><div class="m-zh">${t.zh}</div><div class="m-pinyin">${t.pinyin}</div></div>
+    <div class="m-body">
+      <div class="m-sec"><h4>In sintesi</h4><p>${t.desc}</p><div class="m-tags">${t.tags.map(x=>`<span class="m-tag">${x}</span>`).join('')}</div></div>
+      <div class="m-div"></div>${sects}
+    </div>`;
+  openModal();
+}
+
+function fmtTime(t){
+  if(t<60) return t+'s';
+  const m=Math.floor(t/60), s=t%60;
+  return m+'\''+( s?String(s).padStart(2,'0')+'\'\'':'');
+}
+
+function openParamsModal(p){
+  const bubbles=p.infusioni.map((inf,i)=>`<div class="inf-bubble${i<3?' hl':''}"><span class="inf-n">${inf.n}ª</span><span class="inf-t">${fmtTime(inf.t)}</span></div>`).join('');
+  document.getElementById('modal-content').innerHTML=`
+    <div class="m-top"><div style="font-size:32px;margin-bottom:6px">${p.emoji}</div><div class="m-title" style="color:var(--gold-l)">${p.it}</div></div>
+    <div class="m-body">
+      <div class="tp-modal-params">
+        <div class="tp-param"><div class="tp-param-lbl">Temperatura</div><div class="tp-param-val">${p.temp}</div>
+          <div class="temp-bar"><div class="temp-indicator" style="left:${p.tempPct}%"></div></div>
+          <div class="tp-param-sub">60°C ──────────── 100°C</div></div>
+        <div class="tp-param"><div class="tp-param-lbl">Quantità foglie</div><div class="tp-param-val">${p.foglie}</div><div class="tp-param-sub">stile Gong Fu · 100ml</div></div>
+        <div class="tp-param"><div class="tp-param-lbl">Risciacquo iniziale</div><div class="tp-param-val">${p.risciacquo}</div><div class="tp-param-sub">醒茶 xǐng chá</div></div>
+        <div class="tp-param"><div class="tp-param-lbl">Strumento ideale</div><div class="tp-param-val" style="font-size:14px;line-height:1.3">${p.materiale}</div></div>
+      </div>
+      <div class="m-sec"><h4>Sequenza delle infusioni</h4><div class="infusion-row">${bubbles}</div>
+        <p style="font-size:10px;color:var(--cream-d);opacity:.38;margin-top:6px;font-style:italic;font-family:'Cormorant Garamond',serif">I tempi in evidenza (prima–terza infusione) sono orientativi — assaggia e aggiusta.</p>
+      </div>
+      <div class="m-div"></div>
+      <div class="m-sec"><h4>Note</h4><p>${p.note}</p></div>
+    </div>`;
+  openModal();
+}
+
+function openModal(){document.getElementById('modal-bg').classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal-bg').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('modal-close').addEventListener('click',closeModal);
+document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+renderTools();
+renderRitual();
+renderParams();
+</script>
+</body>
+</html>

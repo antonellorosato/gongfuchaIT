@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Pianta del Tè — Camellia sinensis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a1a10;--mid:#162a1c;--light:#234a2a;
+  --gold:#c9a84c;--gold-l:#e8cd8a;--gold-p:#f5ecd4;
+  --cream:#faf6ee;--cream-d:#ede4d0;--text:#e8dfc8;
+  --sin:#4a9a8a;--sin-l:#7acaba;
+  --ass:#c8743a;--ass-l:#e8a46a;
+}
+body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 8%,rgba(35,74,42,.28) 0%,transparent 50%),radial-gradient(ellipse at 85% 85%,rgba(20,55,30,.22) 0%,transparent 50%);pointer-events:none;z-index:0}
+.poster{max-width:1160px;margin:0 auto;padding:52px 44px;position:relative;z-index:1}
+.border-frame{position:absolute;inset:16px;border:1px solid rgba(201,168,76,.16);pointer-events:none}
+.border-frame::before{content:'';position:absolute;inset:6px;border:1px solid rgba(201,168,76,.07)}
+.corner{position:absolute;width:28px;height:28px;border-color:var(--gold);border-style:solid;opacity:.5}
+.corner-tl{top:16px;left:16px;border-width:2px 0 0 2px}
+.corner-tr{top:16px;right:16px;border-width:2px 2px 0 0}
+.corner-bl{bottom:16px;left:16px;border-width:0 0 2px 2px}
+.corner-br{bottom:16px;right:16px;border-width:0 2px 2px 0}
+
+.header{text-align:center;margin-bottom:58px}
+.eyebrow{font-size:10px;letter-spacing:6px;text-transform:uppercase;color:var(--gold);opacity:.72;margin-bottom:14px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5vw,66px);line-height:1.05;margin-bottom:4px}
+h1 em{font-style:italic;color:var(--gold-l)}
+.subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--gold-p);opacity:.58;margin-top:8px}
+.nav-hint{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.35;margin-top:16px}
+.divider{display:flex;align-items:center;gap:12px;margin:20px auto 0;max-width:360px;justify-content:center}
+.dl{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold));opacity:.32}
+.dr{flex:1;height:1px;background:linear-gradient(to left,transparent,var(--gold));opacity:.32}
+.dd{width:6px;height:6px;background:var(--gold);transform:rotate(45deg);opacity:.55}
+
+.sec{margin-bottom:64px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:14px;opacity:.8}
+.sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(201,168,76,.28),transparent)}
+.sec-intro{font-size:11.5px;color:var(--cream-d);opacity:.5;margin-bottom:28px;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.65;max-width:720px}
+
+/* ─── PIANTA ─── */
+.pianta-grid{display:grid;grid-template-columns:1fr 72px 1fr}
+.pianta-col{background:var(--mid);padding:28px 26px}
+.pianta-col.sin{border:1px solid rgba(74,154,138,.22);border-right:none}
+.pianta-col.ass{border:1px solid rgba(200,116,58,.22);border-left:none}
+.pianta-center{background:var(--mid);border-top:1px solid rgba(201,168,76,.07);border-bottom:1px solid rgba(201,168,76,.07);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:10px 0}
+.pianta-vs{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:var(--gold);opacity:.5;writing-mode:vertical-rl;letter-spacing:4px}
+.pcline{flex:1;width:1px;background:linear-gradient(to bottom,transparent,rgba(201,168,76,.18),transparent)}
+.pianta-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.pianta-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.sin .pianta-icon{background:rgba(74,154,138,.15);border:1px solid rgba(74,154,138,.35)}
+.ass .pianta-icon{background:rgba(200,116,58,.15);border:1px solid rgba(200,116,58,.35)}
+.pianta-name{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;line-height:1.1}
+.sin .pianta-name{color:var(--sin-l)}
+.ass .pianta-name{color:var(--ass-l)}
+.pianta-latin{font-family:'Cormorant Garamond',serif;font-size:12px;font-style:italic;opacity:.42;color:var(--cream-d)}
+.pc{margin-bottom:9px;font-size:11.5px;line-height:1.58;color:var(--text);opacity:.84}
+.pc strong{display:block;font-size:9px;letter-spacing:1.8px;text-transform:uppercase;color:var(--gold);opacity:.48;font-weight:400;margin-bottom:1px}
+.bars{margin-top:18px}
+.bars-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.35;margin-bottom:8px}
+.bar-row{margin-bottom:7px}
+.brl{display:flex;justify-content:space-between;margin-bottom:3px}
+.brl span:first-child{font-size:10px;color:var(--cream-d);opacity:.62}
+.brl span:last-child{font-size:10px;color:var(--gold);opacity:.5}
+.bar-track{height:3px;background:rgba(201,168,76,.08);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px}
+.pteas{margin-top:16px;padding-top:14px;border-top:1px solid rgba(201,168,76,.08)}
+.pteas-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:7px}
+.ptbs{display:flex;flex-wrap:wrap;gap:4px}
+.ptb{font-size:9.5px;padding:2px 8px;border:1px solid;font-family:'Cormorant Garamond',serif}
+.sin .ptb{border-color:rgba(74,154,138,.28);color:var(--sin-l);opacity:.82}
+.ass .ptb{border-color:rgba(200,116,58,.28);color:var(--ass-l);opacity:.82}
+.pianta-note{font-size:10px;color:var(--cream-d);opacity:.3;margin-top:10px;font-style:italic;font-family:'Cormorant Garamond',serif;text-align:center;line-height:1.5}
+
+/* ─── FACTORS ─── */
+.factors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.factor-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:24px 20px 20px;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .15s}
+.factor-card:hover{background:var(--light);transform:translateY(-2px)}
+.factor-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--gold));opacity:0;transition:opacity .2s}
+.factor-card:hover::before{opacity:.5}
+.factor-icon{font-size:28px;margin-bottom:10px;display:block}
+.factor-it{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--gold-l);margin-bottom:2px;line-height:1.2}
+.factor-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:10px}
+.factor-desc{font-size:11px;color:var(--text);line-height:1.6;opacity:.8}
+.factor-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:10px}
+.ftag{font-size:9px;padding:2px 6px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.13);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic}
+
+/* ─── MAP ─── */
+.map-wrap{border:1px solid rgba(201,168,76,.12);background:rgba(5,15,10,.6)}
+.map-top-bar{padding:16px 22px 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.map-zh-lbl{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--gold-p);opacity:.48}
+.map-legend{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.ml-item{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--cream-d);opacity:.55}
+.ml-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.map-svg-wrap{padding:8px 16px 10px}
+.map-svg-wrap svg{width:100%;display:block}
+.map-hint{text-align:center;padding:0 0 12px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.25}
+
+.rpin{cursor:pointer}
+.rpin .rpulse{transition:opacity .18s,r .18s}
+.rpin:hover .rpulse{opacity:.3}
+.rpin:hover .rdot{r:7}
+.rdot{transition:r .18s}
+
+/* ─── MODAL ─── */
+.modal-bg{position:fixed;inset:0;background:rgba(4,10,6,.92);backdrop-filter:blur(12px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
+.modal-bg.open{opacity:1;pointer-events:all}
+.modal{background:var(--mid);border:1px solid rgba(201,168,76,.2);max-width:800px;width:94%;max-height:90vh;overflow-y:auto;position:relative;animation:slideUp .28s ease}
+@keyframes slideUp{from{transform:translateY(18px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-close{position:absolute;top:15px;right:18px;font-size:17px;cursor:pointer;color:var(--gold);opacity:.42;z-index:2;transition:opacity .15s;line-height:1;background:none;border:none}
+.modal-close:hover{opacity:1}
+
+.fm-top{padding:30px 34px 0}
+.fm-icon{font-size:40px;margin-bottom:8px}
+.fm-title{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:500;color:var(--gold-l);margin-bottom:2px}
+.fm-sub{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.42;margin-bottom:14px}
+.fm-body{padding:18px 34px 34px}
+.fm-sec h4{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.45;margin-bottom:8px}
+.fm-sec p{font-size:13px;color:var(--text);line-height:1.72;opacity:.9}
+.fm-sec p em{color:var(--gold-l);font-style:italic}
+.fm-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}
+.fm-tag{font-size:11px;padding:4px 11px;background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.16);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic}
+.fm-div{height:1px;background:rgba(201,168,76,.09);margin:16px 0}
+.fm-eg{background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.28);padding:10px 14px;margin-top:10px}
+.fm-eg p{font-size:12px;color:var(--cream-d);line-height:1.6;opacity:.72;font-style:italic;font-family:'Cormorant Garamond',serif}
+
+.rm-top{padding:26px 30px 0}
+.rm-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;color:var(--gold-l);margin-bottom:2px}
+.rm-zh{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;opacity:.43;color:var(--cream-d);margin-bottom:10px}
+.rm-tag{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;margin-bottom:6px}
+.rm-tag.sin{background:rgba(74,154,138,.1);border:1px solid rgba(74,154,138,.28);color:var(--sin-l)}
+.rm-tag.ass{background:rgba(200,116,58,.1);border:1px solid rgba(200,116,58,.28);color:var(--ass-l)}
+.rm-tag.both{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.22);color:var(--gold-l)}
+.rm-body{padding:18px 30px 30px;display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.rm-sec h4{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.43;margin-bottom:7px}
+.rm-sec p{font-size:12.5px;color:var(--text);line-height:1.65;opacity:.88}
+.rm-sec p em{color:var(--gold-l);font-style:italic}
+.rm-tea{margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid rgba(201,168,76,.06)}
+.rm-tea:last-child{border-bottom:none}
+.rm-tea-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:500;color:var(--gold-l);margin-bottom:1px}
+.rm-tea-type{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:2px}
+.rm-tea-note{font-size:11px;color:var(--cream-d);opacity:.6;font-style:italic;font-family:'Cormorant Garamond',serif}
+.rm-div{height:1px;background:rgba(201,168,76,.08);margin:12px 0}
+
+.ym-wrap{padding:24px 28px 28px}
+.ym-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;color:var(--gold-l);margin-bottom:3px}
+.ym-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:14px}
+.ym-legend{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.ym-li{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--cream-d);opacity:.62}
+.ym-ld{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.ym-note{font-size:11.5px;color:var(--cream-d);opacity:.48;margin-top:12px;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.6}
+.ym-note em{color:var(--gold-l);font-style:italic;opacity:1}
+
+/* ─── PART NAV ─── */
+.part-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:40px;padding:0 2px}
+.nav-arrow{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--gold);opacity:.42;transition:opacity .22s;min-width:120px}
+.nav-arrow:hover{opacity:.9}
+.nav-arrow.nav-next{flex-direction:row-reverse}
+.nav-arrow.nav-next .nav-part{text-align:right}
+.nav-arr{font-size:28px;line-height:1;font-family:'Cormorant Garamond',serif;flex-shrink:0}
+.nav-part-num{font-size:8px;letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:2px;opacity:.7}
+.nav-part-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;display:block;line-height:1.2}
+.nav-center-label{font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.32}
+.nav-placeholder{min-width:120px}
+
+.footer{text-align:center;margin-top:44px;padding-top:22px;border-top:1px solid rgba(201,168,76,.08)}
+.footer p{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.3;line-height:1.8}
+.footer a{color:var(--gold);opacity:.55;text-decoration:none;transition:opacity .18s}
+.footer a:hover{opacity:1}
+
+@media(max-width:700px){
+  .factors-grid{grid-template-columns:1fr 1fr}
+  .pianta-grid{grid-template-columns:1fr}
+  .pianta-center{display:none}
+  .rm-body{grid-template-columns:1fr}
+  .poster{padding:28px 16px}
+  h1{font-size:clamp(30px,8vw,52px)}
+  .part-nav{margin-bottom:28px}
+  .nav-center-label{display:none}
+  .nav-part-title{font-size:12px}
+  .modal{width:96%;max-height:95vh}
+  .fm-top,.fm-body,.rm-top,.rm-body,.ym-wrap{padding-left:20px;padding-right:20px}
+  .map-top-bar{flex-direction:column;align-items:flex-start;gap:8px}
+}
+@media(max-width:420px){
+  .factors-grid{grid-template-columns:1fr}
+  .nav-part-title{display:none}
+  .nav-part-num{font-size:9px;letter-spacing:2px}
+}
+</style>
+</head>
+<body>
+<div class="poster">
+  <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+  <div class="border-frame"></div>
+
+  <header class="header">
+    <nav class="part-nav">
+      <div class="nav-placeholder"></div>
+      <a href="index.html" class="nav-center-label" style="text-decoration:none;pointer-events:all;opacity:.38;transition:opacity .2s" onmouseover="this.style.opacity=.8" onmouseout="this.style.opacity=.38">Guida al Tè Cinese</a>
+      <a href="tipi_di_te.html" class="nav-arrow nav-next" title="Parte II — Varietà di Tè">
+        <div class="nav-part">
+          <span class="nav-part-num">Parte II</span>
+          <span class="nav-part-title">Varietà di Tè</span>
+        </div>
+        <span class="nav-arr">→</span>
+      </a>
+    </nav>
+    <p class="eyebrow">Guida al Tè Cinese · Parte I</p>
+    <h1>La <em>Pianta</em> del Tè</h1>
+    <p class="subtitle">Camellia sinensis — genetica, terroir e cosa determina la foglia</p>
+    <div class="divider"><div class="dl"></div><div class="dd"></div><div class="dr"></div></div>
+    <p class="nav-hint">↓ clicca su ogni elemento per esplorare</p>
+  </header>
+
+  <section class="sec">
+    <h2 class="sec-title">I — Le due varietà principali</h2>
+    <p class="sec-intro">Tutte le foglie di tè provengono dalla stessa specie, <em>Camellia sinensis</em>. Ma due varietà dominano la produzione mondiale con caratteristiche morfologiche, chimiche e climatiche profondamente diverse. La genetica determina il punto di partenza — poi tutto il resto entra in gioco.</p>
+    <div class="pianta-grid">
+      <div class="pianta-col sin" id="pianta-sin"></div>
+      <div class="pianta-center"><div class="pcline"></div><div class="pianta-vs">vs</div><div class="pcline"></div></div>
+      <div class="pianta-col ass" id="pianta-ass"></div>
+    </div>
+    <p class="pianta-note">Esistono anche var. cambodiensis e numerosi ibridi naturali e cultivar selezionate (Tie Guan Yin, Da Ye, Jin Xuan, Qing Xin, Rougui…)</p>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-title">II — Cosa determina la foglia</h2>
+    <p class="sec-intro">Questi sono i fattori <em>naturali</em>: ciò che il campo costruisce nella foglia prima che l'uomo intervenga. Il processo di lavorazione è l'altro lato — i passaggi umani che estraggono e trasformano quello che la natura ha creato.</p>
+    <div class="factors-grid" id="factors-grid"></div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-title">III — Le Regioni del Tè in Cina</h2>
+    <p class="sec-intro">Clicca su ogni regione per terroir, cultivar e tè prodotti. Lo <strong style="color:var(--gold-l);font-weight:400">Yunnan</strong> ha uno zoom dedicato — la regione più antica e complessa del tè nel mondo.</p>
+    <div class="map-wrap">
+      <div class="map-top-bar">
+        <div class="map-zh-lbl">中国茶叶产区</div>
+        <div class="map-legend">
+          <div class="ml-item"><div class="ml-dot" style="background:var(--sin)"></div>var. sinensis</div>
+          <div class="ml-item"><div class="ml-dot" style="background:var(--ass)"></div>var. assamica</div>
+          <div class="ml-item"><div class="ml-dot" style="background:linear-gradient(135deg,var(--sin),var(--ass))"></div>entrambe</div>
+        </div>
+      </div>
+      <div class="map-svg-wrap" id="map-svg-wrap"></div>
+      <p class="map-hint">clicca sulle regioni per i dettagli · Yunnan: zoom disponibile</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <nav class="part-nav" style="margin-bottom:20px;margin-top:0">
+      <div class="nav-placeholder"></div>
+      <a href="index.html" class="nav-center-label" style="text-decoration:none;pointer-events:all;opacity:.38;transition:opacity .2s" onmouseover="this.style.opacity=.8" onmouseout="this.style.opacity=.38">Guida al Tè Cinese</a>
+      <a href="tipi_di_te.html" class="nav-arrow nav-next">
+        <div class="nav-part"><span class="nav-part-num">Parte II</span><span class="nav-part-title">Varietà di Tè</span></div>
+        <span class="nav-arr">→</span>
+      </a>
+    </nav>
+    <p>Guida al Tè Cinese &middot; a cura di <a href="https://github.com/antonellorosato/gongfuchaIT" target="_blank">Antonello Rosato</a> &middot; <a href="https://github.com/antonellorosato/gongfuchaIT" target="_blank">github.com/antonellorosato/gongfuchaIT</a></p>
+  </footer>
+</div>
+
+<div class="modal-bg" id="modal-bg">
+  <div class="modal" id="modal-inner">
+    <button class="modal-close" id="modal-close">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+const VARIETIES={
+  sin:{icon:'🌿',name:'var. sinensis',latin:'Camellia sinensis var. sinensis',barColor:'#4a9a8a',
+    chars:[
+      {k:'Foglia',v:'Piccola e spessa (3–8 cm), coriacea, bordi dentati fini, verde scuro intenso.'},
+      {k:'Portamento',v:'Cespuglio basso (1–3 m), fusto multiplo. Si presta alla potatura continua per facilitare la raccolta.'},
+      {k:'Clima',v:'Resistente al freddo fino a −15°C. Predilige zone montuose temperate con stagioni marcate.'},
+      {k:'Crescita',v:'Lenta. 3–4 raccolti/anno. La stagionalità crea le differenze tra first flush, second flush e autunno.'},
+      {k:'Profilo chimico',v:'Alta L-teanina, note floreali e fruttate complesse, catechine fini e armoniche.'},
+      {k:'Longevità',v:'Fino a 500–1000 anni. Gli alberi antichi Gushu dello Yunnan sono da seme, non clonali.'},
+    ],
+    bars:[{l:'Complessità aromatica',v:88},{l:'Tannini / astringenza',v:42},{l:'Resistenza al freddo',v:90},{l:'Resa produttiva',v:50}],
+    teas:["Tè Bianco","Tè Verde","Tè Giallo","Oolong","Tè Rosso CN","Pu'er Gushu"]
+  },
+  ass:{icon:'🍃',name:'var. assamica',latin:'Camellia sinensis var. assamica',barColor:'#c8743a',
+    chars:[
+      {k:'Foglia',v:'Grande e morbida (10–20 cm), brillante, nervature pronunciate, verde più chiaro.'},
+      {k:'Portamento',v:'Albero alto fino a 15 m allo stato selvatico, fusto singolo, chioma ampia.'},
+      {k:'Clima',v:'Tropicale e sub-tropicale. Sensibile alle gelate, richiede alta umidità e calore stabile.'},
+      {k:'Crescita',v:'Rapida. Fino a 5–6 raccolti/anno nei tropici. Alta resa ma profilo più semplice.'},
+      {k:'Profilo chimico',v:'Alta concentrazione di polifenoli e tannini, theaflavine abbondanti. Profilo bold e robusto.'},
+      {k:'Longevità',v:'Alberi pluricentenari noti in Yunnan meridionale, Myanmar, Laos — zona di origine della specie.'},
+    ],
+    bars:[{l:'Complessità aromatica',v:55},{l:'Tannini / astringenza',v:82},{l:'Resistenza al freddo',v:17},{l:'Resa produttiva',v:84}],
+    teas:["Tè Rosso Assam","Dian Hong","Pu'er industriale","Ceylon","Darjeeling (ibrido)"]
+  }
+};
+
+const FACTORS=[
+  {icon:'🧬',it:'Genetica & Cultivar',sub:'La mappa chimica della pianta',accent:'#7ab87a',
+   desc:'Ogni cultivar è un progetto chimico diverso: determina il rapporto tra L-teanina, caffeina, catechine e oli aromatici prima ancora che il seme tocchi terra.',
+   tags:['Sinensis vs Assamica','Cultivar clonale vs da seme','Ibridi naturali','Selezione umana'],
+   sections:[
+     {t:'Come la genetica plasma il sapore',p:'La genetica determina il <em>blueprint chimico</em> della foglia: quante catechine, quanta L-teanina, quali terpeni. Tie Guan Yin produce naturalmente note lattiginose; Da Ye tannini audaci; Qing Xin di Taiwan oolong di straordinaria finezza floreale. Due cultivar diverse, stesso campo, stessa lavorazione — tè radicalmente diversi in tazza.'},
+     {t:'Clonale vs pianta da seme',p:'Le piantagioni <em>clonali</em> offrono uniformità — essenziale per la produzione industriale. Le piante <em>da seme</em> (jicai) mostrano variabilità genetica: ogni pianta è leggermente diversa. Nel Pu\'er e nei tè di terroir questa variabilità è un valore. I tè da antichi alberi a seme sono tra i più ricercati e costosi al mondo.',eg:'Un Pu\'er Gushu da seme di 500 anni dello stesso villaggio di un Taidi clonale può costare 50–100 volte di più.'},
+     {t:'Cultivar notevoli',p:'<em>Tie Guan Yin</em>: lattiginoso, orchidea · <em>Jin Xuan</em>: burrosa per natura · <em>Da Hong Pao</em>: cultivar rocciosa Wuyi · <em>Long Jing 43</em>: selezionata per la precocità primaverile · <em>Da Ye</em>: foglia grande yunnanese, base del Pu\'er industriale · <em>Ruby #18</em> Taiwan: note di menta e cannella geneticamente proprie'},
+   ]},
+  {icon:'🌱',it:'Età della Pianta',sub:'Radici profonde, sapori profondi',accent:'#c0d060',
+   desc:"Una pianta giovane raggiunge strati superficiali. Una centenaria affonda le radici fino a 10–30 m, attingendo a minerali irraggiungibili dalle piantagioni moderne.",
+   tags:['Gushu 古树','Taidi vs foresta','Radici profonde','Huigan 回甘'],
+   sections:[
+     {t:'Taidi vs Gushu',p:'<em>Taidi</em> (台地): piantagioni moderne ad alta densità, potate basse, alta resa ma profilo semplice. <em>Gushu</em> (古树, "albero antico"): piante con più di 100 anni — spesso 300–1000+ — che crescono come alberi nel sottobosco yunnanese. La differenza non è solo di età: è di relazione con l\'ecosistema.'},
+     {t:'Perché l\'età cambia il sapore',p:'Radici profonde accedono a <em>strati mineralici ricchi</em> irraggiungibili. Il metabolismo rallentato concentra gli aromi. Il risultato è complessità irriproducibile: umami profondo, dolcezza persistente in gola (<em>huigan</em>), mineralità distintiva. Caratteristiche che nessuna tecnica di lavorazione può simulare.',eg:'Lo stesso villaggio, stessa lavorazione: un Gushu centenario e un Taidi trentennale sono riconoscibilmente diversi da un tea master in 30 secondi.'},
+     {t:'Il mercato del Gushu',p:'I Pu\'er da villaggi come <em>Lao Banzhang</em> (老班章) o <em>Bing Dao</em> (冰岛) raggiungono prezzi da Grand Cru. La scarsità — un albero antico produce pochissimo — e la qualità irriproducibile sono il motore di un mercato da centinaia di milioni di yuan.'},
+   ]},
+  {icon:'🌍',it:'Terreno & Suolo',sub:'La firma minerale della terra',accent:'#c9a84c',
+   desc:'Il tè prospera in suoli acidi, ben drenati, ricchi di materia organica. Ma sono i minerali specifici — granito, scisto, calcare — a dare la vera impronta territoriale.',
+   tags:['pH 4.5–6.0','Granito / Scisto','Yan yun 岩韵','Drenaggio','Humus forestale'],
+   sections:[
+     {t:'Condizioni ottimali',p:'pH <em>4.5–6.0</em> (acido), ottimo drenaggio (nessun ristagno), ricchezza organica, suoli profondi. Paradossalmente, suoli troppo fertili producono crescita rapida ma tè privi di carattere.'},
+     {t:'Yan Yun 岩韵 — la risonanza della roccia',p:'Il concetto wuyi di <em>yan yun</em> (岩韵) descrive la mineralità caratteristica dei tè cresciuti sulle rocce vulcaniche del Wuyi Shan. Scisto rosso danxia e granito alterato: ferro, zinco, manganese si trasferiscono nella foglia come profondità pietrosa, quasi salina, persistente in gola.',eg:'Rougui e Shuixian: stessa cultivar, rocce diverse del Wuyi Shan. Due tè riconoscibilmente diversi — il suolo parla.'},
+     {t:'Suolo per suolo',p:'<em>Argilla rossa Fujian</em>: oolong leggeri e floreali · <em>Suoli vulcanici Taiwan</em>: mineralità pulita negli high-mountain · <em>Calcare Yunnan</em>: contribuisce alla dolcezza del Pu\'er · <em>Humus di foresta</em>: complessità organica unica degli alberi antichi'},
+   ]},
+  {icon:'🌤️',it:'Clima & Altitudine',sub:'La lentezza come lusso',accent:'#7acaba',
+   desc:'Ad alta quota il freddo rallenta la crescita. La pianta impiega di più, ma concentra. Nebbia, escursione termica, UV: ogni fattore lascia la sua impronta chimica nella foglia.',
+   tags:['Alta montagna 高山','Nebbia & UV diffusa','Escursione termica','L-teanina vs catechine','Stagionalità'],
+   sections:[
+     {t:'Altitudine e concentrazione',p:'Oltre i 1000m (1600–2600m per i high-mountain di Taiwan e Yunnan), la crescita rallenta. La pianta accumula <em>L-teanina</em> invece di convertirla in catechine amare. Il freddo notturno preserva i precursori aromatici. Meno volume, più intensità e dolcezza.',eg:'Il Longjing Mingqian contiene fino al 40% di L-teanina in più rispetto a un raccolto estivo della stessa piantagione.'},
+     {t:'La nebbia come ingrediente',p:'La nebbia persistente di Ali Shan, Li Shan, Huang Shan <em>diffonde la luce solare</em>. La pianta risponde riducendo i polifenoli difensivi e aumentando gli aminoacidi. Risultato: meno astringenza, più dolcezza, texture quasi setosa in tazza.'},
+     {t:'Stagionalità',p:'<em>Prima raccolta primaverile — Mingqian</em> (pre-Qingming): gemme ricchissime di L-teanina dopo il riposo invernale, la più pregiata. <em>Estate</em>: crescita rapida, più catechine, più astringenza. <em>Autunno</em>: temperature fresche, spesso la seconda raccolta di qualità.'},
+   ]},
+  {icon:'⚡',it:'Stress Ambientale',sub:'La difesa che diventa aroma',accent:'#e8a46a',
+   desc:'Una pianta sotto stress attiva meccanismi di difesa che producono composti straordinari. Il caso più celebre: i morsi di un insetto trasformano una foglia danneggiata nel più floreale degli oolong.',
+   tags:['ECBF — cicalina verde','Siccità','Freddo','Oriental Beauty','Difesa terpenica'],
+   sections:[
+     {t:'Il paradosso dello stress',p:'Lo stress attiva la produzione di <em>metaboliti secondari</em> — composti difensivi che coincidono con i responsabili degli aromi più complessi: terpeni, flavonoidi, carotenoidi. Una pianta "troppo comoda" produce foglie grasse ma aromaticamente piatte.'},
+     {t:'Il caso dell\'Oriental Beauty',p:'Il <em>Dongfang Meiren</em> (東方美人) nasce dai morsi della cicalina verde <em>Empoasca onukii</em>. La pianta risponde producendo <em>linalolo, geraniolo e altri terpeni</em> floreali come segnale di difesa. Queste molecole creano l\'aroma di miele, orchidea e pesca. Senza l\'insetto, il tè non esiste.',eg:'In alcune piantagioni di Oriental Beauty le foglie vengono lasciate intenzionalmente agli insetti nelle settimane prima della raccolta estiva — un danneggiamento controllato e desiderato.'},
+     {t:'Altri stress produttivi',p:'<em>Siccità controllata</em>: concentra zuccheri e aromi · <em>Freddo invernale</em>: prepara la dolcezza primaverile · <em>Alta UV ad alta quota</em>: aumenta polifenoli e complessità · <em>Potatura</em>: stimola gemme giovani ricche di aminoacidi'},
+   ]},
+  {icon:'🌿',it:'Ecosistema & Coltivazioni',sub:'Il vicinato che si sente in tazza',accent:'#9ab87a',
+   desc:'Il tè non cresce nel vuoto. Alberi da ombra, piante aromatiche vicine, funghi del suolo e pratiche agricole trasmettono carattere alle foglie in modi che la chimica moderna sta ancora esplorando.',
+   tags:['Policoltura vs monocultura','Alberi da ombra','Osmanto / agrumi','Micorrize','Biologico'],
+   sections:[
+     {t:'Foresta vs piantagione',p:'Il Pu\'er da alberi antichi cresce in <em>agroforeste miste</em>: tea tree con banani, fruttiferi, erbe selvatiche. Radici intrecciate, micorrize condivise, lettiera organica ricca. Una complessità del suolo irriproducibile in piantagione monoculturale.'},
+     {t:'Trasferimento aromatico',p:'È documentato che piante coltivate vicino a <em>osmanto, gelsomino, orchidee, agrumi</em> mostrano note aromatiche correlate — attraverso il suolo (metaboliti radicali), l\'aria (terpeni volatili) e gli insetti impollinatori.',eg:"Un Gushu yunnanese che cresce all'ombra di un albero da frutto può mostrare note fruttate irrintracciabili nella sua genetica."},
+     {t:'Ombreggiatura e intensità',p:'L\'<em>ombreggiatura</em> (gyokuro japonais): riduce UV, aumenta clorofilla e L-teanina, crea dolcezza e umami estremi. La <em>monocultura intensiva</em>: alta resa, profilo semplice e omogeneo. Complessità e intensità produttiva sono inversamente proporzionali.'},
+   ]},
+];
+
+const REGIONS=[
+  {id:'yunnan',it:'Yunnan',zh:'云南',variety:'both',x:270,y:430,ldx:12,ldy:-5,
+   terroir:"Altitudini 1200–2500m. Clima subtropicale con stagione secca (ott–apr) e umida (mag–set). Foreste miste, suoli acidi su substrato calcareo. La regione di origine evolutiva della specie.",
+   cultivar:"Da Ye 大叶 (assamica) nelle pianure. Var. sinensis e Gushu antichi 100–1000+ anni nelle zone montane. Oltre 100 cultivar locali non catalogate.",
+   yunnanZoom:true,
+   teas:[
+     {name:"Pu'er Crudo (Sheng)",type:"Tè Nero",note:"Lao Banzhang, Bing Dao, Jingmai — alberi antichi Gushu"},
+     {name:"Pu'er Cotto (Shu)",type:"Tè Nero",note:"Menghai, Kunming — fermentazione Wò Duī"},
+     {name:'Dian Hong',type:'Tè Rosso',note:'Foglie dorate, miele e malto — assamica'},
+     {name:'Moonlight White',type:'Tè Bianco',note:"Gemme argentate yunnanese, appassimento notturno"},
+   ]},
+  {id:'fujian',it:'Fujian',zh:'福建',variety:'sin',x:572,y:388,ldx:10,ldy:-6,
+   terroir:"Costa sud-orientale. Clima umido, inverni miti. Wuyi Shan: rocce vulcaniche rosse (danxia), torrenti e canyon — il terroir più celebre per gli oolong.",
+   cultivar:"Tie Guan Yin, Shuixian, Rougui, Da Hong Pao, Fuding Da Bai, Zhenghe Da Bai",
+   teas:[
+     {name:'Tie Guan Yin',type:'Oolong',note:'Anxi — floreale, lattiginoso, orchidea'},
+     {name:'Wuyi Yancha (Rock Oolong)',type:'Oolong',note:'Da Hong Pao, Rougui, Shuixian — yan yun, tostato'},
+     {name:'Silver Needle / White Peony',type:'Tè Bianco',note:'Fuding e Zhenghe — i classici mondiali del tè bianco'},
+     {name:'Lapsang Souchong',type:'Tè Rosso',note:"Zhengshan — affumicato al pino, il più antico tè rosso"},
+   ]},
+  {id:'zhejiang',it:'Zhejiang',zh:'浙江',variety:'sin',x:596,y:328,ldx:10,ldy:-6,
+   terroir:"Hangzhou e dintorni. Colline calcaree intorno al Lago Ovest, nebbia primaverile costante, inverni freddi. Clima ideale per tè verdi di eccellenza.",
+   cultivar:"Long Jing 43, Qun Ti Zhong (seme misto), Wu Niu Zao",
+   teas:[
+     {name:'Long Jing (Drago che vola)',type:'Tè Verde',note:'Hangzhou — piatto, tostato, dolce, castagna'},
+     {name:'Anji Bai Cha',type:'Tè Verde',note:'Foglie albine da mutazione — altissima L-teanina'},
+     {name:'Bi Luo Chun',type:'Tè Verde',note:'Spirali pelose, fruttato e floreale'},
+   ]},
+  {id:'anhui',it:'Anhui',zh:'安徽',variety:'sin',x:545,y:302,ldx:-72,ldy:-6,
+   terroir:"Huang Shan (Montagna Gialla): granito, nebbia perenne a 1000–1800m, foreste di pini. Clima continentale con inverni freddi. Suoli acidi ricchi di humus.",
+   cultivar:"Huang Shan Mao Feng, Liu An Gua Pian, Keemun (Qimen)",
+   teas:[
+     {name:'Huangshan Maofeng',type:'Tè Verde',note:'Gemme vellose, floreale e dolce'},
+     {name:'Keemun (Qimen Hong Cha)',type:'Tè Rosso',note:'Orchidea e vino rosso — il più aromatico dei rossi cinesi'},
+     {name:'Liu An Gua Pian',type:'Tè Verde',note:'Solo foglia media, senza gemma — strutturato'},
+   ]},
+  {id:'hunan',it:'Hunan',zh:'湖南',variety:'sin',x:468,y:368,ldx:-72,ldy:-5,
+   terroir:"Entroterra centrale. Jun Shan: isola nel lago Dongting con microclima unico. Anhua: zone montuose per il dark tea. Estati torride, alta umidità.",
+   cultivar:"Cultivar Jun Shan, varietà Anhua per dark tea",
+   teas:[
+     {name:'Jun Shan Yin Zhen',type:'Tè Giallo',note:"Isola Jun Shan — il tè giallo più pregiato, rarissimo"},
+     {name:"Fu Brick / Anhua Dark Tea",type:'Tè Nero',note:"Mattoni pressati con 'fiori d'oro' (Eurotium cristatum)"},
+   ]},
+  {id:'sichuan',it:'Sichuan',zh:'四川',variety:'sin',x:344,y:292,ldx:10,ldy:-5,
+   terroir:"Bacino del Sichuan e montagne: Emei Shan 3099m, Meng Ding Shan. Nebbia quasi permanente, temperature miti. Uno dei territori del tè più antichi documentati.",
+   cultivar:"Meng Ding cultivar storiche, varietà locali di montagna",
+   teas:[
+     {name:'Meng Ding Gan Lu',type:'Tè Verde',note:'Documentato fin dal VII secolo'},
+     {name:'Meng Ding Huang Ya',type:'Tè Giallo',note:'Il tè giallo imperiale storico'},
+     {name:'Zhu Ye Qing',type:'Tè Verde',note:'Emei Shan — aghi piatti, fresco'},
+   ]},
+  {id:'guangdong',it:'Guangdong',zh:'广东',variety:'sin',x:490,y:432,ldx:10,ldy:-5,
+   terroir:"Phoenix Mountain (Fenghuang Shan): granito, 900–1500m, clima subtropicale umido. Chaozhou: microclima costiero con nebbia mattutina.",
+   cultivar:"Dan Cong cultivar (80+ varietà riconosciute): Ya Shi Xiang, Mi Lan Xiang, Huang Zhi Xiang",
+   teas:[
+     {name:'Fenghuang Dan Cong',type:'Oolong',note:'Singolo ceppo, aromi estremi per cultivar'},
+     {name:'Mi Lan Xiang',type:'Oolong',note:'Miele e orchidea — il Dan Cong più diffuso'},
+     {name:'Liu Bao',type:'Tè Nero',note:'Guangxi — dark tea in ceste di bambù'},
+   ]},
+  {id:'taiwan',it:'Taiwan',zh:'台灣',variety:'sin',x:638,y:416,ldx:-74,ldy:-8,
+   terroir:"Montagne centrali (2000–2600m): Li Shan, Ali Shan, Da Yu Ling. Nebbia continua, escursione termica 15–20°C giorno/notte. Suoli vulcanici acidi.",
+   cultivar:"Qing Xin, Jin Xuan, Si Ji Chun, Ruanzhi, Hong Yu (Ruby #18)",
+   teas:[
+     {name:'High Mountain Oolong (Gao Shan)',type:'Oolong',note:'Li Shan, Ali Shan — latte, fiori bianchi, cremoso'},
+     {name:'Dong Ding Oolong',type:'Oolong',note:'Ossidazione media, tostato morbido'},
+     {name:'Oriental Beauty (Dongfang Meiren)',type:'Oolong',note:'Xinzhu — ECBF, miele-orchidea-pesca'},
+     {name:'Baozhong (Pouchong)',type:'Oolong',note:'Wenshan — leggerissimo, quasi verde'},
+   ]},
+];
+
+// ══════════ RENDER PIANTA ══════════
+function renderPianta(){
+  ['sin','ass'].forEach(k=>{
+    const v=VARIETIES[k];
+    const el=document.getElementById(`pianta-${k}`);
+    el.innerHTML=`
+      <div class="pianta-head">
+        <div class="pianta-icon">${v.icon}</div>
+        <div><div class="pianta-name">${v.name}</div><div class="pianta-latin">${v.latin}</div></div>
+      </div>
+      ${v.chars.map(c=>`<div class="pc"><strong>${c.k}</strong>${c.v}</div>`).join('')}
+      <div class="bars">
+        <div class="bars-lbl">Confronto caratteristiche</div>
+        ${v.bars.map(b=>`<div class="bar-row">
+          <div class="brl"><span>${b.l}</span><span>${b.v}%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:${b.v}%;background:${v.barColor}"></div></div>
+        </div>`).join('')}
+      </div>
+      <div class="pteas">
+        <div class="pteas-lbl">Usata principalmente per</div>
+        <div class="ptbs">${v.teas.map(t=>`<span class="ptb">${t}</span>`).join('')}</div>
+      </div>`;
+  });
+}
+
+// ══════════ RENDER FACTORS ══════════
+function renderFactors(){
+  const g=document.getElementById('factors-grid');
+  FACTORS.forEach(f=>{
+    const d=document.createElement('div');
+    d.className='factor-card';
+    d.style.setProperty('--accent',f.accent);
+    d.innerHTML=`
+      <span class="factor-icon">${f.icon}</span>
+      <div class="factor-it">${f.it}</div>
+      <div class="factor-sub">${f.sub}</div>
+      <div class="factor-desc">${f.desc}</div>
+      <div class="factor-tags">${f.tags.map(t=>`<span class="ftag">${t}</span>`).join('')}</div>`;
+    d.addEventListener('click',()=>openFactorModal(f));
+    g.appendChild(d);
+  });
+}
+
+// ══════════ RENDER MAP ══════════
+function renderMap(){
+  const wrap=document.getElementById('map-svg-wrap');
+  const NS='http://www.w3.org/2000/svg';
+
+  // viewBox 900x580, lat 17–54°N, lon 72–136°E
+  function xy(lon,lat){return [(lon-72)/64*900,(54-lat)/37*580];}
+
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 900 580');
+  svg.setAttribute('xmlns',NS);
+
+  // Defs
+  const defs=document.createElementNS(NS,'defs');
+  defs.innerHTML=`
+    <filter id="pglow"><feGaussianBlur stdDeviation="2.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <linearGradient id="yunGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a9a8a"/><stop offset="100%" stop-color="#c8743a"/>
+    </linearGradient>`;
+  svg.appendChild(defs);
+
+  // Background
+  const bg=document.createElementNS(NS,'rect');
+  Object.entries({width:'900',height:'580',fill:'rgba(8,18,12,0.7)'}).forEach(([k,v])=>bg.setAttribute(k,v));
+  svg.appendChild(bg);
+
+  // Grid
+  const gg=document.createElementNS(NS,'g');
+  gg.setAttribute('stroke','rgba(201,168,76,0.05)');gg.setAttribute('stroke-width','1');
+  [20,25,30,35,40,45,50].forEach(lat=>{
+    const [,y]=xy(72,lat);
+    const l=document.createElementNS(NS,'line');
+    l.setAttribute('x1','0');l.setAttribute('x2','900');l.setAttribute('y1',y);l.setAttribute('y2',y);
+    gg.appendChild(l);
+    const t=document.createElementNS(NS,'text');
+    t.setAttribute('x','3');t.setAttribute('y',y-2);
+    t.setAttribute('font-family','Jost,sans-serif');t.setAttribute('font-size','7');t.setAttribute('fill','rgba(201,168,76,0.2)');
+    t.textContent=`${lat}°N`;gg.appendChild(t);
+  });
+  [80,90,100,110,120,130].forEach(lon=>{
+    const [x]=xy(lon,54);
+    const l=document.createElementNS(NS,'line');
+    l.setAttribute('x1',x);l.setAttribute('x2',x);l.setAttribute('y1','0');l.setAttribute('y2','580');
+    gg.appendChild(l);
+    const t=document.createElementNS(NS,'text');
+    t.setAttribute('x',x+2);t.setAttribute('y','10');
+    t.setAttribute('font-family','Jost,sans-serif');t.setAttribute('font-size','7');t.setAttribute('fill','rgba(201,168,76,0.2)');
+    t.textContent=`${lon}°E`;gg.appendChild(t);
+  });
+  svg.appendChild(gg);
+
+  // China outline — more accurate traced points
+  const border=[
+    [73,39],[76,38],[80,33],[82,32],[84,30],[87,31],[90,28],[92,27],[93,28],[95,29],
+    [97,29],[97,27],[98,28],[100,22],[101,21],[102,22],[104,23],[105,24],[105,26],
+    [104,27.5],[102,28],[100,28.5],[98.5,28],[97.5,27.5],[97,24],[97.5,23],[98,22],
+    [99,21.5],[100,21],[101,21],[102,22],[104,23],[105,24],[106,22],[108,21],
+    [110,20],[111,21],[113,22],[114,22],[116,22],[117,23],[119,25],[120,26],
+    [122,27],[121,30],[122,31],[121,33],[122,36],[121,37],[122,38],[126,38],
+    [128,40],[130,42],[133,43],[135,47],[134,48],[130,48],[122,53],[115,53],
+    [108,53.5],[102,52],[100,50],[95,50],[90,49],[85,47],[80,42],[73,40],[73,39]
+  ];
+  const chinaPath=document.createElementNS(NS,'path');
+  chinaPath.setAttribute('d','M '+border.map(([lo,la])=>xy(lo,la).join(',')).join(' L ')+' Z');
+  chinaPath.setAttribute('fill','rgba(18,40,24,0.93)');
+  chinaPath.setAttribute('stroke','rgba(201,168,76,0.28)');
+  chinaPath.setAttribute('stroke-width','1.5');
+  chinaPath.setAttribute('stroke-linejoin','round');
+  svg.appendChild(chinaPath);
+
+  // Shandong peninsula
+  const sdPts=[[120,36],[122,37],[122,38],[120,38],[119,37],[120,36]];
+  const sd=document.createElementNS(NS,'path');
+  sd.setAttribute('d','M '+sdPts.map(([lo,la])=>xy(lo,la).join(',')).join(' L ')+' Z');
+  sd.setAttribute('fill','rgba(18,40,24,0.93)');sd.setAttribute('stroke','rgba(201,168,76,0.2)');sd.setAttribute('stroke-width','1');
+  svg.appendChild(sd);
+
+  // Taiwan
+  const [twx,twy]=xy(121,23.5);
+  const tw=document.createElementNS(NS,'ellipse');
+  tw.setAttribute('cx',twx);tw.setAttribute('cy',twy);tw.setAttribute('rx','9');tw.setAttribute('ry','20');
+  tw.setAttribute('transform',`rotate(-12 ${twx} ${twy})`);
+  tw.setAttribute('fill','rgba(18,40,24,0.93)');tw.setAttribute('stroke','rgba(201,168,76,0.22)');tw.setAttribute('stroke-width','1.2');
+  svg.appendChild(tw);
+
+  // Hainan
+  const [hx,hy]=xy(109.7,19.2);
+  const hai=document.createElementNS(NS,'ellipse');
+  hai.setAttribute('cx',hx);hai.setAttribute('cy',hy);hai.setAttribute('rx','17');hai.setAttribute('ry','12');
+  hai.setAttribute('fill','rgba(18,40,24,0.93)');hai.setAttribute('stroke','rgba(201,168,76,0.18)');hai.setAttribute('stroke-width','1');
+  svg.appendChild(hai);
+
+  // Yunnan tea region highlight
+  const yunZone=[[98,26],[102,26],[104,25],[104,23],[102,22],[100,22],[99,21.5],[98,22],[97.5,23],[97,24],[97.5,27.5],[98,26]];
+  const yunH=document.createElementNS(NS,'path');
+  yunH.setAttribute('d','M '+yunZone.map(([lo,la])=>xy(lo,la).join(',')).join(' L ')+' Z');
+  yunH.setAttribute('fill','rgba(100,130,50,0.07)');yunH.setAttribute('stroke','rgba(160,200,80,0.14)');
+  yunH.setAttribute('stroke-width','1');yunH.setAttribute('stroke-dasharray','4,3');
+  svg.appendChild(yunH);
+
+  // Pins
+  const pG=document.createElementNS(NS,'g');
+  REGIONS.forEach(r=>{
+    const cs=r.variety==='sin'?'#4a9a8a':r.variety==='ass'?'#c8743a':'#c9a84c';
+    const fill=r.variety==='both'?'url(#yunGrad)':cs;
+    const g=document.createElementNS(NS,'g');
+    g.style.cursor='pointer';
+
+    const pulse=document.createElementNS(NS,'circle');
+    pulse.setAttribute('cx',r.x);pulse.setAttribute('cy',r.y);pulse.setAttribute('r','13');
+    pulse.setAttribute('fill',cs);pulse.setAttribute('opacity','0.13');pulse.classList.add('rpulse');
+    g.appendChild(pulse);
+
+    const dot=document.createElementNS(NS,'circle');
+    dot.setAttribute('cx',r.x);dot.setAttribute('cy',r.y);dot.setAttribute('r','5');
+    dot.setAttribute('fill',fill);dot.setAttribute('opacity','0.9');
+    dot.setAttribute('filter','url(#pglow)');dot.classList.add('rdot');
+    g.appendChild(dot);
+
+    const nt=document.createElementNS(NS,'text');
+    nt.setAttribute('x',r.x+r.ldx);nt.setAttribute('y',r.y+r.ldy);
+    nt.setAttribute('font-family',"'Cormorant Garamond',serif");
+    nt.setAttribute('font-size','12.5');nt.setAttribute('font-style','italic');
+    nt.setAttribute('fill',cs);nt.setAttribute('opacity','0.88');
+    nt.textContent=r.it;g.appendChild(nt);
+
+    const zt=document.createElementNS(NS,'text');
+    zt.setAttribute('x',r.x+r.ldx);zt.setAttribute('y',r.y+r.ldy+12);
+    zt.setAttribute('font-family','Jost,sans-serif');zt.setAttribute('font-size','8.5');
+    zt.setAttribute('fill',cs);zt.setAttribute('opacity','0.4');
+    zt.textContent=r.zh;g.appendChild(zt);
+
+    if(r.yunnanZoom){
+      const zr=document.createElementNS(NS,'rect');
+      zr.setAttribute('x',r.x+r.ldx);zr.setAttribute('y',r.y+r.ldy+16);
+      zr.setAttribute('width','58');zr.setAttribute('height','14');zr.setAttribute('rx','2');
+      zr.setAttribute('fill','rgba(201,168,76,0.12)');zr.setAttribute('stroke','rgba(201,168,76,0.32)');zr.setAttribute('stroke-width','0.8');
+      g.appendChild(zr);
+      const zt2=document.createElementNS(NS,'text');
+      zt2.setAttribute('x',r.x+r.ldx+5);zt2.setAttribute('y',r.y+r.ldy+27);
+      zt2.setAttribute('font-family','Jost,sans-serif');zt2.setAttribute('font-size','8');
+      zt2.setAttribute('fill','rgba(201,168,76,0.72)');zt2.setAttribute('letter-spacing','1');
+      zt2.textContent='⊕ ZOOM';g.appendChild(zt2);
+      g.addEventListener('click',openYunnanZoom);
+    } else {
+      g.addEventListener('click',()=>openRegionModal(r));
+    }
+
+    // hover
+    g.addEventListener('mouseenter',()=>{pulse.setAttribute('opacity','0.28');dot.setAttribute('r','7');});
+    g.addEventListener('mouseleave',()=>{pulse.setAttribute('opacity','0.13');dot.setAttribute('r','5');});
+    pG.appendChild(g);
+  });
+  svg.appendChild(pG);
+
+  // Compass
+  const cg=document.createElementNS(NS,'g');
+  cg.setAttribute('transform','translate(864,542)');cg.setAttribute('opacity','0.22');
+  cg.innerHTML=`<line x1="0" y1="-14" x2="0" y2="14" stroke="#c9a84c" stroke-width="1"/>
+    <line x1="-14" y1="0" x2="14" y2="0" stroke="#c9a84c" stroke-width="1"/>
+    <text x="0" y="-17" text-anchor="middle" font-family="Jost" font-size="8" fill="#c9a84c">N</text>`;
+  svg.appendChild(cg);
+
+  wrap.appendChild(svg);
+}
+
+// ══════════ YUNNAN ZOOM SVG ══════════
+function yunnanZoomSVG(){
+  // viewBox 540x420, lon 97–107°E, lat 21–29°N
+  function xy(lon,lat){return [(lon-97)/10*540,(29-lat)/8*420];}
+  const NS='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(NS,'svg');
+  svg.setAttribute('viewBox','0 0 540 420');
+  svg.setAttribute('xmlns',NS);
+  svg.style.width='100%';svg.style.display='block';
+
+  svg.innerHTML=`<defs>
+    <radialGradient id="ybg" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="rgba(18,48,22,0.96)"/>
+      <stop offset="100%" stop-color="rgba(8,18,10,0.98)"/>
+    </radialGradient>
+    <filter id="yg"><feGaussianBlur stdDeviation="2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="540" height="420" fill="url(#ybg)"/>`;
+
+  // Grid
+  let grid='<g stroke="rgba(201,168,76,0.07)" stroke-width="1">';
+  [22,23,24,25,26,27,28].forEach(lat=>{
+    const [,y]=xy(97,lat);
+    grid+=`<line x1="0" x2="540" y1="${y}" y2="${y}"/>
+      <text x="2" y="${y-2}" font-family="Jost" font-size="7" fill="rgba(201,168,76,0.3)">${lat}°N</text>`;
+  });
+  [98,99,100,101,102,103,104,105,106].forEach(lon=>{
+    const [x]=xy(lon,29);
+    grid+=`<line x1="${x}" x2="${x}" y1="0" y2="420"/>
+      <text x="${x+2}" y="10" font-family="Jost" font-size="7" fill="rgba(201,168,76,0.3)">${lon}°E</text>`;
+  });
+  grid+='</g>';
+
+  // Yunnan province outline
+  const yunBorder=[[98.5,28.5],[101,28.5],[104,27.5],[106,26],[106,24],[105,23],[104,22.5],[102,22],[101,21],[100,21],[99,21.5],[98,22],[97.5,23],[97,24],[97,25.5],[97.5,27.5],[98.5,28.5]];
+  const bPts=yunBorder.map(([lo,la])=>xy(lo,la).join(',')).join(' ');
+
+  // Assamica zone
+  const assZone=[[99.2,22.5],[102.8,22.5],[102.8,23.8],[101.5,24],[100,23.8],[99.2,23.2],[99.2,22.5]];
+  const aPts=assZone.map(([lo,la])=>xy(lo,la).join(',')).join(' ');
+
+  // Sinensis/Gushu zone
+  const sinZone=[[98,25],[101.5,26.5],[104.5,25.5],[104.5,24],[102.8,23.8],[101.5,24],[100,23.8],[99.2,23.2],[98.5,23.5],[98,25]];
+  const sPts=sinZone.map(([lo,la])=>xy(lo,la).join(',')).join(' ');
+
+  let body=`
+    <polygon points="${bPts}" fill="rgba(22,50,28,0.9)" stroke="rgba(201,168,76,0.28)" stroke-width="1.8"/>
+    <polygon points="${aPts}" fill="rgba(200,116,58,0.12)" stroke="rgba(200,116,58,0.28)" stroke-width="1.2" stroke-dasharray="4,3"/>
+    <polygon points="${sPts}" fill="rgba(74,154,138,0.1)" stroke="rgba(74,154,138,0.25)" stroke-width="1.2" stroke-dasharray="4,3"/>`;
+
+  // Zone labels
+  const [alx,aly]=xy(100.8,22.8); body+=`<text x="${alx}" y="${aly}" text-anchor="middle" font-family="Jost" font-size="9" fill="rgba(200,116,58,0.55)">zona assamica</text><text x="${alx}" y="${aly+11}" text-anchor="middle" font-family="Jost" font-size="8" fill="rgba(200,116,58,0.38)">pianure basse &lt;1200m</text>`;
+  const [slx,sly]=xy(101.8,25.2); body+=`<text x="${slx}" y="${sly}" text-anchor="middle" font-family="Jost" font-size="9" fill="rgba(74,154,138,0.55)">zona sinensis / gushu</text><text x="${slx}" y="${sly+11}" text-anchor="middle" font-family="Jost" font-size="8" fill="rgba(74,154,138,0.38)">d'altura &gt;1500m</text>`;
+
+  // Tea mountains
+  const mtns=[
+    {n:'Lao Banzhang',lo:100.4,la:22.3,note:'老班章'},
+    {n:"Yi Wu",lo:101.3,la:22.3,note:'易武'},
+    {n:'Nannuo Shan',lo:100.6,la:22.1,note:'南糯山'},
+    {n:'Jingmai Shan',lo:100.0,la:22.2,note:'景迈山'},
+    {n:'Bulang Shan',lo:100.3,la:22.1,note:'布朗山'},
+    {n:'Bingdao',lo:99.9,la:23.8,note:'冰岛'},
+  ];
+  mtns.forEach(m=>{
+    const [mx,my]=xy(m.lo,m.la);
+    body+=`<text x="${mx}" y="${my}" text-anchor="middle" font-size="10" fill="rgba(201,168,76,0.5)">▲</text>
+      <text x="${mx+6}" y="${my+1}" font-family="Cormorant Garamond,serif" font-style="italic" font-size="9" fill="rgba(201,168,76,0.6)">${m.n}</text>
+      <text x="${mx+6}" y="${my+11}" font-family="Jost" font-size="7.5" fill="rgba(201,168,76,0.3)">${m.note}</text>`;
+  });
+
+  // Cities
+  const cities=[
+    {n:"Pu'er 普洱",lo:100.9,la:23.0,c:'#c9a84c',note:'hub storico'},
+    {n:'Xishuangbanna 西双版纳',lo:100.8,la:21.9,c:'#c8743a',note:'assamica'},
+    {n:'Kunming 昆明',lo:102.7,la:25.0,c:'#c9a84c',note:'capitale'},
+    {n:'Lincang 临沧',lo:100.1,la:23.9,c:'#7acaba',note:'gushu'},
+    {n:'Dali 大理',lo:100.2,la:25.6,c:'#7acaba',note:'sinensis alta quota'},
+    {n:'Baoshan 保山',lo:99.2,la:25.1,c:'#7acaba',note:'tè bianco'},
+  ];
+  cities.forEach(c=>{
+    const [cx,cy]=xy(c.lo,c.la);
+    body+=`<circle cx="${cx}" cy="${cy}" r="5" fill="${c.c}" opacity="0.85" filter="url(#yg)"/>
+      <circle cx="${cx}" cy="${cy}" r="11" fill="${c.c}" opacity="0.1"/>
+      <text x="${cx+8}" y="${cy+1}" font-family="Cormorant Garamond,serif" font-style="italic" font-size="10.5" fill="${c.c}" opacity="0.85">${c.n}</text>
+      <text x="${cx+8}" y="${cy+12}" font-family="Jost" font-size="7.5" fill="${c.c}" opacity="0.42">${c.note}</text>`;
+  });
+
+  // Compass
+  body+=`<g transform="translate(518,400)" opacity="0.28">
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#c9a84c" stroke-width="1"/>
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#c9a84c" stroke-width="1"/>
+    <text x="0" y="-14" text-anchor="middle" font-family="Jost" font-size="7" fill="#c9a84c">N</text>
+  </g>`;
+
+  svg.innerHTML+=grid+body;
+  return svg.outerHTML;
+}
+
+// ══════════ MODALS ══════════
+function openFactorModal(f){
+  const sects=f.sections.map((s,i)=>`
+    ${i>0?'<div class="fm-div"></div>':''}
+    <div class="fm-sec">
+      <h4>${s.t}</h4><p>${s.p}</p>
+      ${s.eg?`<div class="fm-eg"><p>${s.eg}</p></div>`:''}
+    </div>`).join('');
+  document.getElementById('modal-content').innerHTML=`
+    <div class="fm-top">
+      <div class="fm-icon">${f.icon}</div>
+      <div class="fm-title">${f.it}</div>
+      <div class="fm-sub">${f.sub}</div>
+    </div>
+    <div class="fm-body">
+      <div class="fm-sec">
+        <h4>In sintesi</h4><p>${f.desc}</p>
+        <div class="fm-tags">${f.tags.map(t=>`<span class="fm-tag">${t}</span>`).join('')}</div>
+      </div>
+      <div class="fm-div"></div>${sects}
+    </div>`;
+  openModal();
+}
+
+function openRegionModal(r){
+  const vc=r.variety==='both'?'both':r.variety;
+  const vl=r.variety==='sin'?'var. sinensis':r.variety==='ass'?'var. assamica':'sinensis & assamica';
+  document.getElementById('modal-content').innerHTML=`
+    <div class="rm-top">
+      <div class="rm-name">${r.it}</div><div class="rm-zh">${r.zh}</div>
+      <span class="rm-tag ${vc}">${vl}</span>
+    </div>
+    <div class="rm-body">
+      <div class="rm-sec">
+        <div class="rm-div" style="margin-top:0"></div>
+        <h4>Terroir</h4><p>${r.terroir}</p>
+        <div class="rm-div"></div>
+        <h4>Cultivar principali</h4><p>${r.cultivar}</p>
+      </div>
+      <div>
+        <div class="rm-div" style="margin-top:0"></div>
+        <h4>Tè principali</h4>
+        ${r.teas.map(t=>`<div class="rm-tea">
+          <div class="rm-tea-name">${t.name}</div>
+          <div class="rm-tea-type">${t.type}</div>
+          <div class="rm-tea-note">${t.note}</div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  openModal();
+}
+
+function openYunnanZoom(){
+  document.getElementById('modal-content').innerHTML=`
+    <div class="ym-wrap">
+      <div class="ym-title">Yunnan · 云南</div>
+      <div class="ym-sub">Distribuzione delle varietà e montagne del tè</div>
+      <div class="ym-legend">
+        <div class="ym-li"><div class="ym-ld" style="background:#4a9a8a"></div>var. sinensis · Gushu d'altura (&gt;1500m)</div>
+        <div class="ym-li"><div class="ym-ld" style="background:#c8743a"></div>var. assamica · pianure basse (&lt;1200m)</div>
+        <div class="ym-li"><div class="ym-ld" style="background:#c9a84c"></div>città / hub commerciale</div>
+        <div class="ym-li" style="opacity:.55">▲ montagna del tè (cha shan)</div>
+      </div>
+      ${yunnanZoomSVG()}
+      <p class="ym-note">Lo Yunnan è la regione di <em>origine evolutiva</em> della Camellia sinensis. La var. <em>assamica</em> domina le pianure calde di Xishuangbanna e Pu'er (sotto i 1200m), mentre la var. <em>sinensis</em> e i Gushu antichi si trovano nelle zone montane sopra i 1500m. Le "montagne del tè" (茶山, cha shan) — Lao Banzhang, Yi Wu, Jingmai, Nannuo, Bulang, Bingdao — sono i micro-terroir più ricercati: ogni cha shan ha un carattere riconoscibile e un mercato dedicato.</p>
+    </div>`;
+  openModal();
+}
+
+function openModal(){document.getElementById('modal-bg').classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal-bg').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('modal-close').addEventListener('click',closeModal);
+document.getElementById('modal-bg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+
+renderPianta();
+renderFactors();
+renderMap();
+</script>
+</body>
+</html>

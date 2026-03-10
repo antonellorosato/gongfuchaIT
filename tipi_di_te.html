@@ -144,6 +144,13 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .footer a{color:var(--gold);opacity:.55;text-decoration:none;transition:opacity .18s}
 .footer a:hover{opacity:1}
 
+.border-frame{position:absolute;inset:16px;border:1px solid rgba(201,168,76,.16);pointer-events:none}
+.border-frame::before{content:'';position:absolute;inset:6px;border:1px solid rgba(201,168,76,.07)}
+.corner{position:absolute;width:28px;height:28px;border-color:var(--gold);border-style:solid;opacity:.5}
+.corner-tl{top:16px;left:16px;border-width:2px 0 0 2px}
+.corner-tr{top:16px;right:16px;border-width:2px 2px 0 0}
+.corner-bl{bottom:16px;left:16px;border-width:0 0 2px 2px}
+.corner-br{bottom:16px;right:16px;border-width:0 2px 2px 0}
 @media(max-width:640px){
   .phases-grid{grid-template-columns:repeat(2,1fr)}
   .teas-grid{grid-template-columns:1fr}
@@ -233,6 +240,9 @@ h1 em{font-style:italic;color:var(--gold-l)}
 
 <div class="prog-bar-wrap"><div class="prog-bar" id="prog-bar"></div></div>
 <div class="poster">
+  <div class="corner corner-tl"></div><div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div><div class="corner corner-br"></div>
+  <div class="border-frame"></div>
   <header class="header">
     <nav class="part-nav">
       <a href="pianta.html" class="nav-arrow nav-prev" title="Parte I — La Pianta">
@@ -242,7 +252,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
           <span class="nav-part-title">La Pianta</span>
         </div>
       </a>
-      <a href="index.html" class="nav-center-label" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
+      <a href="index.html" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
       <a href="gongfu.html" class="nav-arrow nav-next" title="Parte III — Gong Fu Cha">
         <div class="nav-part">
           <span class="nav-part-num">Parte III</span>
@@ -344,7 +354,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
         <span class="nav-arr">←</span>
         <div class="nav-part"><span class="nav-part-num">Parte I</span><span class="nav-part-title">La Pianta</span></div>
       </a>
-      <a href="index.html" class="nav-center-label" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
+      <a href="index.html" class="nav-home"><span class="nav-home-icon">⌂</span><span class="nav-home-lbl">Indice</span></a>
       <a href="gongfu.html" class="nav-arrow nav-next">
         <div class="nav-part"><span class="nav-part-num">Parte III</span><span class="nav-part-title">Gong Fu Cha</span></div>
         <span class="nav-arr">→</span>

@@ -8,14 +8,14 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0e1f0e;--mid:#1c3a1c;--light:#2d5a2d;
+  --bg:#0a1a10;--mid:#162a1c;--light:#234a2a;
   --gold:#c9a84c;--gold-l:#e8cd8a;--gold-p:#f5ecd4;
   --cream:#faf6ee;--cream-d:#ede4d0;--text:#e8dfc8;
 }
 .prog-bar-wrap{position:fixed;top:0;left:0;right:0;height:2px;background:rgba(201,168,76,.07);z-index:999;pointer-events:none}
 .prog-bar{height:100%;background:linear-gradient(to right,rgba(201,168,76,.35),var(--gold));width:0%;transition:width .07s linear}
 body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%,rgba(45,90,45,.2) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(30,70,30,.15) 0%,transparent 50%);pointer-events:none;z-index:0}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 8%,rgba(35,74,42,.28) 0%,transparent 50%),radial-gradient(ellipse at 85% 85%,rgba(20,55,30,.22) 0%,transparent 50%);pointer-events:none;z-index:0}
 
 .poster{max-width:1120px;margin:0 auto;padding:52px 44px;position:relative;z-index:1}
 
@@ -198,6 +198,8 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .var-tag{font-size:11px;padding:5px 12px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.18);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic}
 .modal-teas-title{font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);opacity:.55;margin-bottom:8px}
 .tea-badges{display:flex;flex-wrap:wrap;gap:6px}
+.tea-badge-link{transition:background .15s,border-color .15s,opacity .15s}
+.tea-badge-link:hover{opacity:.75}
 .tea-badge{font-size:10px;padding:3px 10px;border:1px solid rgba(201,168,76,.2);color:var(--gold);opacity:.7}
 
 /* Tea modal */
@@ -778,9 +780,23 @@ function renderFlowchart(){
 // MODALS
 // ═══════════════════════════════
 
+
+// Map tea name strings in PHASES.teas to TEAS objects
+function teaByLabel(label) {
+  var l = label.toLowerCase();
+  if (l.includes('bianco')) return TEAS.find(function(t){return t.id==='bianco';});
+  if (l.includes('verde'))  return TEAS.find(function(t){return t.id==='verde';});
+  if (l.includes('giallo')) return TEAS.find(function(t){return t.id==='giallo';});
+  if (l.includes('oolong')) return TEAS.find(function(t){return t.id==='oolong';});
+  if (l.includes('rosso'))  return TEAS.find(function(t){return t.id==='rosso';});
+  if (l.includes('crudo') || l.includes('sheng')) return TEAS.find(function(t){return t.id==='sheng';});
+  if (l.includes('cotto') || l.includes('shu')) return TEAS.find(function(t){return t.id==='shu';});
+  if (l.includes('nero') || l.includes('dark')) return TEAS.find(function(t){return t.id==='nero';});
+  return null;
+}
+
 function openPhaseModal(p){
   const varsHTML=p.variabili.map(v=>`<span class="var-tag">${v}</span>`).join('');
-  const teasHTML=p.teas.map(t=>`<span class="tea-badge">${t}</span>`).join('');
   document.getElementById('modal-content').innerHTML=`
     <img class="modal-img" src="${p.img}" alt="${p.it}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
     <div class="modal-img-fallback" style="display:none;background:${p.bg}">🍃</div>
@@ -793,9 +809,28 @@ function openPhaseModal(p){
       <div class="modal-divider"></div>
       <div class="modal-vars-title">Variabili controllabili dal produttore</div>
       <div class="vars-grid">${varsHTML}</div>
-      <div class="modal-teas-title">Presente in</div>
-      <div class="tea-badges">${teasHTML}</div>
+      <div class="modal-teas-title">Presente in <span style="opacity:.4;font-size:8px;letter-spacing:1px;text-transform:uppercase"> — clicca per i dettagli</span></div>
+      <div class="tea-badges" id="phase-tea-badges"></div>
     </div>`;
+  // Build clickable tea badges
+  const badgesEl = document.getElementById('phase-tea-badges');
+  p.teas.forEach(label => {
+    const tea = teaByLabel(label);
+    const sp = document.createElement('span');
+    if (tea) {
+      sp.className = 'tea-badge tea-badge-link';
+      sp.style.cursor = 'pointer';
+      sp.style.borderColor = tea.radarColors[0] + '66';
+      sp.style.color = tea.radarColors[0];
+      sp.title = 'Apri scheda ' + tea.it;
+      sp.innerHTML = tea.emoji + ' ' + label;
+      sp.addEventListener('click', (e) => { e.stopPropagation(); openTeaModal(tea); });
+    } else {
+      sp.className = 'tea-badge';
+      sp.textContent = label;
+    }
+    badgesEl.appendChild(sp);
+  });
   openModal();
 }
 

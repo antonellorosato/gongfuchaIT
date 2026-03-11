@@ -75,7 +75,8 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .liq-teas{font-size:9.5px;color:var(--cream-d);opacity:.48;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.45}
 
 /* ── EVOLUTION TABLE ── */
-.evo-table{width:100%;border-collapse:collapse}
+.evo-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.evo-table{width:100%;border-collapse:collapse;min-width:520px}
 .evo-table th{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.5;padding:8px 12px;text-align:left;border-bottom:1px solid rgba(201,168,76,.12)}
 .evo-table td{font-size:11.5px;color:var(--text);line-height:1.55;opacity:.85;padding:10px 12px;border-bottom:1px solid rgba(201,168,76,.05);vertical-align:top}
 .evo-table tr:hover td{background:rgba(201,168,76,.03)}
@@ -130,6 +131,11 @@ h1 em{font-style:italic;color:var(--gold-l)}
 
 .m-zh{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--cream-d);opacity:.45;margin-bottom:4px}
 .m-pinyin{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.42;margin-bottom:14px}
+.sd-add-wrap{display:flex;align-items:center;gap:5px;margin-top:5px}
+.sd-add-input{background:rgba(201,168,76,.04);border:1px dashed rgba(201,168,76,.22);color:var(--cream);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:10px;padding:3px 8px;outline:none;width:90px;min-width:60px}
+.sd-add-input:focus{border-color:rgba(201,168,76,.45)}
+.sd-add-btn{font-size:13px;width:22px;height:22px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);color:var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;flex-shrink:0;padding:0}
+.sd-add-btn:hover{background:rgba(201,168,76,.22)}
 .m-q-item{font-size:12px;color:var(--cream-d);padding:5px 0;border-bottom:1px solid rgba(201,168,76,.05);font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.6}
 .m-term-wrap{padding:12px 0;border-bottom:1px solid rgba(201,168,76,.05)}
 .m-term-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;margin-bottom:4px}
@@ -223,7 +229,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   </nav>
 
   <header class="header">
-    <p class="eyebrow">Guida interattiva · Vol. IV</p>
+    <p class="eyebrow">Guida interattiva · Parte IV</p>
     <h1>Degustare il <em>Tè</em></h1>
     <p class="subtitle">Come guardare, annusare, assaggiare e leggere una tazza</p>
     <div class="divider"><div class="dl"></div><div class="dd"></div><div class="dr"></div></div>
@@ -268,7 +274,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   <section class="sec">
     <h2 class="sec-title">V — Come Evolve il Tè Infusione per Infusione</h2>
     <p class="sec-intro">Ogni infusione racconta un capitolo diverso. La struttura generale è simile per quasi tutti i tè — ma le sfumature cambiano radicalmente tra una tipologia e l'altra.</p>
-    <table class="evo-table">
+    <div class="evo-table-wrap"><table class="evo-table">
       <thead>
         <tr>
           <th style="width:50px;text-align:center">№</th>
@@ -278,7 +284,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
         </tr>
       </thead>
       <tbody id="evo-tbody"></tbody>
-    </table>
+    </table></div>
   </section>
 
   <!-- VI — VOCABOLARIO -->
@@ -736,6 +742,32 @@ function mkChips(arr, active, groupKey){
     chip.onclick=function(){this.classList.toggle('active');};
     wrap.appendChild(chip);
   });
+  // + button to add custom chip
+  var addWrap=document.createElement('div');
+  addWrap.className='sd-add-wrap';
+  var inp=document.createElement('input');
+  inp.type='text';inp.className='sd-add-input';inp.placeholder='personalizzato…';
+  inp.setAttribute('data-addgroup',groupKey);
+  var btn=document.createElement('button');
+  btn.className='sd-add-btn';btn.textContent='+';btn.type='button';
+  btn.onclick=function(){
+    var val=inp.value.trim();
+    if(!val) return;
+    // Check not already present
+    var existing=wrap.querySelectorAll('.sd');
+    for(var i=0;i<existing.length;i++){if(existing[i].getAttribute('data-val')===val) return;}
+    var chip=document.createElement('span');
+    chip.className='sd active';
+    chip.textContent=val;
+    chip.setAttribute('data-group',groupKey);
+    chip.setAttribute('data-val',val);
+    chip.onclick=function(){this.classList.toggle('active');};
+    wrap.insertBefore(chip,addWrap);
+    inp.value='';
+  };
+  inp.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();btn.click();}});
+  addWrap.appendChild(inp);addWrap.appendChild(btn);
+  wrap.appendChild(addWrap);
   return wrap;
 }
 
@@ -866,6 +898,20 @@ function exportExcel(){
   var ws=XLSX.utils.aoa_to_sheet(rows);
   ws['!cols']=[{wch:10},{wch:25},{wch:18},{wch:14},{wch:12},{wch:18},{wch:32},{wch:18},{wch:32},{wch:22},{wch:14},{wch:40}];
   XLSX.utils.book_append_sheet(wb,ws,'Degustazione');
+  // Watermark / attribution
+  var wsInfo=XLSX.utils.book_new();
+  var attribRows=[
+    [],
+    ['\u00a9 Antonello Rosato — Guida interattiva al cha (t\u00e8 cinese)'],
+    ['https://antonellorosato.github.io/gongfuchaIT'],
+    ['Generato il: '+new Date().toLocaleString('it-IT')],
+  ];
+  // Append attribution at the bottom of the sheet
+  var lastRow=rows.length+2;
+  XLSX.utils.sheet_add_aoa(ws, attribRows, {origin: lastRow});
+  // Style note: SheetJS free edition doesn't support cell styling, but we set column widths
+  ws['!cols']=[{wch:10},{wch:25},{wch:18},{wch:14},{wch:12},{wch:18},{wch:32},{wch:18},{wch:32},{wch:22},{wch:14},{wch:40}];
+
   var teName=(infData[1]&&infData[1].te)||'degustazione';
   var safeName=teName.replace(/[^\w\s-]/g,'').substring(0,30).trim();
   XLSX.writeFile(wb,'scheda_'+(safeName||'te')+'_'+new Date().toISOString().slice(0,10)+'.xlsx');

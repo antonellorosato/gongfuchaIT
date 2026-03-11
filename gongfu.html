@@ -175,7 +175,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
   </nav>
 
   <header class="header">
-    <p class="eyebrow">Guida interattiva &middot; Vol. III</p>
+    <p class="eyebrow">Guida interattiva &middot; Parte III</p>
     <h1>Gong Fu <em>Cha</em></h1>
     <p class="subtitle">&#21151;&#22827;&#33590; &mdash; gli strumenti, il rituale, temperatura e tempi per ogni tè</p>
     <div class="divider"><div class="dl"></div><div class="dd"></div><div class="dr"></div></div>
@@ -439,7 +439,13 @@ function renderParams() {
 
 function openToolModal(t) {
   var sects = t.sections.map(function(s, i) {
-    var div = (i > 0 ? "<div class=\"m-div\"></div>" : "") + "<div class=\"m-sec\"><h4>" + s.t + "</h4><p>" + s.p + "</p>";
+    // sections that only have a `note` (no t/p) are "per chi inizia" tips
+    if (!s.t && !s.p) {
+      return s.note ? "<div class=\"m-note\" style=\"margin-top:4px\"><p>" + s.note + "</p></div>" : "";
+    }
+    var div = (i > 0 ? "<div class=\"m-div\"></div>" : "") + "<div class=\"m-sec\">";
+    if (s.t) div += "<h4>" + s.t + "</h4>";
+    if (s.p) div += "<p>" + s.p + "</p>";
     if (s.note) div += "<div class=\"m-note\"><p>" + s.note + "</p></div>";
     div += "</div>";
     return div;

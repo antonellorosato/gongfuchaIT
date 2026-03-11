@@ -90,7 +90,8 @@ h1 em{font-style:italic;color:var(--gold-l)}
 
 /* TABLE */
 .table-section{margin-bottom:48px}
-.matrix-table{width:100%;border-collapse:collapse;font-size:10.5px}
+.matrix-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:2px}
+.matrix-table{width:100%;border-collapse:collapse;font-size:10.5px;min-width:600px}
 .matrix-table th{padding:9px 7px;text-align:center;font-weight:400;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.65;border-bottom:1px solid rgba(201,168,76,.18)}
 .matrix-table th.rh{text-align:left;padding-left:0;opacity:.45;font-size:8.5px;letter-spacing:2px}
 .matrix-table td{padding:8px 7px;text-align:center;border-bottom:1px solid rgba(201,168,76,.04);color:var(--cream-d)}
@@ -283,7 +284,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
 
   <section class="table-section">
     <h2 class="sec-title">III — Mappa rapida</h2>
-    <table class="matrix-table" id="matrix"></table>
+    <div class="matrix-wrap"><table class="matrix-table" id="matrix"></table></div>
     <p style="font-size:9px;color:var(--cream-d);opacity:.38;margin-top:10px;font-style:italic;font-family:'Cormorant Garamond',serif">
       ● presente &nbsp;|&nbsp; ◌ opzionale &nbsp;|&nbsp; — assente &nbsp;|&nbsp; ☀ essiccazione al sole &nbsp;|&nbsp; ●● prolungato
     </p>

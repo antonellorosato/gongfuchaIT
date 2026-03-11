@@ -128,6 +128,14 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .btn-excel:hover{background:rgba(30,100,50,.45);border-color:rgba(80,160,80,.6)}
 @media(max-width:600px){.scheda-header-row{flex-direction:column}.scheda-actions{width:100%;justify-content:flex-end}}
 
+.m-zh{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--cream-d);opacity:.45;margin-bottom:4px}
+.m-pinyin{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.42;margin-bottom:14px}
+.m-q-item{font-size:12px;color:var(--cream-d);padding:5px 0;border-bottom:1px solid rgba(201,168,76,.05);font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.6}
+.m-term-wrap{padding:12px 0;border-bottom:1px solid rgba(201,168,76,.05)}
+.m-term-title{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;margin-bottom:4px}
+.m-term-desc{font-size:12px;color:var(--text);line-height:1.68;opacity:.85}
+.m-vocab-zh{font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:300;color:var(--gold-l);margin-bottom:4px;line-height:1}
+.m-vocab-desc{margin-top:8px;font-size:12px;color:var(--cream-d);opacity:.65;line-height:1.6;font-style:italic;font-family:'Cormorant Garamond',serif}
 /* ── MODAL ── */
 .modal-bg{position:fixed;inset:0;background:rgba(4,10,6,.92);backdrop-filter:blur(12px);z-index:100;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s}
 .modal-bg.open{opacity:1;pointer-events:all}
@@ -349,15 +357,15 @@ const SENSI=[
    sections:[
      {t:'Huigan 回甘 — il dolce che ritorna',p:'L\'<em>huigan</em> è la dolcezza che emerge in gola 10–30 secondi dopo la deglutizione — non in bocca, ma più in profondità. Non è residuo zuccherino: è una reazione fisiologica in cui certi polifenoli interagiscono con i recettori del palato e stimolano la produzione di saliva dolce. Più è intenso e persistente, più il tè è di qualità. Un Gushu di Lao Banzhang può avere un huigan che dura 10–15 minuti.'},
      {t:'Kuwei 苦味 — l\'amaro piacevole',p:'Il <em>kuwei</em> è l\'amaro "buono" del tè — non l\'amaro piatto e sgradevole dell\'over-estrazione, ma quello che si apre, si ammorbidisce e si trasforma in dolcezza. È la caratteristica più difficile da spiegare e la più cercata nei pu\'er di qualità. La differenza tra kuwei e amaro cattivo: il kuwei si trasforma, l\'altro rimane piatto o peggiora.'},
-     {t:'Cha Qi 茶气 — l\'energia del tè',p:'Il <em>cha qi</em> è la sensazione fisica che il tè trasmette al corpo — calore, formicolio, apertura del petto, sudorazione leggera, senso di presenza. Non è misticismo: caffeina, L-teanina e centinaia di altri composti attivi influenzano concretamente il sistema nervoso e la circolazione. I tè Gushu e i pu\'er invecchiati di qualità sono noti per cha qi particolarmente intenso.'},
+     {t:'Cha Qi 茶气 — l\'energia del tè',p:'Il <em>cha qi</em> è quello che si sente nel corpo durante e dopo una buona sessione: calore che sale al petto, alle spalle, alle mani; a volte leggero formicolio sulla fronte o sullo scalpo; una chiarezza che non agita. Caffeina e L-teanina spiegano una parte. Ma certi tè Gushu vecchi hanno qualcosa in più che la chimica non riassume completamente.'},
    ]},
   {icon:'🧠',it:'Il Tempo',sub:'Infusione per infusione',accent:'#80b0a0',
    desc:'Un tè di qualità non è mai lo stesso due volte. La sua bellezza sta nell\'evoluzione — ogni infusione è un capitolo, e leggere la sequenza è parte dell\'esperienza.',
    tags:['Evoluzione','Picco','Declino','Persistenza'],
    domande:['Quando il tè è al suo picco di complessità? (spesso 2ª–4ª infusione)','Come cambia il colore del liquore infusione dopo infusione?','L\'aroma si mantiene o evolve verso note diverse?','Quanto dura il tè prima che diventi piatto?','C\'è un\'infusione dove emerge qualcosa di inaspettato?'],
    sections:[
-     {t:'La struttura di una sessione',p:'Quasi tutti i tè Gong Fu seguono una curva simile: <em>apertura</em> (1ª–2ª infusione, le foglie si schiudono, i profili si stabiliscono), <em>picco</em> (3ª–5ª infusione, massima complessità e corpo), <em>sviluppo</em> (5ª–8ª, il profilo si ammorbidisce, emergono note secondarie), <em>declino</em> (8ª in poi, il tè si semplifica, la dolcezza aumenta, il corpo diminuisce). Ogni fase merita attenzione.'},
-     {t:'Prendere note durante la sessione',p:'Notare i cambiamenti <em>infusione per infusione</em> affina rapidamente la percezione. Non servono parole tecniche — basta notare se qualcosa è cambiato: più dolce, meno amaro, nuovo aroma floreale, corpo diminuito. Con il tempo le note diventano più precise e il confronto tra sessioni diverse rivela pattern.'},
+     {t:'La struttura di una sessione',p:'Quasi tutti i tè Gong Fu seguono una traiettoria simile. Le prime due infusioni sono una presentazione — il tè si apre, le foglie si idratano, il profilo è ancora trattenuto. Dalla terza alla quinta si arriva al picco: massima complessità, corpo pieno. Poi il tè si ammorbidisce, cedendo a note secondarie più delicate. Nelle ultime infusioni l\'amaro scompare e rimane solo dolcezza. Ogni fase merita attenzione propria.'},
+     {t:'Prendere note',p:'Non servono parole tecniche. Basta notare se qualcosa è cambiato rispetto all\'infusione prima — più dolce, aroma diverso, meno corpo. Anche solo "questa è stata la migliore" è utile. Con il tempo i dettagli arrivano da soli, e il confronto tra sessioni diventa istruttivo.'},
      {t:'Il tè che sorprende',p:'I tè di qualità eccezionale spesso hanno un momento di "<em>apertura tardiva</em>" — un\'infusione, di solito tra la 4ª e la 6ª, in cui il profilo si rivela completamente diverso dalle prime. Un pu\'er Gushu amaro nelle prime infusioni può aprirsi in qualcosa di straordinariamente floreale e dolce. Questa imprevedibilità è parte della ricerca.'},
    ]},
 ];
@@ -391,48 +399,56 @@ const AROMA_MOMENTS=[
 ];
 
 const RUOTA_CATS=[
-  {name:'Floreale',color:'#c8a0d8',angle:0,
+  // Ordine allineato agli assi del radar chart: Erbaceo, Floreale, Fruttato, Legnoso, Tostato, Cremoso
+  {name:'Erbaceo / Vegetale',color:'#90c878',angle:0,
    terms:[
-     {t:'Orchidea',d:'Nota caratteristica di certi oolong: Tie Guan Yin, Jin Xuan, Oriental Beauty. Un\'orchidea dolce e leggermente cremosa, non la fragranza tagliente dei fiori recisi.'},
-     {t:'Gelsomino',d:'Spesso indotta con fiori (tè al gelsomino), ma presente naturalmente in alcuni Bi Luo Chun e Long Jing primaverili.'},
-     {t:'Rosa',d:'Nota floreale presente in certi Keemun e tè rossi di alta qualità. Più profonda e meno volatile dell\'orchidea.'},
-     {t:'Lilium',d:'Nota bianca, polveriosa, caratteristica di certi tè bianchi Silver Needle di Fuding.'},
-     {t:'Osmanto',d:'Nota dolce e speziata, quasi apricot-floreale. Caratteristica di certi Dan Cong e tè di Guangdong.'},
+     {t:'Erba fresca',d:'La firma dei tè verdi — Long Jing, Bi Luo Chun. Clorofilla e aldeidi verdi che ricordano un prato tagliato di mattina. Più è intensa e pulita, più il tè è fresco.'},
+     {t:'Bambù',d:'Fresco e leggermente fibroso. Presente in certi tè verdi di montagna e in alcuni Baozhong leggeri. Meno erbaceo dell erba fresca, più strutturato.'},
+     {t:'Asparagi',d:'Nota primaverile quasi impalpabile. Presente nei tè verdi pre-Qingming di qualità elevata — uno degli indicatori di raccolta precocissima.'},
+     {t:'Alghe / Nori',d:'Marina e iodica. Caratteristica del gyokuro e di certi Anji Bai Cha coltivati in nebbia. Quando è netta è elegante; quando è pesante indica problema.'},
+     {t:'Spinaci / Verdura cotta',d:'Nota verde scura, quasi cotta. Di solito indica un tè verde estratto troppo caldo o non abbastanza fresco. Da riconoscere per sapere cosa evitare.'},
    ]},
-  {name:'Fruttato',color:'#d8c060',angle:72,
+  {name:'Floreale',color:'#c8a0d8',angle:60,
    terms:[
-     {t:'Pesca',d:'Nota matura e succosa. Caratteristica dell\'Oriental Beauty e certi oolong taiwanesi estivi. Legata alla presenza di terpeni da stress da insetto (ECBF).'},
-     {t:'Albicocca',d:'Nota secca e leggermente acidula. Frequente nei Wuyi oolong di media ossidazione e in certi tè bianchi invecchiati.'},
-     {t:'Uva passa',d:'Nota scura, densa. Caratteristica dei tè rossi maltati come Dian Hong e Yunnan gold.'},
-     {t:'Frutti rossi',d:'Note di ciliegia e ribes. Presenti in certi tè rossi leggeri e nei Sheng giovani di alta qualità.'},
-     {t:'Agrumi',d:'Limone, bergamotto. Nota fresca e tagliente. Presente in certi tè verdi primaverili e in alcuni Baozhong.'},
+     {t:'Orchidea',d:'La nota floreale più cercata negli oolong di qualità. Presente nel Tie Guan Yin, Jin Xuan, Oriental Beauty. Non è tagliente come i fiori recisi — è avvolgente, quasi cremosa.'},
+     {t:'Gelsomino',d:'Nota fresca e dolce. Spesso associata ai tè aromatizzati, ma presente naturalmente in certi Bi Luo Chun primaverili e Long Jing di prima raccolta.'},
+     {t:'Rosa',d:'Floreale più profondo e persistente dell orchidea. Si trova in certi Keemun di alta qualità e in alcuni Dan Cong di Guangdong.'},
+     {t:'Osmanto',d:'Dolce e quasi fruttato — a metà tra fiore e albicocca. Caratteristica di certi Dan Cong e dei tè aromatizzati con i fiori di osmanto autunnali.'},
+     {t:'Biancospino / Lilium',d:'Bianco e leggermente cipriato. Caratteristica di certi tè bianchi Silver Needle di Fuding e di alcuni oolong leggeri taiwanesi di alta quota.'},
    ]},
-  {name:'Vegetale',color:'#90c878',angle:144,
+  {name:'Fruttato',color:'#d8c060',angle:120,
    terms:[
-     {t:'Erba fresca',d:'La firma dei tè verdi giapponesi e di molti Long Jing. Clorofilla e aldeidi vegetali che evocano un prato tagliato.'},
-     {t:'Alghe / Nori',d:'Nota marina e iodica. Caratteristica del gyokuro giapponese ma presente anche in certi Anji Bai Cha e tè bianchi nebbiosi.'},
-     {t:'Spinaci cotti',d:'Nota verde scura, quasi "cotta". Segno di un tè verde poco fresco o estratto a temperatura troppo alta.'},
-     {t:'Asparagi',d:'Nota primavera fresca e delicata. Presente nei tè verdi pre-Qingming di altissima qualità.'},
-     {t:'Bamb\u00f9',d:'Nota fresca e legnosa insieme. Caratteristica di certi tè verdi montani e di alcuni Baozhong.'},
+     {t:'Pesca',d:'Matura e succosa. Una delle note più amate negli oolong taiwanesi estivi e nell Oriental Beauty. Prodotta da terpeni che la pianta rilascia in risposta al morso dell insetto verde (ECBF).'},
+     {t:'Albicocca',d:'Più secca e acidula della pesca. Frequente nei Wuyi oolong di media ossidazione e in certi tè bianchi con qualche anno di invecchiamento.'},
+     {t:'Agrumi',d:'Limone, scorza di arancia, bergamotto. Nota fresca e tagliente. Presente in certi tè verdi primaverili vivaci e in alcuni Baozhong leggeri.'},
+     {t:'Frutti rossi',d:'Ciliegia, ribes, lampone. Presente in certi tè rossi leggeri e nei Sheng giovani di alta qualità — dove il fruttato e il tannico si bilanciano bene.'},
+     {t:'Uva passa / Prugna',d:'Scura e densa. Caratteristica dei tè rossi maltati — Dian Hong, Yunnan Gold. Dolcezza profonda con un fondo leggermente acidulo.'},
    ]},
-  {name:'Tostato / Speziato',color:'#d09848',angle:216,
+  {name:'Legnoso / Terroso',color:'#a08860',angle:180,
    terms:[
-     {t:'Miele',d:'Dolcezza calda e leggermente cerosa. Caratteristica dei Dan Cong tostati, dei Dian Hong maturi e dell\'Oriental Beauty.'},
-     {t:'Cannella',d:'Nota speziata e leggermente piccante. Caratteristica del Rougui wuyi (il nome significa proprio "scorza di cannella").'},
-     {t:'Fumo',d:'Da legno di pino. Caratteristica distintiva del Lapsang Souchong tradizionale. Presente anche in certi pu\'er crudi.'},
-     {t:'Caramello',d:'Dolcezza bruciata. Presente nei tè rossi molto ossidati e negli oolong con tostatura pesante.'},
-     {t:'Noce',d:'Castagna, noce tostata. Caratteristica del Long Jing tostato in padella e di certi Wuyi.'},
+     {t:'Terra umida',d:'Il petrichor — la terra dopo la pioggia. Caratteristica dei pu er invecchiati ben conservati e dei dark tea. Pulita è bellissima; soffocante è difetto.'},
+     {t:'Muschio / Sottobosco',d:'Silvestre e leggermente umido — il pavimento di una foresta vecchia. Presente nei pu er Gushu di foresta antica e nell Oriental Beauty.'},
+     {t:'Cedro / Sandalo',d:'Legno secco e aromatico. Si trova in certi pu er crudi invecchiati e negli yancha wuyi. Dà struttura senza coprire le note più delicate.'},
+     {t:'Cuoio',d:'Animale e asciutto. Presente nei pu er cotti maturi e nei dark tea fermentati a lungo. Accettabile in sottofondo, problematico se domina.'},
+     {t:'Tabacco / Paglia',d:'Secco e leggermente erbaceo. Caratteristica di certi tè rossi fumè (Lapsang) e di alcuni pu er con foglie mature. Indice di ossidazione prolungata.'},
    ]},
-  {name:'Terroso / Legnoso',color:'#a08860',angle:288,
+  {name:'Tostato / Nocciolato',color:'#d09848',angle:240,
    terms:[
-     {t:'Terra umida',d:'Petrichor — il profumo della terra dopo la pioggia. Caratteristica dei pu\'er invecchiati ben conservati e dei dark tea.'},
-     {t:'Muschio',d:'Nota silvestre, di sottobosco. Presente nei pu\'er Gushu di foresta e nell\'Oriental Beauty.'},
-     {t:'Cedro',d:'Legno secco e aromatico. Presente in certi pu\'er crudi invecchiati e negli oolong rocciosi wuyi.'},
-     {t:'Muffa nobile',d:'La "cantina" — un\'umidità aromatica accettabile che indica invecchiamento corretto. Diversa dalla muffa cattiva (sgradevole, soffocante).'},
-     {t:'Cuoio',d:'Nota animale e secca. Presente in certi pu\'er cotti maturi e nei dark tea fermentati.'},
+     {t:'Noce / Castagna',d:'La firma dei tè verdi tostati in padella — Long Jing artigianale, Bi Luo Chun. Secca e confortante, senza la dolcezza del caramello.'},
+     {t:'Caramello / Melassa',d:'Dolcezza bruciata e profonda. Presente negli oolong con tostatura pesante e nei tè rossi molto ossidati. Nei pu er cotti ben fatti dà struttura dolce.'},
+     {t:'Cannella',d:'Speziato e leggermente piccante. La nota principale del Rougui wuyi — il cui nome significa proprio scorza di cannella. Uno degli yancha più riconoscibili.'},
+     {t:'Miele caldo',d:'Dolcezza cerosa e avvolgente. Caratteristica dei Dan Cong tostati, del Dian Hong maturo e dell Oriental Beauty. Dove miele e fruttato si fondono senza che nessuno prevalga.'},
+     {t:'Fumo / Resina',d:'Da legno di pino arso. La firma del Lapsang Souchong tradizionale. Presente anche in certi pu er crudi giovani con note resinose fresche.'},
+   ]},
+  {name:'Cremoso / Lattiginoso',color:'#d4b8a0',angle:300,
+   terms:[
+     {t:'Latte / Burro',d:'Avvolgente e morbido. Naturale in certi tè gialli e in alcuni oolong leggeri di alta montagna. In bocca dà una texture vellutata che persiste.'},
+     {t:'Crema / Panna',d:'Più leggera del burro, quasi eterea. Presente nei Silver Needle di prima qualità e in certi tè bianchi leggermente invecchiati. Spesso emerge nelle infusioni centrali.'},
+     {t:'Yogurt / Latticello',d:'Leggermente acido e fresco. Presente in alcuni oolong leggeri taiwanesi di alta montagna. Segnala fermentazione molto controllata e clima fresco.'},
+     {t:'Tofu / Soia',d:'Morbido e delicatamente vegetale. Caratteristica di certi tè verdi a vapore e di alcuni Anji Bai Cha di qualità. Raro ma inconfondibile.'},
+     {t:'Cocco',d:'Dolce e tropicale. Presente in alcuni Jin Xuan di alta montagna e in certi tè rossi di Yunnan con foglie mature. Tra le note più rare — e più discusse.'},
    ]},
 ];
-
 const EVO_ROWS=[
   {n:'1–2',fase:'Apertura',what:'Le foglie si schiudono, i profili si stabiliscono. Spesso la prima infusione è più semplice — una sorta di presentazione. Amaro più presente, corpo ancora trattenuto.',dove:'Colore del liquore, struttura di base. Come cambia tra 1ª e 2ª?'},
   {n:'3–4',fase:'Picco',what:'La massima complessità aromatica e il corpo più pieno. Le foglie sono completamente aperte, tutti i composti estratti in equilibrio. <em>Questa è l\'infusione a cui fare più attenzione.</em>',dove:'Aroma del coperchio (massima intensità), corpo in bocca, primo huigan.'},
@@ -444,37 +460,37 @@ const EVO_ROWS=[
 
 const VOCAB=[
   {zh:'回甘',it:'Huigan',pinyin:'Huí Gān',
-   desc:'La dolcezza che ritorna in gola 10–60 secondi dopo la deglutizione. Non è residuo in bocca: emerge più in profondità, dalla gola verso su. Indica qualità del tè e ricchezza di aminoacidi.',
+   desc:'Una dolcezza che sale in gola 10–30 secondi dopo aver inghiottito — non in bocca, più in profondità. Più dura e si ripete, più il tè è di qualità.',
    sections:[
      {t:'Come riconoscerlo',p:'Dopo aver inghiottito, aspetta in silenzio 15–30 secondi. Se sale una sensazione di dolcezza dalla gola — non sulle papille, ma più indietro — è huigan. In un Lao Banzhang di qualità può durare fino a 15 minuti e riacutizzarsi ondata dopo ondata.'},
      {t:'Cosa lo causa',p:'I polifenoli del tè — in particolare alcune catechine complesse — interagiscono con i recettori del palato posteriore stimolando la produzione di saliva ricca di componenti dolci. È una risposta fisiologica reale, non una percezione soggettiva.'},
    ]},
   {zh:'苦味',it:'Kuwei',pinyin:'Kǔ Wèi',
-   desc:'L\'amaro "buono" del tè — quello che si apre, si trasforma e diventa dolcezza. Diverso dall\'amaro piatto dell\'over-estrazione.',
+   desc:'L\'amaro che si trasforma invece di restare piatto. Entra forte, poi si apre e cede il posto all\'huigan. La differenza da imparare a distinguere.',
    sections:[
      {t:'La distinzione fondamentale',p:'L\'amaro da <em>buona qualità</em> (kuwei) si percepisce chiaramente ma <em>si trasforma</em>: dopo 10–20 secondi inizia a cedere e diventa huigan. L\'amaro da sovra-estrazione o tè di bassa qualità rimane piatto, non evolve, può diventare metallico. Imparare a distinguerli è uno dei progressi più importanti nella degustazione.'},
      {t:'Dove si sente',p:'Il kuwei si percepisce prevalentemente sul <em>retro della lingua</em> e sulla gola, non sulla punta. Se senti amaro sulla punta della lingua fin dall\'ingresso, è probabile sia da estrazione eccessiva.'},
    ]},
   {zh:'杯底香',it:'Beidixiang',pinyin:'Bēi Dǐ Xiāng',
-   desc:'Il profumo del fondo della tazza vuota, ancora calda. La persistenza aromatica — uno degli indicatori di qualità più affidabili.',
+   desc:'Il profumo nella tazza vuota, ancora calda. Quanto dura racconta molto: pochi secondi in un tè ordinario, dieci minuti in un oolong di alta montagna.',
    sections:[
      {t:'Come misurarlo',p:'Dopo aver bevuto, annusa la tazza a intervalli: subito, dopo 1 minuto, dopo 3 minuti. In un oolong di alta montagna di qualità eccellente il profumo è ancora riconoscibile dopo 10–15 minuti. In un tè mediocre svanisce in meno di 30 secondi.'},
      {t:'Cosa rivela',p:'Il beidixiang rivela la <em>complessità molecolare</em> del tè: i composti aromatici a media volatilità (quelli che restano) riflettono la ricchezza genetica della cultivar, la qualità del terroir e la cura nella lavorazione.'},
    ]},
   {zh:'茶气',it:'Cha Qi',pinyin:'Chá Qì',
-   desc:'L\'energia che il tè trasmette al corpo — calore, formicolio, chiarezza mentale. Non è misticismo: caffeina e L-teanina agiscono concretamente sul sistema nervoso.',
+   desc:'Quello che si sente nel corpo dopo certe sessioni — calore che sale, formicolio alle mani, una chiarezza silenziosa. Caffeina e L-teanina agiscono insieme, ma i tè Gushu hanno qualcosa di più difficile da descrivere.',
    sections:[
      {t:'Cosa senti fisicamente',p:'Il cha qi si manifesta come: <em>calore</em> che sale dal centro del petto verso le braccia, <em>sudorazione leggera</em> sulla fronte, <em>formicolio</em> nelle mani e sullo scalpo, <em>chiarezza mentale</em> senza agitazione (l\'effetto sinergico di caffeina + L-teanina). I tè Gushu e i pu\'er invecchiati sono rinomati per cha qi particolarmente intenso.'},
      {t:'La chimica dietro',p:'La L-teanina <em>modula</em> l\'effetto eccitante della caffeina, producendo uno stato di "allerta calma" diverso dal caffè. I polifenoli attivi influenzano la circolazione periferica (il calore). In tè molto vecchi e fermentati ci sono altri composti non ancora completamente catalogati che contribuiscono all\'effetto.'},
    ]},
   {zh:'岩韵',it:'Yan Yun',pinyin:'Yán Yùn',
-   desc:'La "risonanza della roccia" — la mineralità caratteristica dei tè wuyi cresciuti sulle rocce vulcaniche rosse del Fujian.',
+   desc:'La "risonanza della roccia" — una mineralità che attraversa tutto il profilo degli yancha wuyi. Pietra bagnata, ferro, sale. Non è un sapore preciso: è una qualità che si sente ovunque nel tè.',
    sections:[
      {t:'Come si manifesta',p:'Lo yan yun non è un sapore unico — è una <em>qualità trasversale</em>: una profondità minerale che attraversa ogni strato del profilo, una persistenza quasi pietrosa in gola, una sensazione di "peso" e solidità. Chi dice di sentire pietra bagnata, gesso, ferro, sale di roccia — sta probabilmente descrivendo yan yun.'},
      {t:'Perché esiste',p:'Le rocce danxia del Wuyi Shan — scisto rosso vulcanico ricco di ferro, manganese, zinco — si trasferiscono lentamente nel suolo e poi nella foglia attraverso l\'assorbimento radicale. La mineralità è letteralmente un trasferimento geologico in tazza.'},
    ]},
   {zh:'生津',it:'Sheng Jin',pinyin:'Shēng Jīn',
-   desc:'La salivazione che il tè stimola — "produrre fluido". Un tè di qualità ti fa venire acquolina in bocca dopo averlo bevuto.',
+   desc:'La salivazione che arriva dopo aver inghiottito — non durante, dopo. Segnale che il tè ha stimolato qualcosa. I tè che seccano la bocca senza sheng jin hanno i tannini sbilanciati.',
    sections:[
      {t:'Perché conta',p:'La <em>salivazione abbondante</em> dopo la deglutizione è segno che il tè ha stimolato i recettori del palato in modo complesso. È correlata all\'huigan — spesso si salivano insieme. Tè che "secano" la bocca (astringenza senza sheng jin) indicano tannini non equilibrati da altri componenti.'},
      {t:'Dove sentirla',p:'Sotto la lingua e ai lati, nella ghiandola parotide. In un tè con forte sheng jin, dopo alcuni secondi dalla deglutizione senti letteralmente la bocca riempirsi di saliva — è una risposta fisica reale e misurata.'},
@@ -527,6 +543,7 @@ function renderAromi(){
       <div style="background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.22);padding:8px 10px;margin-top:10px;font-size:10.5px;font-style:italic;font-family:\'Cormorant Garamond\',serif;color:var(--cream-d);opacity:.68;line-height:1.55">${a.note}</div>`;
     d.addEventListener('mouseenter',()=>{d.style.background='var(--light)';d.style.transform='translateY(-2px)';});
     d.addEventListener('mouseleave',()=>{d.style.background='var(--mid)';d.style.transform='';});
+    d.addEventListener('click',()=>openAromaModal(a));
     g.appendChild(d);
   });
 }
@@ -854,6 +871,100 @@ function exportExcel(){
   XLSX.writeFile(wb,'scheda_'+(safeName||'te')+'_'+new Date().toISOString().slice(0,10)+'.xlsx');
 }
 
+// ════════════════════════════════════
+// SISTEMA MODAL
+// ════════════════════════════════════
+function openModal() {
+  document.getElementById("modal-bg").classList.add("open");
+  document.body.style.overflow = "hidden";
+  if (!history.state || !history.state.modalOpen) history.pushState({modalOpen: true}, "");
+}
+function _doClose() {
+  document.getElementById("modal-bg").classList.remove("open");
+  document.body.style.overflow = "";
+}
+function closeModal() {
+  _doClose();
+  if (history.state && history.state.modalOpen) history.back();
+}
+window.addEventListener("popstate", function() {
+  if (document.getElementById("modal-bg").classList.contains("open")) _doClose();
+});
+document.getElementById("modal-close").addEventListener("click", closeModal);
+document.getElementById("modal-bg").addEventListener("click", function(e) {
+  if (e.target === e.currentTarget) closeModal();
+});
+document.addEventListener("keydown", function(e) {
+  if (e.key === "Escape") closeModal();
+});
+
+function sectionsHtml(sections) {
+  return sections.map(function(s, i) {
+    var div = (i > 0 ? "<div class=\"m-div\"></div>" : "") + "<div class=\"m-sec\">";
+    if (s.t) div += "<h4>" + s.t + "</h4>";
+    if (s.p) div += "<p>" + s.p + "</p>";
+    if (s.note) div += "<div class=\"m-note\"><p>" + s.note + "</p></div>";
+    div += "</div>";
+    return div;
+  }).join("");
+}
+
+function openSensoModal(s) {
+  var tags = s.tags.map(function(x){ return "<span class=\"m-tag\">" + x + "</span>"; }).join("");
+  var quest = s.domande.map(function(q){ return "<div class=\"m-q-item\">" + q + "</div>"; }).join("");
+  document.getElementById("modal-content").innerHTML =
+    "<div class=\"m-top\"><div style=\"font-size:40px;margin-bottom:8px\">" + s.icon + "</div>" +
+    "<div class=\"m-title\">" + s.it + "</div>" +
+    "<div class=\"m-zh\">" + s.sub + "</div></div>" +
+    "<div class=\"m-body\"><div class=\"m-sec\"><p>" + s.desc + "</p>" +
+    "<div class=\"m-tags\">" + tags + "</div></div>" +
+    "<div class=\"m-div\"></div>" + sectionsHtml(s.sections) +
+    "<div class=\"m-div\"></div>" +
+    "<div class=\"m-sec\"><h4>Domande per la sessione</h4>" + quest + "</div></div>";
+  openModal();
+}
+
+function openAromaModal(a) {
+  document.getElementById("modal-content").innerHTML =
+    "<div class=\"m-top\"><div style=\"font-size:36px;margin-bottom:8px\">" + a.icon + "</div>" +
+    "<div class=\"m-title\">" + a.it + "</div>" +
+    "<div class=\"m-zh\">" + a.zh + "</div>" +
+    "<div class=\"m-pinyin\">" + a.pinyin + "</div></div>" +
+    "<div class=\"m-body\"><div class=\"m-sec\"><p>" + a.desc + "</p>" +
+    "<div class=\"m-note\"><p>" + a.note + "</p></div></div></div>";
+  openModal();
+}
+
+function openRuotaCat(cat) {
+  var terms = cat.terms.map(function(t) {
+    return "<div class=\"m-term-wrap\"><div class=\"m-term-title\" style=\"color:" + cat.color + "\">" + t.t + "</div><div class=\"m-term-desc\">" + t.d + "</div></div>";
+  }).join("");
+  document.getElementById("modal-content").innerHTML =
+    "<div class=\"m-top\"><div style=\"width:24px;height:24px;border-radius:50%;background:" + cat.color + ";opacity:.55;margin-bottom:10px\"></div>" +
+    "<div class=\"m-title\" style=\"color:" + cat.color + "\">" + cat.name + "</div></div>" +
+    "<div class=\"m-body\">" + terms + "</div>";
+  openModal();
+}
+
+function openTermModal(title, color, desc) {
+  document.getElementById("modal-content").innerHTML =
+    "<div class=\"m-top\"><div class=\"m-title\" style=\"color:" + color + "\">" + title + "</div></div>" +
+    "<div class=\"m-body\"><div class=\"m-sec\"><p>" + desc + "</p></div></div>";
+  openModal();
+}
+
+function openVocabModal(v) {
+  document.getElementById("modal-content").innerHTML =
+    "<div class=\"m-top\"><div class=\"m-vocab-zh\">" + v.zh + "</div>" +
+    "<div class=\"m-title\">" + v.it + "</div>" +
+    "<div class=\"m-pinyin\">" + v.pinyin + "</div>" +
+    "<div class=\"m-vocab-desc\">" + v.desc + "</div></div>" +
+    "<div class=\"m-body\">" + sectionsHtml(v.sections) + "</div>";
+  openModal();
+}
+
+
+renderSensi();
 renderLiquore();
 renderAromi();
 renderRuota();

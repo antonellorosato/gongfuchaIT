@@ -104,7 +104,7 @@ h1 em{font-style:italic;color:var(--gold-l)}
 /* FLOWCHART */
 .flowchart-section{margin-bottom:48px}
 .flowchart-wrap{overflow-x:auto;padding-bottom:12px}
-.flowchart-grid{display:grid;min-width:860px;grid-template-columns:160px repeat(8,1fr);position:relative}
+.flowchart-grid{display:grid;min-width:980px;grid-template-columns:180px repeat(10,1fr);position:relative}
 .fc-header{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.6;padding:0 4px 18px;text-align:center;line-height:1.4}
 .fc-header.label-h{text-align:left;padding-left:0;opacity:.4;font-size:8px;letter-spacing:2px}
 .fc-row{display:contents}
@@ -341,11 +341,21 @@ h1 em{font-style:italic;color:var(--gold-l)}
     <div class="caff-note">
       📎 Nessun valore di caffeina nel tè è affidabile senza conoscere: cultivar, parte della foglia raccolta, metodo di coltivazione, temperatura e tempo di brew, e peso esatto delle foglie. Le etichette che riportano "bassa caffeina" o "alta caffeina" senza contesto sono marketing, non scienza.
     </div>
+  <div style="margin-top:16px;border-top:1px solid rgba(201,168,76,.1);padding-top:14px">
+    <div style="font-size:8.5px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.38;margin-bottom:10px">Riferimenti scientifici selezionati</div>
+    <ol style="padding-left:16px;margin:0">
+      <li style="font-size:10px;color:var(--cream-d);opacity:.55;line-height:1.65;margin-bottom:6px;font-family:'Cormorant Garamond',serif;font-style:italic">Einöther SJL &amp; Martens VEG (2013). Acute effects of tea consumption on attention and mood. <em>American Journal of Clinical Nutrition</em>, 98(6), 1700S–1708S. <span style="opacity:.5">[caffeina + L-teanina: effetti sinergici su attenzione]</span></li>
+      <li style="font-size:10px;color:var(--cream-d);opacity:.55;line-height:1.65;margin-bottom:6px;font-family:'Cormorant Garamond',serif;font-style:italic">Türközü D &amp; Şanlıer N (2017). L-theanine, unique amino acid of tea, and its metabolism. <em>Critical Reviews in Food Science and Nutrition</em>, 57(8), 1681–1687. <span style="opacity:.5">[meccanismo L-teanina, variabilità per cultivar e ombreggiatura]</span></li>
+      <li style="font-size:10px;color:var(--cream-d);opacity:.55;line-height:1.65;margin-bottom:6px;font-family:'Cormorant Garamond',serif;font-style:italic">Komes D et al. (2010). Green tea preparation and its influence on the content of bioactive compounds. <em>Food Research International</em>, 43(1), 167–176. <span style="opacity:.5">[temperatura e tempo di infusione come fattori primari sull'estrazione di caffeina]</span></li>
+      <li style="font-size:10px;color:var(--cream-d);opacity:.55;line-height:1.65;margin-bottom:6px;font-family:'Cormorant Garamond',serif;font-style:italic">Bryan J (2008). Psychological effects of dietary components of tea: caffeine and L-theanine. <em>Nutrition Reviews</em>, 66(2), 82–90. <span style="opacity:.5">[rapporto caffeina/L-teanina e «allerta calma»]</span></li>
+      <li style="font-size:10px;color:var(--cream-d);opacity:.55;line-height:1.65;font-family:'Cormorant Garamond',serif;font-style:italic">Chen ZM &amp; Lin Z (2015). Tea and human health: biomedical functions of tea active components. <em>Journal of Zhejiang University-Science B</em>, 16(2), 87–102. <span style="opacity:.5">[caffeina per parte della foglia: gemme &gt; prima foglia &gt; foglie adulte]</span></li>
+    </ol>
+  </div>
   </section>
 
   <section class="flowchart-section">
     <h2 class="sec-title">IV — Flowchart completo</h2>
-    <p class="sec-intro">Il percorso di ogni tè attraverso le fasi di lavorazione — segui ogni colonna dall'alto verso il basso</p>
+    <p class="sec-intro">Il percorso di ogni tè attraverso le fasi di lavorazione — ogni riga è un tè, ogni colonna una fase</p>
     <div class="flowchart-wrap">
       <div id="flowchart" class="flowchart-grid"></div>
     </div>
@@ -463,7 +473,7 @@ const PHASES = [
   }
 ];
 
-const RADAR_AXES = ['Erbaceo\nVegetale','Floreale','Fruttato','Legnoso\nTerroso','Tostato\nNocciolato','Cremoso\nLattiginoso'];
+const RADAR_AXES = ['Erbaceo\nVegetale','Floreale','Fruttato','Legnoso\nTerroso','Tostato','Cremoso'];
 
 const TEAS = [
   {
@@ -698,51 +708,55 @@ function renderMatrix(){
 function renderFlowchart(){
   const fc=document.getElementById('flowchart');
 
-  // header row
+  // ── Header row: empty cell + 10 phase names ──
   const labelH=document.createElement('div');
   labelH.className='fc-header label-h';
-  labelH.textContent='FASE';
+  labelH.textContent='TIPOLOGIA';
   fc.appendChild(labelH);
 
-  TEAS.forEach((t,ti)=>{
+  PHASES.forEach((p,pi)=>{
     const h=document.createElement('div');
     h.className='fc-header';
-    h.style.color=TEA_COLORS[ti];
-    h.innerHTML=`${TEA_EMOJIS[ti]}<br>${t.it.replace('Tè ','')}`;
+    h.style.cursor='pointer';
+    h.style.fontSize='9px';
+    h.innerHTML=`<div style="font-size:12px;margin-bottom:2px">${p.num}</div><div>${p.it.replace(' / ','/<br>')}</div>`;
+    h.style.lineHeight='1.2';
+    h.addEventListener('click',()=>openPhaseModal(p));
     fc.appendChild(h);
   });
 
-  // data rows
-  PHASES.forEach((p,pi)=>{
-    // label cell
+  // ── Data rows: one row per tea ──
+  TEAS.forEach((t,ti)=>{
+    // Tea label cell
     const lc=document.createElement('div');
     lc.className='fc-label';
+    lc.style.cursor='pointer';
     lc.innerHTML=`<div class="fc-label-inner">
-      <div class="fc-label-num">${p.num}</div>
-      <div class="fc-label-name">${p.it}</div>
-      <div class="fc-label-zh">${p.zh.split(' · ')[0]}</div>
+      <div style="font-size:18px;line-height:1;margin-bottom:3px">${TEA_EMOJIS[ti]}</div>
+      <div class="fc-label-name" style="color:${TEA_COLORS[ti]}">${t.it.replace('Tè ','')}</div>
+      <div class="fc-label-zh">${t.zh.split(' · ')[0]}</div>
     </div>`;
+    lc.addEventListener('click',()=>openTeaModal(t));
     fc.appendChild(lc);
 
-    TEAS.forEach((t,ti)=>{
-      const state=t.fc[pi]; // 0=absent,1=active,2=optional,3=special(sole)
+    PHASES.forEach((p,pi)=>{
+      const state=t.fc[pi]; // 0=absent,1=active,2=optional,3=special
       const cell=document.createElement('div');
       cell.className='fc-cell';
       cell.style.setProperty('--dot-color', TEA_COLORS[ti]);
       cell.style.setProperty('--line-color', TEA_COLORS[ti]);
 
-      // Determine if line should connect (any active phase before or after)
-      const hasPrev = t.fc.slice(0,pi).some(v=>v>0);
-      const hasNext = t.fc.slice(pi+1).some(v=>v>0);
-      const hasLine = state > 0 || (hasPrev && hasNext);
+      // Line connects phases that are part of this tea's process
+      const hasPrev=t.fc.slice(0,pi).some(v=>v>0);
+      const hasNext=t.fc.slice(pi+1).some(v=>v>0);
+      const hasLine=state>0||(hasPrev&&hasNext);
 
       if(hasLine) cell.classList.add('has-line');
-      if(!hasPrev && state>0) cell.classList.add('line-start');
-      if(!hasNext && state>0) cell.classList.add('line-end');
+      if(!hasPrev&&state>0) cell.classList.add('line-start');
+      if(!hasNext&&state>0) cell.classList.add('line-end');
 
       if(state===0){
-        // absent — just show line if it bridges two active phases
-        if(hasPrev && hasNext){
+        if(hasPrev&&hasNext){
           cell.classList.add('has-line');
           const dot=document.createElement('div');
           dot.className='fc-dot absent';
@@ -754,12 +768,10 @@ function renderFlowchart(){
         else if(state===3) dot.className='fc-dot special';
         else dot.className='fc-dot';
 
-        // clickable
         dot.style.cursor='pointer';
         dot.title=p.it;
-        dot.addEventListener('click',(e)=>{ e.stopPropagation(); openPhaseModal(p); });
+        dot.addEventListener('click',(e)=>{e.stopPropagation();openPhaseModal(p);});
 
-        // tooltip label
         const label=document.createElement('div');
         label.style.cssText=`position:absolute;left:50%;transform:translateX(-50%);bottom:calc(100% + 6px);background:var(--mid);border:1px solid rgba(201,168,76,.25);font-size:9px;padding:3px 7px;white-space:nowrap;color:var(--gold-l);pointer-events:none;opacity:0;transition:opacity .15s;z-index:10;font-family:'Jost',sans-serif`;
         label.textContent=p.it;
@@ -767,10 +779,8 @@ function renderFlowchart(){
 
         dot.addEventListener('mouseenter',()=>label.style.opacity='1');
         dot.addEventListener('mouseleave',()=>label.style.opacity='0');
-
         cell.appendChild(dot);
       }
-
       fc.appendChild(cell);
     });
   });

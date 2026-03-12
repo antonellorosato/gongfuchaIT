@@ -668,7 +668,12 @@ function renderScheda(){
   btnExcel.className='btn-scheda primary btn-excel';
   btnExcel.textContent='\u2193 Esporta Excel';
   btnExcel.onclick=exportExcel;
+  var btnPrint=document.createElement('button');
+  btnPrint.className='btn-scheda secondary';
+  btnPrint.innerHTML='&#9113; Stampa PDF';
+  btnPrint.onclick=openPrintSheet;
   actions.appendChild(btnClear);
+  actions.appendChild(btnPrint);
   actions.appendChild(btnExcel);
   headerRow.appendChild(tabsArea);
   headerRow.appendChild(actions);
@@ -881,6 +886,195 @@ function clearCurrent(){
   infData[currentInf]=emptyInf();
   if(prev) infData[currentInf].te=prev;
   renderForm();
+}
+
+
+function openPrintSheet() {
+  collectCurrent();
+  var win = window.open('', '_blank');
+  if (!win) { alert('Abilita i popup per la stampa.'); return; }
+
+  var AROMI_COLS = [
+    {label:'Erbaceo / Vegetale', items:['Vegetale','Erbaceo','Fieno','Foglia bagnata','Spinaci','Bambù']},
+    {label:'Floreale',           items:['Orchidea','Gelsomino','Rosa','Biancospino','Glicine','Lilla']},
+    {label:'Fruttato',           items:['Pesca','Albicocca','Litchi','Prugna','Agrumi','Frutta secca']},
+    {label:'Legnoso / Terroso',  items:['Legno','Terra umida','Muschio','Radici','Sottobosco','Pietra']},
+    {label:'Tostato / Nocciolato',items:['Tostato','Castagna','Nocciola','Cioccolato','Caramello','Affumicato']},
+    {label:'Cremoso / Lattiginoso',items:['Latte','Burro','Panna','Miele','Vaniglia','Malto']},
+  ];
+  var GUSTO_ITEMS = ['Dolce','Amaro','Acido','Salato','Umami','Astringente','Secco','Cremoso','Rotondo'];
+  var CORPO_ITEMS = ['Leggero','Medio','Pieno','Oleoso','Vellutato','Setoso','Acquoso'];
+  var COLORI = [
+    {n:'Cristallino / Paglierino', c:'#f5f0d0'},
+    {n:'Giallo dorato',   c:'#e8cc60'},
+    {n:'Ambra',           c:'#d49830'},
+    {n:'Arancio / Rame',  c:'#c87028'},
+    {n:'Rosso rubino',    c:'#982020'},
+    {n:'Mogano / Bruno',  c:'#5a1808'},
+    {n:'Verde chiaro',    c:'#c8e090'},
+    {n:'Verde',           c:'#68a040'},
+  ];
+
+  function makeInfRow(n) {
+    return `<tr>
+      <td class="inf-n">${n}ª</td>
+      <td class="inp-cell narrow"><div class="line-write"></div></td>
+      <td class="inp-cell narrow"><div class="line-write"></div></td>
+      <td class="inp-cell wide-aroma"><div class="line-write"></div><div class="line-write mt2"></div></td>
+      <td class="inp-cell corpo-cell"><div class="line-write"></div><div class="line-write mt2"></div></td>
+      <td class="inp-cell note-cell"><div class="line-write"></div><div class="line-write mt2"></div></td>
+    </tr>`;
+  }
+
+  var aromaGrid = AROMI_COLS.map(col => `
+    <div class="aroma-col">
+      <div class="aroma-col-title">${col.label}</div>
+      ${col.items.map(it => `<label class="cb-label"><input type="checkbox"> ${it}</label>`).join('')}
+    </div>`).join('');
+
+  var coloriHtml = COLORI.map(c =>
+    `<label class="colore-item">
+       <input type="radio" name="colore">
+       <span class="colore-dot" style="background:${c.c}"></span>
+       <span class="colore-name">${c.n}</span>
+     </label>`
+  ).join('');
+
+  var gusto = GUSTO_ITEMS.map(it => `<label class="cb-label"><input type="checkbox"> ${it}</label>`).join('');
+  var corpo = CORPO_ITEMS.map(it => `<label class="cb-label"><input type="checkbox"> ${it}</label>`).join('');
+
+  var html = `<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Scheda di Degustazione — Gong Fu Cha</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Jost',sans-serif;font-weight:300;color:#1a1a1a;background:#fff;padding:14px 18px;font-size:10px}
+@page{size:A4;margin:10mm 12mm}
+h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:21px;letter-spacing:1px;margin-bottom:2px}
+h1 em{font-style:italic;color:#8b6914}
+.eyebrow{font-size:8px;letter-spacing:4px;text-transform:uppercase;color:#8b6914;opacity:.65;margin-bottom:5px}
+/* Meta */
+.meta-row{display:flex;gap:16px;margin:10px 0 5px;border-bottom:1px solid #e0d8c8;padding-bottom:7px}
+.meta-field{flex:1}.meta-field label{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#8b6914;display:block;margin-bottom:3px}
+.line-write{border-bottom:1px solid #c8b878;height:14px;width:100%}
+.mt2{margin-top:4px}
+/* Section */
+.section{margin:7px 0}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#8b6914;margin-bottom:5px;border-left:2px solid #c9a84c;padding-left:7px}
+/* Colore liquore — solo cerchietti + radio + nome */
+.colori-row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.colore-item{display:flex;align-items:center;gap:4px;cursor:pointer}
+.colore-item input[type=radio]{accent-color:#8b6914;margin:0}
+.colore-dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(0,0,0,.15);flex-shrink:0}
+.colore-name{font-size:9px;color:#3a2c08}
+/* Aroma grid */
+.aroma-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.aroma-col-title{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#8b6914;opacity:.65;margin-bottom:3px;font-weight:400}
+/* Checkbox */
+.cb-label{display:flex;align-items:center;gap:3px;font-size:9px;margin-bottom:2px;line-height:1.3;cursor:pointer}
+.cb-label input[type=checkbox]{width:9px;height:9px;flex-shrink:0;accent-color:#8b6914}
+/* Gusto / Corpo — side by side */
+.gusto-corpo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.gusto-corpo-col label.sec-title-sm{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8b6914;display:block;margin-bottom:4px;opacity:.7}
+.cb-wrap{display:flex;flex-wrap:wrap;gap:2px 10px}
+/* Huigan */
+.huigan-scale{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.huigan-scale label{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:8px;cursor:pointer}
+.huigan-scale input[type=radio]{accent-color:#8b6914}
+/* Infusion table */
+.inf-table{width:100%;border-collapse:collapse;font-size:9px}
+.inf-table th{background:#f5f0e0;font-size:7.5px;letter-spacing:1px;text-transform:uppercase;padding:3px 4px;text-align:left;border:1px solid #e0d8c0;color:#6a5010;font-weight:400}
+.inf-table td{border:1px solid #e8e0d0;padding:3px 4px;vertical-align:top}
+.inf-n{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:#c9a84c;text-align:center;width:20px}
+.inp-cell{min-height:26px;vertical-align:top}
+.narrow{width:52px}
+.wide-aroma{width:160px}
+.corpo-cell{width:90px}
+.note-cell{min-width:130px}
+/* Notes area */
+.notes-area{border:1px solid #d4c898;min-height:72px;width:100%;padding:5px;font-family:'Jost',sans-serif;font-size:9px;margin-top:4px;resize:none}
+/* Footer */
+.footer-print{margin-top:10px;border-top:1px solid #e0d8c8;padding-top:5px;font-size:7.5px;color:#aaa;display:flex;justify-content:space-between}
+@media print{body{padding:0}.notes-area{min-height:80px}button{display:none}}
+</style>
+</head>
+<body>
+<div class="eyebrow">Guida al Tè Cinese &middot; Gong Fu Cha</div>
+<h1>Scheda di <em>Degustazione</em></h1>
+
+<div class="meta-row">
+  <div class="meta-field"><label>Tè / Cultivar</label><div class="line-write"></div></div>
+  <div class="meta-field"><label>Produttore / Origine</label><div class="line-write"></div></div>
+  <div class="meta-field"><label>Annata</label><div class="line-write"></div></div>
+  <div class="meta-field"><label>Data</label><div class="line-write"></div></div>
+</div>
+
+<div class="section">
+  <div class="sec-title">Colore del liquore</div>
+  <div class="colori-row">${coloriHtml}</div>
+</div>
+
+<div class="section">
+  <div class="sec-title">Descrittori Aroma</div>
+  <div class="aroma-grid">${aromaGrid}</div>
+</div>
+
+<div class="section">
+  <div class="sec-title">Gusto &amp; Corpo</div>
+  <div class="gusto-corpo">
+    <div class="gusto-corpo-col">
+      <label class="sec-title-sm">Gusto</label>
+      <div class="cb-wrap">${gusto}</div>
+    </div>
+    <div class="gusto-corpo-col">
+      <label class="sec-title-sm">Corpo</label>
+      <div class="cb-wrap">${corpo}</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-title">Huigan (retrogusto dolce) &mdash; 0 assente · 5 lungo e persistente</div>
+  <div class="huigan-scale">
+    ${[0,1,2,3,4,5].map(n=>`<label><input type="radio" name="huigan"> ${n}</label>`).join('')}
+  </div>
+</div>
+
+<div class="section">
+  <div class="sec-title">Evoluzione per infusione</div>
+  <table class="inf-table">
+    <thead><tr>
+      <th>Inf.</th>
+      <th class="narrow">Temp °C</th>
+      <th class="narrow">Tempo</th>
+      <th class="wide-aroma">Aroma</th>
+      <th class="corpo-cell">Corpo</th>
+      <th class="note-cell">Note</th>
+    </tr></thead>
+    <tbody>
+      ${[1,2,3,4,5,6,7,8].map(n=>makeInfRow(n)).join('')}
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <div class="sec-title">Note generali &amp; impressioni</div>
+  <textarea class="notes-area" rows="5" placeholder="Impressioni generali, confronti, evoluzione nel tempo, punteggio personale…"></textarea>
+</div>
+
+<div class="footer-print">
+  <span>antonellorosato.github.io/gongfuchaIT</span>
+  <span>&copy; Antonello Rosato &mdash; Guida al Tè Cinese</span>
+</div>
+</body>
+</html>`;
+
+  win.document.write(html);
+  win.document.close();
+  setTimeout(()=>win.print(), 600);
 }
 
 function exportExcel(){

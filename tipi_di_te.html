@@ -114,10 +114,10 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .fc-label-name{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold-p);opacity:.8;line-height:1.2}
 .fc-label-zh{font-size:9px;font-style:italic;font-family:'Cormorant Garamond',serif;color:var(--gold-l);opacity:.35;letter-spacing:.5px}
 .fc-cell{display:flex;align-items:center;justify-content:center;min-height:52px;position:relative}
-.fc-cell::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;transform:translateX(-50%);background:var(--line-color,transparent);opacity:.0}
-.fc-cell.has-line::before{opacity:.35}
-.fc-cell.line-start::before{top:50%}
-.fc-cell.line-end::before{bottom:50%}
+.fc-cell::before{content:'';position:absolute;top:50%;left:0;right:0;height:2px;transform:translateY(-50%);background:var(--line-color,transparent);opacity:0}
+.fc-cell.has-line::before{opacity:.32}
+.fc-cell.line-start::before{left:50%}
+.fc-cell.line-end::before{right:50%}
 .fc-dot{width:14px;height:14px;border-radius:50%;background:var(--dot-color,rgba(201,168,76,.3));position:relative;z-index:1;flex-shrink:0;transition:transform .15s}
 .fc-dot.dim{opacity:.25;background:rgba(201,168,76,.2)}
 .fc-dot.absent{opacity:0}
@@ -544,7 +544,16 @@ const TEAS = [
 ];
 
 // Tea colors for flowchart
-const TEA_COLORS = ['#c8d8c0','#7ab87a','#e8c84a','#c8843a','#c05050','#7070a0','#c0d060','#a07040'];
+const TEA_COLORS = [
+  '#d8d4c8', // bianco — panna antica
+  '#68c068', // verde — verde fresco
+  '#d4a820', // giallo — oro caldo
+  '#d08040', // oolong — ambra
+  '#c04848', // rosso — rubino
+  '#7880b8', // nero/dark — acciaio blu
+  '#a8be4a', // sheng — verde oliva vivo
+  '#c08050', // shu — terra bruciata
+];
 const TEA_EMOJIS = ['⬜','🟢','🟡','🟠','🔴','⬛','🟤','🟫'];
 
 const MATRIX_DATA = {

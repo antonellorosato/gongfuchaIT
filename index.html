@@ -104,6 +104,19 @@ h1 em{font-style:italic;color:var(--gold-l)}
   .page{padding:40px 20px 36px}
   h1{font-size:clamp(40px,12vw,72px)}
 }
+
+@media (max-width: 700px) {
+  .card-desc { font-size: 13px; }
+  .card-title { font-size: 22px; }
+  /* card-cta always visible on touch */
+}
+@media (hover: none) {
+  .card-cta { opacity: .6 !important; }
+  .card::before { opacity: .3 !important; }
+}
+@media (hover: none) and (pointer: coarse) {
+  .card:active { background: var(--light) !important; transform: translateY(-2px) !important; }
+}
 </style>
 </head>
 <body>

@@ -47,6 +47,10 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .tool-glyph{font-size:26px;margin-bottom:10px;display:block;line-height:1}
 .tool-it{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500;color:var(--gold-l);margin-bottom:1px;line-height:1.2}
 .tool-zh{font-family:'Cormorant Garamond',serif;font-size:11px;font-style:italic;color:var(--cream-d);opacity:.38;margin-bottom:8px;letter-spacing:.5px}
+.tool-card .click-hint{position:absolute;bottom:12px;right:12px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity .2s}
+.tool-card:hover .click-hint{opacity:.5}
+.tp-card .click-hint{position:absolute;bottom:10px;right:10px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity .2s}
+.tp-card:hover .click-hint{opacity:.5}
 .tool-desc{font-size:10.5px;color:var(--text);line-height:1.55;opacity:.75}
 /* RITUAL */
 .ritual-steps{display:flex;flex-direction:column;gap:3px}
@@ -155,6 +159,34 @@ h1 em{font-style:italic;color:var(--gold-l)}
   .nav-home-lbl{display:none}
 }
 @media(max-width:600px){.modal-close{width:44px;height:44px;font-size:18px;top:8px;right:8px}}
+
+/* ── MOBILE TOUCH: tap hints always visible, active feedback ── */
+@media (hover: none) {
+  .click-hint { opacity: .55 !important; }
+  .card-cta    { opacity: .6  !important; }
+}
+@media (hover: none) and (pointer: coarse) {
+  .factor-card:active, .phase-card:active, .tea-card:active,
+  .tool-card:active,   .tp-card:active,     .senso-card:active,
+  .vocab-card:active,  .liq-item:active,    .step-card:active  {
+    background: rgba(201,168,76,.12) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .sec-intro      { font-size: 13px; }
+  .tool-desc      { font-size: 12.5px; }
+  .tool-it        { font-size: 17px; }
+  .step-text      { font-size: 13.5px; }
+  .step-tip       { font-size: 12.5px; }
+  .step-it        { font-size: 20px; }
+  .inf-t          { font-size: 15px; }
+  .tp-param-sub   { font-size: 11.5px; }
+  .tp-val         { font-size: 12px; }
+  .sec-title      { font-size: 11.5px; letter-spacing: 4px; }
+  .m-sec p, .m-body p { font-size: 14px; }
+  .stag           { font-size: 10.5px; }
+}
 </style>
 </head>
 <body>

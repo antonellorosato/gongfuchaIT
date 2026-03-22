@@ -79,13 +79,15 @@ h1 em{font-style:italic;color:var(--gold-l)}
 
 /* ─── FACTORS ─── */
 .factors-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
-.factor-card{background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:24px 20px 20px;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .15s}
+.factor-card{position:relative;background:var(--mid);border:1px solid rgba(201,168,76,.08);padding:24px 20px 20px;cursor:pointer;position:relative;overflow:hidden;transition:background .2s,transform .15s}
 .factor-card:hover{background:var(--light);transform:translateY(-2px)}
 .factor-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent,var(--gold));opacity:0;transition:opacity .2s}
 .factor-card:hover::before{opacity:.5}
 .factor-icon{font-size:28px;margin-bottom:10px;display:block}
 .factor-it{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--gold-l);margin-bottom:2px;line-height:1.2}
 .factor-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.4;margin-bottom:10px}
+.factor-card .click-hint{position:absolute;bottom:14px;right:14px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity .2s}
+.factor-card:hover .click-hint{opacity:.5}
 .factor-desc{font-size:11px;color:var(--text);line-height:1.6;opacity:.8}
 .factor-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:10px}
 .ftag{font-size:9px;padding:2px 6px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.13);color:var(--cream-d);font-family:'Cormorant Garamond',serif;font-style:italic}
@@ -202,6 +204,38 @@ h1 em{font-style:italic;color:var(--gold-l)}
   .factors-grid{grid-template-columns:1fr}
   .nav-part-title{display:none}
   .nav-part-num{font-size:9px;letter-spacing:2px}
+}
+
+/* ── MOBILE TOUCH: tap hints always visible, active feedback ── */
+@media (hover: none) {
+  .click-hint { opacity: .55 !important; }
+  .card-cta    { opacity: .6  !important; }
+}
+@media (hover: none) and (pointer: coarse) {
+  /* Tap flash feedback */
+  .factor-card:active, .phase-card:active, .tea-card:active,
+  .tool-card:active,   .tp-card:active,     .senso-card:active,
+  .vocab-card:active,  .liq-item:active,    .step-card:active,
+  .pianta-card:active  { background: rgba(201,168,76,.12) !important; }
+}
+
+@media (max-width: 640px) {
+  .sec-intro    { font-size: 13px; }
+  .pc           { font-size: 13px; }
+  .factor-desc  { font-size: 13px; }
+  .fm-sec p     { font-size: 14px; }
+  .rm-sec p     { font-size: 13px; }
+  .rm-tea-note  { font-size: 12.5px; }
+  .ym-note      { font-size: 13px; }
+  .map-hint     { font-size: 10.5px; letter-spacing: 1.5px; }
+  .sec-title    { font-size: 11.5px; letter-spacing: 4px; }
+  .factor-it    { font-size: 17px; }
+  .pianta-name  { font-size: 19px; }
+  .pteas-lbl    { font-size: 10px; letter-spacing: 1.5px; }
+  .ptb          { font-size: 11px; }
+  .factor-sub   { font-size: 10px; }
+  /* map hint for mobile */
+  .map-hint::before { content: ''; }
 }
 </style>
 </head>

@@ -107,6 +107,8 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .flowchart-grid{display:grid;min-width:980px;grid-template-columns:180px repeat(10,1fr);position:relative}
 .fc-header{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.6;padding:0 4px 18px;text-align:center;line-height:1.4}
 .fc-header.label-h{text-align:left;padding-left:0;opacity:.4;font-size:8px;letter-spacing:2px}
+.fc-mobile-hint{display:none;font-size:10px;color:var(--gold);opacity:.45;text-align:center;padding:8px 0 4px;letter-spacing:1px}
+@media(max-width:640px){.fc-mobile-hint{display:block}}
 .fc-row{display:contents}
 .fc-label{padding:0 12px 0 0;display:flex;align-items:center;justify-content:flex-end;min-height:52px;position:relative}
 .fc-label-inner{text-align:right}
@@ -237,6 +239,39 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .caff-note{background:rgba(201,168,76,.05);border-left:2px solid rgba(201,168,76,.25);padding:10px 14px;margin-top:0;font-size:11px;font-style:italic;font-family:'Cormorant Garamond',serif;color:var(--cream-d);opacity:.72;line-height:1.6}
 @media(max-width:640px){.caff-grid{grid-template-columns:repeat(2,1fr)}.caff-scale{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:380px){.caff-grid{grid-template-columns:1fr}}
+
+/* ── MOBILE TOUCH: tap hints always visible, active feedback ── */
+@media (hover: none) {
+  .click-hint { opacity: .55 !important; }
+  .card-cta    { opacity: .6  !important; }
+}
+@media (hover: none) and (pointer: coarse) {
+  .factor-card:active, .phase-card:active, .tea-card:active,
+  .tool-card:active,   .tp-card:active,     .senso-card:active,
+  .vocab-card:active,  .liq-item:active,    .step-card:active  {
+    background: rgba(201,168,76,.12) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .sec-intro      { font-size: 13px; }
+  .phase-scopo    { font-size: 13px; }
+  .phase-it       { font-size: 17px; }
+  .tea-it         { font-size: 20px; }
+  .tea-tagline    { font-size: 13px; }
+  .caff-body      { font-size: 13px; }
+  .caff-note      { font-size: 12.5px; }
+  .matrix-table   { font-size: 12px; }
+  .hint           { font-size: 13px; }
+  .sec-title      { font-size: 11.5px; letter-spacing: 4px; }
+  .modal-scopo    { font-size: 14.5px; }
+  .var-tag        { font-size: 12.5px; }
+  /* flowchart: bigger tap targets */
+  .fc-label-name  { font-size: 15px; }
+  .fc-dot         { width: 16px; height: 16px; }
+  /* fc-cell touch area */
+  .fc-cell        { min-height: 58px; }
+}
 </style>
 </head>
 <body>

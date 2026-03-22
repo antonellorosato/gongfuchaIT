@@ -107,8 +107,6 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .flowchart-grid{display:grid;min-width:980px;grid-template-columns:180px repeat(10,1fr);position:relative}
 .fc-header{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:.6;padding:0 4px 18px;text-align:center;line-height:1.4}
 .fc-header.label-h{text-align:left;padding-left:0;opacity:.4;font-size:8px;letter-spacing:2px}
-.fc-mobile-hint{display:none;font-size:10px;color:var(--gold);opacity:.45;text-align:center;padding:8px 0 4px;letter-spacing:1px}
-@media(max-width:640px){.fc-mobile-hint{display:block}}
 .fc-row{display:contents}
 .fc-label{padding:0 12px 0 0;display:flex;align-items:center;justify-content:flex-end;min-height:52px;position:relative}
 .fc-label-inner{text-align:right}
@@ -240,37 +238,44 @@ h1 em{font-style:italic;color:var(--gold-l)}
 @media(max-width:640px){.caff-grid{grid-template-columns:repeat(2,1fr)}.caff-scale{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:380px){.caff-grid{grid-template-columns:1fr}}
 
-/* ── MOBILE TOUCH: tap hints always visible, active feedback ── */
+/* ══ MOBILE FONT SCALE ══ */
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .sec-intro, .pc, .factor-desc, .tool-desc, .step-text,
+  .senso-desc, .vocab-desc, .caff-body, .hint,
+  .fm-sec p, .rm-sec p, .m-sec p, .m-body p { font-size: 14px !important; line-height: 1.72; }
+  .factor-it, .step-it, .tool-it, .senso-it,
+  .phase-it, .tea-it, .vocab-it { font-size: 18px !important; }
+  .phase-scopo, .step-tip, .tea-tagline, .caff-note,
+  .modal-scopo, .var-tag, .m-q-item, .m-term-desc, .m-vocab-desc { font-size: 13.5px !important; }
+  .factor-sub, .phase-zh, .tea-zh, .step-pinyin, .step-zh,
+  .tool-zh, .m-pinyin, .m-sub, .fm-sub, .rm-tag { font-size: 10px !important; letter-spacing: 2px; }
+  .fm-tag, .m-tag, .stag, .ftag, .ctag { font-size: 11px !important; }
+  .matrix-table { font-size: 12.5px !important; }
+  .inf-table { font-size: 11.5px !important; }
+  .sd { font-size: 12px !important; padding: 5px 12px !important; }
+  .liq-name { font-size: 15px !important; }
+  .liq-teas { font-size: 12px !important; }
+  .aroma-col-title { font-size: 10px !important; }
+  .tp-param-sub { font-size: 12px !important; }
+  .tp-val { font-size: 12.5px !important; }
+  .inf-t { font-size: 16px !important; }
+  .fc-label-name { font-size: 15px !important; }
+  .fc-header { font-size: 10px !important; }
+  .nav-part-title { font-size: 13px !important; }
+  .card-desc { font-size: 13.5px !important; }
+  .card-title { font-size: 22px !important; }
+}
 @media (hover: none) {
-  .click-hint { opacity: .55 !important; }
-  .card-cta    { opacity: .6  !important; }
+  .click-hint { opacity: .6 !important; }
+  .card-cta   { opacity: .65 !important; }
+  .card::before { opacity: .3 !important; }
 }
 @media (hover: none) and (pointer: coarse) {
-  .factor-card:active, .phase-card:active, .tea-card:active,
-  .tool-card:active,   .tp-card:active,     .senso-card:active,
-  .vocab-card:active,  .liq-item:active,    .step-card:active  {
-    background: rgba(201,168,76,.12) !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .sec-intro      { font-size: 13px; }
-  .phase-scopo    { font-size: 13px; }
-  .phase-it       { font-size: 17px; }
-  .tea-it         { font-size: 20px; }
-  .tea-tagline    { font-size: 13px; }
-  .caff-body      { font-size: 13px; }
-  .caff-note      { font-size: 12.5px; }
-  .matrix-table   { font-size: 12px; }
-  .hint           { font-size: 13px; }
-  .sec-title      { font-size: 11.5px; letter-spacing: 4px; }
-  .modal-scopo    { font-size: 14.5px; }
-  .var-tag        { font-size: 12.5px; }
-  /* flowchart: bigger tap targets */
-  .fc-label-name  { font-size: 15px; }
-  .fc-dot         { width: 16px; height: 16px; }
-  /* fc-cell touch area */
-  .fc-cell        { min-height: 58px; }
+  .factor-card:active,.phase-card:active,.tea-card:active,
+  .tool-card:active,.tp-card:active,.senso-card:active,
+  .vocab-card:active,.liq-item:active,.step-card:active,
+  .card:active { background: rgba(201,168,76,.14) !important; }
 }
 </style>
 </head>
@@ -432,7 +437,7 @@ const PHASES = [
     variabili:['Stagione (primavera / estate / autunno)','Altitudine','Grado (sola gemma / 1+1 / 1+2 / 1+3)','Raccolta manuale vs meccanica','Ora del giorno (mattino preferito)','Condizioni meteo'],
     teas:['Bianco','Verde','Giallo','Oolong','Rosso','Nero','Pu\'er'],
     bg:'#162a16',
-    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'
+    img:'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=800&q=80'
   },
   {
     num:'02', it:'Appassimento', en:'Withering', zh:'萎凋 · Wěi Diāo',
@@ -440,7 +445,7 @@ const PHASES = [
     variabili:['Durata (ore — giorni per il bianco)','Temperatura ambiente','Umidità relativa','Interno vs esterno','Sole diretto vs ombra','Spessore dello strato di foglie','Ventilazione (naturale o forzata)'],
     teas:['Bianco (prolungato)','Oolong','Rosso','Nero','Pu\'er'],
     bg:'#1a2f1a',
-    img:'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80'
+    img:'https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=800&q=80'
   },
   {
     num:'03', it:'Scuotimento', en:'Shaking & Bruising', zh:'摇青 · Yáo Qīng',
@@ -448,7 +453,7 @@ const PHASES = [
     variabili:['Intensità dello scuotimento','Numero di cicli (tipicamente 3–8)','Durata di ogni ciclo','Durata delle pause di riposo tra i cicli','Strumento usato (cestino / tamburo rotante)','Temperatura e umidità della stanza'],
     teas:['Oolong (fondamentale)','Rosso (alcuni stili)'],
     bg:'#1e2e18',
-    img:'https://images.unsplash.com/photo-1571934811356-5cc061b6d5df?w=800&q=80'
+    img:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80'
   },
   {
     num:'04', it:'Ossidazione', en:'Oxidising', zh:'氧化 · Yǎng Huà',
@@ -472,7 +477,7 @@ const PHASES = [
     variabili:['Pressione applicata','Durata','Temperatura delle foglie al momento dell\'arrotolamento','Forma target: aghi piatti, spirali, palline, foglie ritorte, pressati','Macchina vs manuale','Umidità residua delle foglie'],
     teas:['Verde','Giallo','Oolong','Rosso','Nero','Pu\'er'],
     bg:'#1e2218',
-    img:'https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?w=800&q=80'
+    img:'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80'
   },
   {
     num:'07', it:'Essiccazione', en:'Drying', zh:'干燥 · Gān Zào',
@@ -480,7 +485,7 @@ const PHASES = [
     variabili:['Metodo: sole, forno (baking), aria calda, essiccatrice','Temperatura','Durata','Umidità finale target','Numero di passaggi'],
     teas:['Tutti — modalità diverse per tipo'],
     bg:'#162616',
-    img:'https://images.unsplash.com/photo-1593100126453-19b562a800c1?w=800&q=80'
+    img:'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80'
   },
   {
     num:'08', it:'Tostatura', en:'Roasting', zh:'烘焙 · Hōng Bèi',
@@ -488,7 +493,7 @@ const PHASES = [
     variabili:['Temperatura (da 80°C leggero a 150°C+ intenso)','Durata (ore)','Numero di sessioni di tostatura','Fonte di calore (carbone di litchi, forno elettrico, carbone di legna)','Intervalli di riposo tra sessioni'],
     teas:['Oolong (frequente, intensità variabile)','Rosso (alcuni stili)','Nero (alcuni)'],
     bg:'#221408',
-    img:'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=800&q=80'
+    img:'https://images.unsplash.com/photo-1571934811356-5cc061b6d5df?w=800&q=80'
   },
   {
     num:'09', it:'Fermentazione', en:'Fermentation · Wò Duī', zh:'渥堆 · Wò Duī',
@@ -496,7 +501,7 @@ const PHASES = [
     variabili:['Umidità del mucchio (40–45%)','Temperatura interna del mucchio','Frequenza di rivoltamento (ogni 5–7 giorni)','Durata totale (6–8 settimane per Wò Duī standard)','Qualità dell\'acqua usata per inumidire','Ventilazione del locale'],
     teas:['Pu\'er Cotto (Wò Duī accelerato)','Tè Nero / Dark Tea (naturale)'],
     bg:'#1a1008',
-    img:'https://images.unsplash.com/photo-1571934811356-5cc061b6d5df?w=800&q=80'
+    img:'https://images.unsplash.com/photo-1593100126453-19b562a800c1?w=800&q=80'
   },
   {
     num:'10', it:'Invecchiamento', en:'Aging', zh:'陈化 · Chén Huà',
@@ -504,7 +509,7 @@ const PHASES = [
     variabili:['Umidità di stoccaggio (secca vs umida — "dry stored" vs "wet stored")','Temperatura media del luogo','Ventilazione e circolazione d\'aria','Durata (mesi → decenni)','Compressione (sfuso vs torta pressata)','Frequenza di ispezione e gestione'],
     teas:['Pu\'er Crudo (essenziale)','Tè Nero / Dark Tea','Pu\'er Cotto (opzionale)','Bianco (alcuni)'],
     bg:'#100c08',
-    img:'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=800&q=80'
+    img:'https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=800&q=80'
   }
 ];
 

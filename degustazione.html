@@ -50,11 +50,12 @@ h1 em{font-style:italic;color:var(--gold-l)}
 .senso-card:hover::before{opacity:.6}
 .senso-icon{font-size:30px;margin-bottom:12px;display:block}
 .senso-it{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;color:var(--gold-l);margin-bottom:2px;line-height:1.15}
-.senso-card .click-hint{position:absolute;bottom:12px;right:12px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity .2s}
-.senso-card:hover .click-hint{opacity:.5}
-.vocab-card .click-hint{position:absolute;bottom:10px;right:10px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity .2s}
-.vocab-card:hover .click-hint{opacity:.5}
 .senso-sub{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.42;margin-bottom:10px}
+.senso-card .click-hint,.vocab-card .click-hint{
+  position:absolute;bottom:12px;right:12px;font-size:9px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--gold);opacity:0;transition:opacity .2s
+}
+.senso-card:hover .click-hint,.vocab-card:hover .click-hint{opacity:.5}
 .senso-desc{font-size:11px;color:var(--text);line-height:1.6;opacity:.8}
 .senso-prompts{margin-top:10px;display:flex;flex-direction:column;gap:3px}
 .sprompt{font-size:9.5px;color:var(--cream-d);opacity:.55;font-style:italic;font-family:'Cormorant Garamond',serif;padding-left:8px;border-left:1px solid rgba(201,168,76,.18)}
@@ -1004,38 +1005,44 @@ h1 em{font-style:italic;color:#8b6914}
 .footer-print{margin-top:10px;border-top:1px solid #e0d8c8;padding-top:5px;font-size:7.5px;color:#aaa;display:flex;justify-content:space-between}
 @media print{body{padding:0}.notes-area{min-height:80px}button{display:none}}
 
-/* ── MOBILE TOUCH: tap hints always visible, active feedback ── */
+/* ══ MOBILE FONT SCALE ══ */
+@media (max-width: 640px) {
+  body { font-size: 15px; }
+  .sec-intro, .pc, .factor-desc, .tool-desc, .step-text,
+  .senso-desc, .vocab-desc, .caff-body, .hint,
+  .fm-sec p, .rm-sec p, .m-sec p, .m-body p { font-size: 14px !important; line-height: 1.72; }
+  .factor-it, .step-it, .tool-it, .senso-it,
+  .phase-it, .tea-it, .vocab-it { font-size: 18px !important; }
+  .phase-scopo, .step-tip, .tea-tagline, .caff-note,
+  .modal-scopo, .var-tag, .m-q-item, .m-term-desc, .m-vocab-desc { font-size: 13.5px !important; }
+  .factor-sub, .phase-zh, .tea-zh, .step-pinyin, .step-zh,
+  .tool-zh, .m-pinyin, .m-sub, .fm-sub, .rm-tag { font-size: 10px !important; letter-spacing: 2px; }
+  .fm-tag, .m-tag, .stag, .ftag, .ctag { font-size: 11px !important; }
+  .matrix-table { font-size: 12.5px !important; }
+  .inf-table { font-size: 11.5px !important; }
+  .sd { font-size: 12px !important; padding: 5px 12px !important; }
+  .liq-name { font-size: 15px !important; }
+  .liq-teas { font-size: 12px !important; }
+  .aroma-col-title { font-size: 10px !important; }
+  .tp-param-sub { font-size: 12px !important; }
+  .tp-val { font-size: 12.5px !important; }
+  .inf-t { font-size: 16px !important; }
+  .fc-label-name { font-size: 15px !important; }
+  .fc-header { font-size: 10px !important; }
+  .nav-part-title { font-size: 13px !important; }
+  .card-desc { font-size: 13.5px !important; }
+  .card-title { font-size: 22px !important; }
+}
 @media (hover: none) {
-  .click-hint { opacity: .55 !important; }
-  .card-cta    { opacity: .6  !important; }
+  .click-hint { opacity: .6 !important; }
+  .card-cta   { opacity: .65 !important; }
+  .card::before { opacity: .3 !important; }
 }
 @media (hover: none) and (pointer: coarse) {
-  .factor-card:active, .phase-card:active, .tea-card:active,
-  .tool-card:active,   .tp-card:active,     .senso-card:active,
-  .vocab-card:active,  .liq-item:active,    .step-card:active  {
-    background: rgba(201,168,76,.12) !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .sec-intro      { font-size: 13px; }
-  .senso-desc     { font-size: 13px; }
-  .senso-it       { font-size: 21px; }
-  .vocab-desc     { font-size: 13px; }
-  .vocab-it       { font-size: 18px; }
-  .m-q-item       { font-size: 13.5px; }
-  .m-term-desc    { font-size: 13.5px; }
-  .m-vocab-desc   { font-size: 13.5px; }
-  .m-sec p        { font-size: 14px; }
-  .sec-title      { font-size: 11.5px; letter-spacing: 4px; }
-  .liq-name       { font-size: 14px; }
-  .liq-teas       { font-size: 11px; }
-  .aroma-col-title{ font-size: 9.5px; }
-  .sd             { font-size: 11.5px; }
-  .scheda-slider-val { font-size: 18px; }
-  .inf-table      { font-size: 11px; }
-  /* bigger tap targets for scheda chips */
-  .sd             { padding: 5px 12px; min-height: 32px; }
+  .factor-card:active,.phase-card:active,.tea-card:active,
+  .tool-card:active,.tp-card:active,.senso-card:active,
+  .vocab-card:active,.liq-item:active,.step-card:active,
+  .card:active { background: rgba(201,168,76,.14) !important; }
 }
 </style>
 </head>
